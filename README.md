@@ -1,5 +1,10 @@
 # immuno_gcp_wdl
-Tutorial to run immuno.wdl on Google Cloud
+A tutorial to demonstrate how to run the WASHU immunogenomics pipeline (immuno.wdl) on Google Cloud.
+This will be done by first setting up the workflow definitions, input data and reference files and a 
+YAML config file on a user's local system. The user will also set up a Google Cloud environment
+and all the inputs will be staged to this environment.  Next Cromwell will be used to execute the pipeline
+using the specified input and reference files, and finally the results will be pulled back to the local system
+and cloud resources will be cleaned up. 
 
 ## Source of instructions
 https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows
@@ -71,7 +76,6 @@ export LOCAL_INPUT=$WORKING_BASE/yamls/somatic_exome_local.yaml
 export CLOUD_INPUT=$WORKING_BASE/yamls/somatic_exome_cloud.yaml
 python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET $WORKFLOW_DEFINITION $LOCAL_INPUT --output=$CLOUD_INPUT
 ```
-
 
 
 
