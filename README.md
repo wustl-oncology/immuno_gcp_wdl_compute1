@@ -49,6 +49,7 @@ gcloud config set project $PROJECT
 ### Set up cloud account and bucket
 
 ```
+cd $WORKING_BASE/git
 sh cloud-workflows/gms/resources.sh init-project --project $PROJECT --bucket $GCS_BUCKET
 ```
 
