@@ -51,7 +51,7 @@ gcloud config set project $PROJECT
 
 ```
 cd $WORKING_BASE/git
-bash cloud-workflows/gms/resources.sh --project griffith-lab --bucket griffith-lab-test-immuno-pipeline
+bash cloud-workflows/manual-workflows/resources.sh init-project --project griffith-lab --bucket griffith-lab-test-immuno-pipeline
 ```
 
 ### Gather input data and reference files to your local system
@@ -72,6 +72,8 @@ cd $WORKING_BASE/raw_data/hcc1395
 wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Norm.tar
 wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Tumor.tar
 wget http://genomedata.org/pmbio-workshop/fastqs/all/RNAseq_Tumor.tar
+tar -xvf Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
+rm -fr Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
 
 ```
 
