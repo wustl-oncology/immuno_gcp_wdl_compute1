@@ -13,12 +13,20 @@ https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows
 - google-cloud-sdk
 - git
 
+### Set some Google Cloud and other environment variables
+
+```
+export PROJECT=griffith-lab
+export GCS_BUCKET=griffith-lab-test-immuno-pipeline
+export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test
+export TUTORIAL_GIT=/home/mgriffit/git/immuno_gcp_wdl
+```
+
 ## Local setup
 
 ### First create a working directory on your local system
 
 ```bash
-export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test
 mkdir $WORKING_BASE
 cd $WORKING_BASE
 ```
@@ -32,13 +40,6 @@ git clone git@github.com:griffithlab/cloud-workflows.git
 git clone git@github.com:griffithlab/analysis-wdls.git
 ```
 
-### Set some Google Cloud environment variables
-
-```
-export PROJECT=griffith-lab
-export GCS_BUCKET=griffith-lab-test-immuno-pipeline
-```
-
 ### Login to GCP and set the desired project
 
 ```
@@ -50,7 +51,7 @@ gcloud config set project $PROJECT
 
 ```
 cd $WORKING_BASE/git
-sh cloud-workflows/gms/resources.sh init-project --project $PROJECT --bucket $GCS_BUCKET
+bash cloud-workflows/gms/resources.sh --project griffith-lab --bucket griffith-lab-test-immuno-pipeline
 ```
 
 ### Gather input data and reference files to your local system
