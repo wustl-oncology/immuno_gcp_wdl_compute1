@@ -63,6 +63,25 @@ mkdir yamls
 cd yamls
 ```
 
+### Setup input data and reference files
+
+Download RAW data for hcc1395
+```
+mkdir -p $WORKING_BASE/raw_data/hcc1395
+cd $WORKING_BASE/raw_data/hcc1395
+wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Norm.tar
+wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Tumor.tar
+wget http://genomedata.org/pmbio-workshop/fastqs/all/RNAseq_Tumor.tar
+
+```
+
+
+Setup yaml files for an example run
+```
+cp $TUTORIAL_GIT/example_yamls/input_files_hcc1395_immuno_local.yaml $WORKING_BASE/yamls/somatic_exome_hcc1395_local.yaml
+```
+
+
 
 ### Stage input files to cloud bucket
 
@@ -74,8 +93,8 @@ bsub -Is -q general-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workfl
 Attempt to cloudize your workflow and inputs
 ```
 export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
-export LOCAL_INPUT=$WORKING_BASE/yamls/somatic_exome_local.yaml
-export CLOUD_INPUT=$WORKING_BASE/yamls/somatic_exome_cloud.yaml
+export LOCAL_INPUT=$WORKING_BASE/yamls/somatic_exome_hcc1395_local.yaml
+export CLOUD_INPUT=$WORKING_BASE/yamls/somatic_exome_hcc1395_cloud.yaml
 python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET $WORKFLOW_DEFINITION $LOCAL_INPUT --output=$CLOUD_INPUT
 ```
 
