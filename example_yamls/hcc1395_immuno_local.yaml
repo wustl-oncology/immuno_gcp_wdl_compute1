@@ -3,27 +3,35 @@
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    bam: "/storage1/fs1/carreno-upenn/Active/cases/TWJF-CRC0120-01/csf_179792602/gerald_H25TYDSX2_1_CCGATAGTAG-ACAGAAGCCG.bam"
-  readgroup: "@RG\tID:2904140002\tPU:H25TYDSX2.1\tSM:TWJF-CRC0120-01DN-TumorLysate\tLB:TWJF-CRC0120-01DN-TumorLysate-lib1\tPL:Illumina\tCN:WUGSC"
-immuno.tumor_sample_name: TWJF-CRC0120-01DN-TumorLysate
+    fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/Exome_Tumor/Exome_Tumor_R1.fastq.gz"
+    fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/Exome_Tumor/Exome_Tumor_R2.fastq.gz"
+  readgroup: "@RG\tID:1\tPU:C1TD1ACXX\tSM:HCC1395_TUMOR_DNA\tLB:HCC1395_TUMOR_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
+immuno.tumor_sample_name: HCC1395_TUMOR_DNA
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    bam: "/storage1/fs1/carreno-upenn/Active/cases/TWJF-CRC0120-01/csf_179792050/gerald_H25TYDSX2_1_AACACGAGAA-GACTTGATTC.bam"
-  readgroup: "@RG\tID:2904139895\tPU:H25TYDSX2.1\tSM:TWJF-CRC0120-01PB-NormCellPellet\tLB:TWJF-CRC0120-01PB-NormCellPellet-lib1\tPL:Illumina\tCN:WUGSC"
-immuno.normal_sample_name: TWJF-CRC0120-01PB-NormCellPellet
+    fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/Exome_Norm/Exome_Norm_R1.fastq.gz"
+    fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/Exome_Norm/Exome_Norm_R2.fastq.gz"
+  readgroup: "@RG\tID:2\tPU:C1TD1ACXX\tSM:HCC1395_NORMAL_DNA\tLB:HCC1395_NORMAL_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
+immuno.normal_sample_name: HCC1395_NORMAL_DNA
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_bams:
-- "/storage1/fs1/carreno-upenn/Active/cases/TWJF-CRC0120-01/csf_180040833/gerald_H72NKDSX2_1_AGTTCAGGAT-ACCCAACAGA.bam"
+  - sequence:
+      - fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
+      - fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz" 
+  - sequence:
+      - fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
+      - fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
 
 immuno.read_group_fields:
-- - SM:H_MT-CRC0120-101411-01RN
+- - SM:HCC1395_TUMOR_RNA
   - PL:ILLUMINA
 immuno.rna_readgroups:
-- '2904144946'
-immuno.sample_name: H_MT-CRC0120-101411-01RN
+- 'Lane1'
+- 'Lane2'
+immuno.sample_name: HCC1395_TUMOR_RNA
 immuno.strand: first
 
 # ------------- Reference genome for DNA-seq alignments ---------------

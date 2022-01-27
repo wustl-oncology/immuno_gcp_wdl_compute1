@@ -95,9 +95,9 @@ bsub -Is -q general-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workfl
 Attempt to cloudize your workflow and inputs
 ```
 export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
-export LOCAL_INPUT=$WORKING_BASE/yamls/somatic_exome_hcc1395_local.yaml
-export CLOUD_INPUT=$WORKING_BASE/yamls/somatic_exome_hcc1395_cloud.yaml
-python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET $WORKFLOW_DEFINITION $LOCAL_INPUT --output=$CLOUD_INPUT
+export LOCAL_YAML=$WORKING_BASE/yamls/somatic_exome_hcc1395_local.yaml
+export CLOUD_YAML=$WORKING_BASE/yamls/somatic_exome_hcc1395_cloud.yaml
+python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET $WORKFLOW_DEFINITION $LOCAL_YAML --output=$CLOUD_YAML
 ```
 
 
