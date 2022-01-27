@@ -35,32 +35,32 @@ immuno.sample_name: HCC1395_TUMOR_RNA
 immuno.strand: first
 
 # ------------- Reference genome for DNA-seq alignments ---------------
-immuno.reference: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa"
-immuno.reference_fai: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa.fai"
-immuno.reference_dict: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.dict"
-immuno.reference_amb: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa.amb"
-immuno.reference_ann: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa.ann"
-immuno.reference_bwt: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa.bwt"
-immuno.reference_pac: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa.pac"
-immuno.reference_sa: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa.sa"
+immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/reference_genome/all_sequences.fa"
+immuno.reference_fai: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/reference_genome/all_sequences.fa.fai"
+immuno.reference_dict: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/reference_genome/all_sequences.dict"
+immuno.reference_amb: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.amb"
+immuno.reference_ann: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.ann"
+immuno.reference_bwt: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.bwt"
+immuno.reference_pac: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.pac"
+immuno.reference_sa: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.sa"
 
 # ------------- Reference genome for RNA-seq alignments ---------------
-immuno.reference_index: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH"
-immuno.reference_index_1ht2: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH.1.ht2"
-immuno.reference_index_2ht2: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH.2.ht2"
-immuno.reference_index_3ht2: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH.3.ht2"
-immuno.reference_index_4ht2: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH.4.ht2"
-immuno.reference_index_5ht2: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH.5.ht2"
-immuno.reference_index_6ht2: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH.6.ht2"
-immuno.reference_index_7ht2: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH.7.ht2"
-immuno.reference_index_8ht2: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH.8.ht2"
-immuno.ribosomal_intervals: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.ribo_intervals"
+immuno.reference_index: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH"
+immuno.reference_index_1ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.1.ht2"
+immuno.reference_index_2ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.2.ht2"
+immuno.reference_index_3ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.3.ht2"
+immuno.reference_index_4ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.4.ht2"
+immuno.reference_index_5ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.5.ht2"
+immuno.reference_index_6ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.6.ht2"
+immuno.reference_index_7ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.7.ht2"
+immuno.reference_index_8ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.8.ht2"
 
 # ------------- RNA transcript annotations ------------
-immuno.gene_transcript_lookup_table: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/ensembl95.transcriptToGene.tsv"
-immuno.kallisto_index: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.kallisto.idx"
-immuno.refFlat: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.refFlat.txt"
-immuno.reference_annotation: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.gtf"
+immuno.ribosomal_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/rna_seq_annotation/Homo_sapiens.GRCh38.95.ribo_intervals"
+immuno.gene_transcript_lookup_table: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/rna_seq_annotation/ensembl95.transcriptToGene.tsv"
+immuno.kallisto_index: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.kallisto.idx"
+immuno.refFlat: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/rna_seq_annotation/Homo_sapiens.GRCh38.95.refFlat.txt"
+immuno.reference_annotation: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/rna_seq_annotation/Homo_sapiens.GRCh38.95.gtf"
 
 # ------------ RNA trimming settings ---------------- 
 immuno.trimming_adapter_min_overlap: 7
