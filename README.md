@@ -73,14 +73,14 @@ wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Norm.tar
 wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Tumor.tar
 wget http://genomedata.org/pmbio-workshop/fastqs/all/RNAseq_Tumor.tar
 tar -xvf Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
-rm -fr Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
+rm -f Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
 
 ```
 
 
 Setup yaml files for an example run
 ```
-cp $TUTORIAL_GIT/example_yamls/input_files_hcc1395_immuno_local.yaml $WORKING_BASE/yamls/somatic_exome_hcc1395_local.yaml
+cp $TUTORIAL_GIT/example_yamls/hcc1395_immuno_local.yaml $WORKING_BASE/yamls/
 ```
 
 
