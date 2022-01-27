@@ -65,7 +65,7 @@ immuno.reference_annotation: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens
 # ------------ RNA trimming settings ---------------- 
 immuno.trimming_adapter_min_overlap: 7
 immuno.trimming_adapter_trim_end: RIGHT
-immuno.trimming_adapters: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/illumina_adapters/illumina_multiplex.fa"
+immuno.trimming_adapters: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/misc/illumina_multiplex.fa"
 immuno.trimming_max_uncalled: 300
 immuno.trimming_min_readlength: 25
 
