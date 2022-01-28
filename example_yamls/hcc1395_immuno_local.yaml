@@ -19,11 +19,11 @@ immuno.normal_sample_name: HCC1395_NORMAL_DNA
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
   - sequence:
-      - fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
-      - fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz" 
+      fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
+      fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz" 
   - sequence:
-      - fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
-      - fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
+      fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
+      fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
 immuno.read_group_fields:
 - - PU:H3MYFBBXX.4
   - SM:HCC1395_TUMOR_RNA

@@ -13,12 +13,16 @@ https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows
 - google-cloud-sdk
 - git
 
+### Interacting with Google buckets from your local system
+Note that you can use this docker image to access `gsutil` for exploration of your google storage: docker(google/cloud-sdk)
+
 ### Set some Google Cloud and other environment variables
 
 ```
 export GROUP=compute-oncology
 export PROJECT=griffith-lab
-export GCS_BUCKET=griffith-lab-test-immuno-pipeline
+export GCS_BUCKET_NAME=griffith-lab-test-immuno-pipeline
+export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
 export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test
 export TUTORIAL_GIT=/home/mgriffit/git/immuno_gcp_wdl
 ```
@@ -49,6 +53,7 @@ gcloud config set project $PROJECT
 ```
 
 ### Set up cloud account and bucket
+Run the following command and make note of the "Service Account" returned (e.g. "cromwell-server@griffith-lab.iam.gserviceaccount.com")
 
 ```
 cd $WORKING_BASE/git
@@ -96,10 +101,75 @@ bsub -Is -q oncology-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workf
 Attempt to cloudize your workflow and inputs
 ```
 export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
-export LOCAL_YAML=$WORKING_BASE/yamls/hcc1395_immuno_local.yaml
-export CLOUD_YAML=$WORKING_BASE/yamls/hcc1395_immuno_cloud.yaml
-python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET $WORKFLOW_DEFINITION $LOCAL_YAML --output=$CLOUD_YAML
+export LOCAL_YAML=hcc1395_immuno_local.yaml
+export CLOUD_YAML=hcc1395_immuno_cloud.yaml
+python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET_NAME $WORKFLOW_DEFINITION $WORKING_BASE/yamls/$LOCAL_YAML --output=$WORKING_BASE/yamls/$CLOUD_YAML
 ```
+
+### Start a Google VM that will run cromwell and orchestrate completion of the workflow
+
+```
+export INSTANCE_NAME=mg-immuno-test
+export SERVER_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
+
+cd $WORKING_BASE/git
+bash cloud-workflows/manual-workflows/start.sh $INSTANCE_NAME --server-account $SERVER_ACCOUNT
+
+```
+
+### Log into the VM and check status 
+
+After logging in, use journalctl to see if the instance start up has completed, and cromwell launch has completed.
+
+```
+gcloud compute ssh $INSTANCE_NAME
+journalctl -u google-startup-scripts -f
+journalctl -u cromwell -f
+exit
+
+```
+
+### Localize your inputs file
+
+First **on your local system**, copy your cloudized YAML file to a google bucket
+
+```
+cd $WORKING_BASE/yamls/
+gsutil cp $CLOUD_YAML $GCS_BUCKET_PATH/yamls/$CLOUD_YAML
+
+```
+
+Now log into Google instance again and copy the YAML file to its local file system
+```
+gcloud compute ssh $INSTANCE_NAME
+
+export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
+export CLOUD_YAML=hcc1395_immuno_cloud.yaml
+
+gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
+
+``` 
+
+### Run the immuno workflow using everything setup thus far
+
+While logged into the google instance:
+```
+source /shared/helpers.sh
+submit_workflow /shared/analysis-wdls/definitions/immuno.wdl $CLOUD_YAML
+
+```
+
+
+
+
+### Once the workflow is done and results retrieved, destroy the Cromwell VM on GCP to avoid wasting resources
+
+```
+gcloud compute instances delete $INSTANCE_NAME
+
+
+```
+
 
 
 
