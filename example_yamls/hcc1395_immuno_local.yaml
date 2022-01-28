@@ -24,7 +24,6 @@ immuno.rna_sequence:
   - sequence:
       - fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
       - fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
-
 immuno.read_group_fields:
 - - PU:H3MYFBBXX.4
   - SM:HCC1395_TUMOR_RNA
@@ -36,7 +35,6 @@ immuno.read_group_fields:
   - LB:HCC1395_TUMOR_RNA_LIB1
   - PL:Illumina
   - CN:WUGSC
-
 immuno.rna_readgroups:
 - 'Lane1'
 - 'Lane2'
@@ -52,6 +50,7 @@ immuno.reference_ann: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/alig
 immuno.reference_bwt: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.bwt"
 immuno.reference_pac: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.pac"
 immuno.reference_sa: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.sa"
+immuno.synonyms_file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/reference_genome/chromAlias.ensembl.txt"
 
 # ------------- Reference genome for RNA-seq alignments ---------------
 immuno.reference_index: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH"
@@ -82,12 +81,14 @@ immuno.trimming_min_readlength: 25
 immuno.bait_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/capture_reagents/IDT_xGen_Lockdown_Exome_v1.baits.interval_list"
 immuno.target_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/capture_reagents/IDT_xGen_Lockdown_Exome_v1.targets.interval_list"
 
+# ------------- Miscellaneous other know variant files
 immuno.docm_vcf: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/docm.vcf.gz"
 immuno.docm_vcf_tbi: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/docm.vcf.gz.tbi"
 immuno.omni_vcf: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz"
 immuno.omni_vcf_tbi: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz.tbi"
 immuno.somalier_vcf: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/GRC-human-build38_gnomad_exome_common_snps.vcf"
-immuno.synonyms_file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/reference_genome/chromAlias.ensembl.txt"
+
+# ------------- Variant annotation VEP cache --------------------
 immuno.vep_cache_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/vep_cache.zip"
 
 # ---------------- Sites to ignore/treat specially during base quality score recalibration after alignemt as per GATK best practices -------------------
