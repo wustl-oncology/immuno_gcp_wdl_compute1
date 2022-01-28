@@ -78,8 +78,8 @@ immuno.docm_vcf_tbi: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known
 immuno.omni_vcf: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz"
 immuno.omni_vcf_tbi: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz.tbi"
 immuno.somalier_vcf: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/GRC-human-build38_gnomad_exome_common_snps.vcf"
-immuno.synonyms_file: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build50f99e75d14340ffb5b7d21b03887637/chromAlias.ensembl.txt"
-immuno.vep_cache_dir_zip: "/storage1/fs1/mgriffit/Active/griffithlab/adhoc/maruska/vep.zip"
+immuno.synonyms_file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/reference_genome/chromAlias.ensembl.txt"
+immuno.vep_cache_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/vep_cache.zip"
 
 # ---------------- Sites to ignore/treat specially during base quality score recalibration after alignemt as per GATK best practices -------------------
 immuno.bqsr_known_sites:
@@ -93,10 +93,10 @@ immuno.bqsr_known_sites_tbi:
 
 # -------------------- Regions used for QC reporting on coverage of known variants and clinically relevant genes -------------------
 immuno.per_base_intervals:
-- file: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/interval-list/01f4fae3699646c3af2fa47853da7a8c/06a82ecf9c434b7ab03d82e59eaa28c8.interval_list"
+- file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/qc_regions/clinvar.interval_list"
   label: clinvar
 immuno.per_target_intervals:
-- file: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/interval-list/db8c25932fd94d2a8a073a2e20449878/a35b64d628b94df194040032d53b5616.interval_list"
+- file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/qc_regions/acmg_genes.interval_list"
   label: acmg_genes
 immuno.picard_metric_accumulation_level: LIBRARY
 
@@ -107,9 +107,9 @@ immuno.vep_custom_annotations:
 - method: exact
   force_report_coordinates: true
   annotation:
-    file: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/genome-db-ensembl-gnomad/2dd4b53431674786b760adad60a29273/fixed_b38_exome.vcf.gz"
+    file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/gnomad_fixed_b38_exome.vcf.gz"
     secondary_files:
-    - "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/genome-db-ensembl-gnomad/2dd4b53431674786b760adad60a29273/fixed_b38_exome.vcf.gz.tbi"
+    - "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/gnomad_fixed_b38_exome.vcf.gz.tbi"
     data_format: vcf
     name: gnomADe
     vcf_fields:
