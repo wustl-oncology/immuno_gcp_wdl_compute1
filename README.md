@@ -161,6 +161,14 @@ submit_workflow /shared/analysis-wdls/definitions/immuno.wdl $CLOUD_YAML
 
 ```
 
+### Monitor progress of the workflow run:
+While the job is running you can see Cromwell logs live as they occur by doing this
+
+```
+journalctl -f -u cromwell
+
+```
+
 
 
 
