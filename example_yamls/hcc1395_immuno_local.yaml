@@ -69,15 +69,15 @@ immuno.trimming_adapters: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/
 immuno.trimming_max_uncalled: 300
 immuno.trimming_min_readlength: 25
 
+# ------------- Baits and targets for exome reagent (94b23d66f667472690a7ee165e2037b6 = "xGen Lockdown Exome Panel v1)"
+immuno.bait_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/capture_reagents/IDT_xGen_Lockdown_Exome_v1.baits.interval_list"
+immuno.target_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/capture_reagents/IDT_xGen_Lockdown_Exome_v1.targets.interval_list"
 
-immuno.bait_intervals: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/interval-list/af48f2f2abc54b92985517a1ff46eefd/94b23d66f667472690a7ee165e2037b6.interval_list"
-immuno.target_intervals: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/interval-list/c83be453937b44e7aa0d7e36f6806710/94b23d66f667472690a7ee165e2037b6.interval_list"
-
-immuno.docm_vcf: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-16572-a6fc7db1ea124431af5271c8cb23ee26/snvs.hq.vcf.gz"
-immuno.docm_vcf_tbi: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-16572-a6fc7db1ea124431af5271c8cb23ee26/snvs.hq.vcf.gz.tbi"
-immuno.omni_vcf: "/storage1/fs1/bga/Active/gmsroot/gc2709/info/production_reference_GRCh38DH/accessory_vcf/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz"
-immuno.omni_vcf_tbi: "/storage1/fs1/bga/Active/gmsroot/gc2709/info/production_reference_GRCh38DH/accessory_vcf/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz.tbi"
-immuno.somalier_vcf: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/annotation_data/concordance_snps/GRC-human-build38_gnomad_exome_common_snps.vcf"
+immuno.docm_vcf: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/docm.vcf.gz"
+immuno.docm_vcf_tbi: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/docm.vcf.gz.tbi"
+immuno.omni_vcf: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz"
+immuno.omni_vcf_tbi: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz.tbi"
+immuno.somalier_vcf: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/known_variants/GRC-human-build38_gnomad_exome_common_snps.vcf"
 immuno.synonyms_file: "/storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build50f99e75d14340ffb5b7d21b03887637/chromAlias.ensembl.txt"
 immuno.vep_cache_dir_zip: "/storage1/fs1/mgriffit/Active/griffithlab/adhoc/maruska/vep.zip"
 
