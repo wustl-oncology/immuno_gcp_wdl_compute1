@@ -26,8 +26,17 @@ immuno.rna_bams:
       - fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
 
 immuno.read_group_fields:
-- - SM:HCC1395_TUMOR_RNA
-  - PL:ILLUMINA
+- - PU:H3MYFBBXX.4
+  - SM:HCC1395_TUMOR_RNA
+  - LB:HCC1395_TUMOR_RNA_LIB1
+  - PL:Illumina
+  - CN:WUGSC
+- - PU:H3MYFBBXX.5
+  - SM:HCC1395_TUMOR_RNA
+  - LB:HCC1395_TUMOR_RNA_LIB1
+  - PL:Illumina
+  - CN:WUGSC
+
 immuno.rna_readgroups:
 - 'Lane1'
 - 'Lane2'
