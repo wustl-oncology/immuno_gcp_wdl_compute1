@@ -98,7 +98,7 @@ Attempt to cloudize your workflow and inputs
 export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
 export LOCAL_YAML=$WORKING_BASE/yamls/hcc1395_immuno_local.yaml
 export CLOUD_YAML=$WORKING_BASE/yamls/hcc1395_immuno_cloud.yaml
-python4 /opt/scripts/cloudize-workflow.py $GCS_BUCKET $WORKFLOW_DEFINITION $LOCAL_YAML --output=$CLOUD_YAML
+python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET $WORKFLOW_DEFINITION $LOCAL_YAML --output=$CLOUD_YAML
 ```
 
 

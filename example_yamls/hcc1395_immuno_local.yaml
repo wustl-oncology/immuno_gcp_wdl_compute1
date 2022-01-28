@@ -17,7 +17,7 @@ immuno.normal_sequence:
 immuno.normal_sample_name: HCC1395_NORMAL_DNA
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
-immuno.rna_bams:
+immuno.rna_sequence:
   - sequence:
       - fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
       - fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz" 
