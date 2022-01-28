@@ -16,6 +16,7 @@ https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows
 ### Set some Google Cloud and other environment variables
 
 ```
+export GROUP=compute-oncology
 export PROJECT=griffith-lab
 export GCS_BUCKET=griffith-lab-test-immuno-pipeline
 export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test
@@ -89,15 +90,15 @@ cp $TUTORIAL_GIT/example_yamls/hcc1395_immuno_local.yaml $WORKING_BASE/yamls/
 
 Start an interactive docker session capable of running the "cloudize" scripts
 ```
-bsub -Is -q general-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
 ```
 
 Attempt to cloudize your workflow and inputs
 ```
 export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
-export LOCAL_YAML=$WORKING_BASE/yamls/somatic_exome_hcc1395_local.yaml
-export CLOUD_YAML=$WORKING_BASE/yamls/somatic_exome_hcc1395_cloud.yaml
-python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET $WORKFLOW_DEFINITION $LOCAL_YAML --output=$CLOUD_YAML
+export LOCAL_YAML=$WORKING_BASE/yamls/hcc1395_immuno_local.yaml
+export CLOUD_YAML=$WORKING_BASE/yamls/hcc1395_immuno_cloud.yaml
+python4 /opt/scripts/cloudize-workflow.py $GCS_BUCKET $WORKFLOW_DEFINITION $LOCAL_YAML --output=$CLOUD_YAML
 ```
 
 
