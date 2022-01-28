@@ -121,6 +121,8 @@ bash cloud-workflows/manual-workflows/start.sh $INSTANCE_NAME --server-account $
 
 After logging in, use journalctl to see if the instance start up has completed, and cromwell launch has completed.
 
+For details on how to recognize whether these processes have completed refer: [here](https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows#ssh-in-to-vm).
+
 ```
 gcloud compute ssh $INSTANCE_NAME
 journalctl -u google-startup-scripts -f

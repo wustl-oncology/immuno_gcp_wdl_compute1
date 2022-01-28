@@ -206,7 +206,6 @@ immuno.epitope_lengths_class_ii:
 - 17
 - 18
 immuno.binding_threshold: 500
-immuno.allele_specific_binding_thresholds: false
 immuno.minimum_fold_change: 0
 immuno.top_score_metric: median
 immuno.downstream_sequence_length: 100
