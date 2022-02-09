@@ -169,17 +169,65 @@ journalctl -f -u cromwell
 
 ```
 
+### Save information about the workflow run itself - Timing Diagram and Outputs List
+
+After a workflow is run, before exiting and deleting your VM, make sure that the timing diagram and the list of outputs are available so you can make use of the data outside of the cloud.
+
+First determine you WORKFLOW_ID. This can be done several ways. If the run was successful it should be reported at the bottom of the cromwell log as "$WORKFLOW_ID  completed with status Succeeded". Or you find it by the name of the directory where your run was stored in the Google bucket. Both of these approaches are illustrated here:
+
+```
+export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
+gsutil ls $GCS_BUCKET_PATH/cromwell-executions/immuno/
+
+journalctl -u cromwell | tail | grep "Workflow actor"
+
+```
+
+Now save the workflow information in your google bucket
+```
+export WORKFLOW_ID=<id from above>
+source /shared/helpers.sh
+save_artifacts WORKFLOW_ID gs://$GCS_BUCKET_PATH/workflow_artifacts/
+
+```
+
+This command will upload the workflow's artifacts to your google bucketS so they can be used after the VM is deleted. They can be found at paths:
+
+```
+gs://$GCS_BUCKET_PATH/workflow_artifacts/WORKFLOW_ID/timing.html
+gs://$GCS_BUCKET_PATH/workflow_artifacts/WORKFLOW_ID/outputs.json
+
+```
+
+The file `outputs.json` will simply be a map of output names to their GCS locations. The `pull_outputs.py` script can be used to retrieve the actual files.
 
 
+### Pulling the Outputs from Google Cloud Bucket back to your local system or cluster
+After the work in your compute instance is all done, including `save_artifacts`, and you want to bring your results back to the cluster, leverage the `pull_outputs.py` script with the generated `outputs.json` to retrieve the files.
+
+On compute1 cluster, jump into a docker container with the script available
+
+```
+bsub -Is -q general-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
+
+```
+
+Execute the script
+
+```
+export WORKFLOW_ID=<id from above>
+cd $WORKING_BASE
+mkdir final_results
+cd final_results
+
+python3 /opt/scripts/pull_outputs.py --outputs-file=$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json --outputs-dir=$WORKING_BASE/final_results/
+
+```
 
 ### Once the workflow is done and results retrieved, destroy the Cromwell VM on GCP to avoid wasting resources
 
 ```
 gcloud compute instances delete $INSTANCE_NAME
 
-
 ```
-
-
-
 
