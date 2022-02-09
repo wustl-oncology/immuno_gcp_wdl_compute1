@@ -187,7 +187,7 @@ Now save the workflow information in your google bucket
 ```
 export WORKFLOW_ID=<id from above>
 source /shared/helpers.sh
-save_artifacts $WORKFLOW_ID gs://$GCS_BUCKET_PATH/workflow_artifacts/
+save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/
 
 ```
 
