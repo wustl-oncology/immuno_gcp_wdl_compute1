@@ -1,4 +1,6 @@
 # Running the WASHU Immunogenomics Workflow on Google Cloud - compute1 version
+
+## Preamble
 This tutorial demonstrates how to run the WASHU immunogenomics pipeline (immuno.wdl) on Google Cloud.
 This will be done by first setting up the workflow definitions, input data and reference files and a 
 YAML config file on a user's local system. The user will also set up a Google Cloud environment
@@ -10,15 +12,21 @@ This version assumes that your are staging your input data files from the WASHU 
 Some steps are run within docker containers on that cluster. It therefore requires that you have access to 
 storage1 disk and ability to launch jobs on compute1 using LSF (bsub).
 
-## Source of instructions
+### Source of instructions
+This tutorial is a specific example of how to run a specific pipeline (immuno) on a specific example dataset (HCC1395 Tumor/normal cell line pair). The steps below are taken from the following link where you will find a  more generic set of documentation that explains in detail how to run any WDL pipeline on the Google Cloud using tools created to assist this process. 
 https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows
 
-## Prerequisites
+### Prerequisites
 - google-cloud-sdk
 - git
 
+### The example data set and analysis to be performed
+To demonstrate an analysis on the Google cloud we will run the WASHU immunogenomics pipeline on a publicly available set of exome and bulk RNA-seq data generated for a tumor/normal cell line pair (HCC1395 and HCC1395/BL). The HCC1395 cell line is a well known breast cancer cell line that can be purchased and is commonly used for benchmarking cancer genomics analysis and methods development. The datasets we will use here are realistic deeply sequenced exome and RNA-seq data. The immunogenomics pipeline is a very elaborate end-to-end pipeline that starts with raw data and performs data QC, germline variant calling, somatic variant calling (multiple variant callers and variant types), HLA typing, RNA expression analysis and neoantigen identification.  
+
 ### Interacting with Google buckets from your local system
 Note that you can use this docker image to access `gsutil` for exploration of your google storage: `docker(google/cloud-sdk)`
+
+## Step-by-step instructions
 
 ### Set some Google Cloud and other environment variables
 The following environment variables are used merely for convenience and should be customized to produce intuitive labeling for your own analysis:
@@ -34,7 +42,7 @@ export TUTORIAL_GIT=/home/mgriffit/git/immuno_gcp_wdl
 ## Local setup
 
 ### First create a working directory on your local system
-The following directory on the local system will contain: (a) git repository for the WDL workflows, including the immuno worflow, (b) git repository for tools that help provision and manage our workflow runs on the cloud, (c) raw data that we will download for this tutorial, (d) a YAML file describing the input data and paramters for the analysis, and (e) final results file from the workflow that we will pull down from the cloud after a successful run..
+The following directory on the local system will contain: (a) a git repository for this tutorial including an example YAML file set up to work with the test HCC139 data, (b) git repository for the WDL workflows, including the immuno worflow, (c) git repository for tools that help provision and manage our workflow runs on the cloud, (d) raw data that we will download for this tutorial, (e) a YAML file describing the input data and paramters for the analysis, and (f) final results file from the workflow that we will pull down from the cloud after a successful run.
 ```bash
 mkdir $WORKING_BASE
 cd $WORKING_BASE
@@ -64,6 +72,8 @@ cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
 bash resources.sh init-project --project griffith-lab --bucket griffith-lab-test-immuno-pipeline
 ```
 
+This step should have created two new configuration files in your current directory: `cromwell.conf` and `workflow_options.json`.
+
 ### Gather input data and reference files to your local system
 Create a directory for YAML files and create one for the desired pipeline that points to the location of input files on your local system
 
@@ -87,12 +97,12 @@ rm -f Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
 ```
 
 
-Setup yaml files for an example run
+Setup yaml files for an example run.
 ```bash
 cp $TUTORIAL_GIT/example_yamls/hcc1395_immuno_local.yaml $WORKING_BASE/yamls/
 ```
 
-
+Note that this YAML file has been set up to work with the HCC1395 raw data files downloaded above. If you are modifying this tutorial to work with your own data, you will need to modify the beginning of the YAML that relates to input sequence files.  For both DNA and RNA files, both FASTQ and Unaligned BAM files are supported as input.  Similarly, you have have your data in one file (or one file pair) or you may have multiple data files that will be merged together. Depending on how your input data is organized the YAML entries will look slightly different.
 
 ### Stage input files to cloud bucket
 
