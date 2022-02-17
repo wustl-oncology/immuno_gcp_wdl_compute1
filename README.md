@@ -36,7 +36,6 @@ export PROJECT=griffith-lab
 export GCS_BUCKET_NAME=griffith-lab-test-immuno-pipeline
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
 export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test
-export TUTORIAL_GIT=/home/mgriffit/git/immuno_gcp_wdl
 ```
 
 ## Local setup
@@ -100,7 +99,7 @@ rm -f Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
 
 Setup yaml files for an example run.
 ```bash
-cp $TUTORIAL_GIT/example_yamls/hcc1395_immuno_local.yaml $WORKING_BASE/yamls/
+cp $WORKING_BASE/git/immuno_gcp_wdl_compute1/hcc1395_immuno_local.yaml $WORKING_BASE/yamls/
 ```
 
 Note that this YAML file has been set up to work with the HCC1395 raw data files downloaded above. If you are modifying this tutorial to work with your own data, you will need to modify the beginning of the YAML that relates to input sequence files.  For both DNA and RNA files, both FASTQ and Unaligned BAM files are supported as input.  Similarly, you have have your data in one file (or one file pair) or you may have multiple data files that will be merged together. Depending on how your input data is organized the YAML entries will look slightly different.
