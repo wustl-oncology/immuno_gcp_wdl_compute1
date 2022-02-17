@@ -38,7 +38,7 @@ cd $WORKING_BASE
 
 ### Clone git repositories that have the workflows (pipelines) and scripts to help run them
 
-```
+```bash
 mkdir git
 cd git
 git clone git@github.com:griffithlab/cloud-workflows.git
@@ -47,7 +47,7 @@ git clone git@github.com:griffithlab/analysis-wdls.git
 
 ### Login to GCP and set the desired project
 
-```
+```bash
 gcloud auth login
 gcloud config set project $PROJECT
 ```
@@ -55,15 +55,15 @@ gcloud config set project $PROJECT
 ### Set up cloud account and bucket
 Run the following command and make note of the "Service Account" returned (e.g. "cromwell-server@griffith-lab.iam.gserviceaccount.com")
 
-```
-cd $WORKING_BASE/git
-bash cloud-workflows/manual-workflows/resources.sh init-project --project griffith-lab --bucket griffith-lab-test-immuno-pipeline
+```bash
+cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
+bash resources.sh init-project --project griffith-lab --bucket griffith-lab-test-immuno-pipeline
 ```
 
 ### Gather input data and reference files to your local system
 Create a directory for YAML files and create one for the desired pipeline that points to the location of input files on your local system
 
-```
+```bash
 cd $WORKING_BASE
 mkdir yamls
 cd yamls
@@ -72,7 +72,7 @@ cd yamls
 ### Setup input data and reference files
 
 Download RAW data for hcc1395
-```
+```bash
 mkdir -p $WORKING_BASE/raw_data/hcc1395
 cd $WORKING_BASE/raw_data/hcc1395
 wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Norm.tar
@@ -80,12 +80,11 @@ wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Tumor.tar
 wget http://genomedata.org/pmbio-workshop/fastqs/all/RNAseq_Tumor.tar
 tar -xvf Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
 rm -f Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
-
 ```
 
 
 Setup yaml files for an example run
-```
+```bash
 cp $TUTORIAL_GIT/example_yamls/hcc1395_immuno_local.yaml $WORKING_BASE/yamls/
 ```
 
@@ -94,12 +93,12 @@ cp $TUTORIAL_GIT/example_yamls/hcc1395_immuno_local.yaml $WORKING_BASE/yamls/
 ### Stage input files to cloud bucket
 
 Start an interactive docker session capable of running the "cloudize" scripts
-```
+```bash
 bsub -Is -q oncology-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
 ```
 
 Attempt to cloudize your workflow and inputs
-```
+```bash
 export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
 export LOCAL_YAML=hcc1395_immuno_local.yaml
 export CLOUD_YAML=hcc1395_immuno_cloud.yaml
@@ -108,13 +107,12 @@ python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET_NAME $WORKFLOW_DEFINITION 
 
 ### Start a Google VM that will run cromwell and orchestrate completion of the workflow
 
-```
+```bash
 export INSTANCE_NAME=mg-immuno-test
 export SERVER_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
 
-cd $WORKING_BASE/git
-bash cloud-workflows/manual-workflows/start.sh $INSTANCE_NAME --server-account $SERVER_ACCOUNT
-
+cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
+bash start.sh $INSTANCE_NAME --server-account $SERVER_ACCOUNT
 ```
 
 ### Log into the VM and check status 
@@ -123,26 +121,24 @@ After logging in, use journalctl to see if the instance start up has completed, 
 
 For details on how to recognize whether these processes have completed refer: [here](https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows#ssh-in-to-vm).
 
-```
+```bash
 gcloud compute ssh $INSTANCE_NAME
 journalctl -u google-startup-scripts -f
 journalctl -u cromwell -f
 exit
-
 ```
 
 ### Localize your inputs file
 
 First **on your local system**, copy your cloudized YAML file to a google bucket
 
-```
+```bash
 cd $WORKING_BASE/yamls/
 gsutil cp $CLOUD_YAML $GCS_BUCKET_PATH/yamls/$CLOUD_YAML
-
 ```
 
 Now log into Google instance again and copy the YAML file to its local file system
-```
+```bash
 gcloud compute ssh $INSTANCE_NAME
 
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
@@ -155,16 +151,16 @@ gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
 ### Run the immuno workflow using everything setup thus far
 
 While logged into the google instance:
-```
+```bash
 source /shared/helpers.sh
 submit_workflow /shared/analysis-wdls/definitions/immuno.wdl $CLOUD_YAML
 
 ```
 
 ### Monitor progress of the workflow run:
-While the job is running you can see Cromwell logs live as they occur by doing this
 
-```
+While the job is running you can see Cromwell logs live as they occur by doing this
+```bash
 journalctl -f -u cromwell
 
 ```
@@ -175,34 +171,30 @@ After a workflow is run, before exiting and deleting your VM, make sure that the
 
 First determine you WORKFLOW_ID. This can be done several ways. If the run was successful it should be reported at the bottom of the cromwell log as "$WORKFLOW_ID  completed with status Succeeded". Or you find it by the name of the directory where your run was stored in the Google bucket. Both of these approaches are illustrated here:
 
-```
+```bash
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
 gsutil ls $GCS_BUCKET_PATH/cromwell-executions/immuno/
 
 journalctl -u cromwell | tail | grep "Workflow actor"
-
 ```
 
 Now save the workflow information in your google bucket
-```
+```bash
 export WORKFLOW_ID=<id from above>
 source /shared/helpers.sh
 save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts
-
 ```
 
 This command will upload the workflow's artifacts to your google bucketS so they can be used after the VM is deleted. They can be found at paths:
 
-```
+```bash
 gs://$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/timing.html
 gs://$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json
-
 ```
 
 Confirm that they were successfully transferred:
-```
+```bash
 gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
-
 ```
 
 The file `outputs.json` will simply be a map of output names to their GCS locations. The `pull_outputs.py` script can be used to retrieve the actual files.
@@ -213,27 +205,24 @@ After the work in your compute instance is all done, including `save_artifacts`,
 
 On compute1 cluster, jump into a docker container with the script available
 
-```
+```bash
 bsub -Is -q general-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
-
 ```
 
 Execute the script
 
-```
+```bash
 export WORKFLOW_ID=<id from above>
 cd $WORKING_BASE
 mkdir final_results
 cd final_results
 
 python3 /opt/scripts/pull_outputs.py --outputs-file=$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json --outputs-dir=$WORKING_BASE/final_results/
-
 ```
 
 ### Once the workflow is done and results retrieved, destroy the Cromwell VM on GCP to avoid wasting resources
 
-```
+```bash
 gcloud compute instances delete $INSTANCE_NAME
-
 ```
 
