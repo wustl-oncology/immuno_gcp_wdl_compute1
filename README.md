@@ -96,7 +96,6 @@ tar -xvf Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
 rm -f Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
 ```
 
-
 Setup yaml files for an example run.
 ```bash
 cp $WORKING_BASE/git/immuno_gcp_wdl_compute1/example_yamls/hcc1395_immuno_local.yaml $WORKING_BASE/yamls/
@@ -202,8 +201,8 @@ save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts
 This command will upload the workflow's artifacts to your google bucketS so they can be used after the VM is deleted. They can be found at paths:
 
 ```bash
-gs://$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/timing.html
-gs://$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json
+$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/timing.html
+$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json
 ```
 
 Confirm that they were successfully transferred:
