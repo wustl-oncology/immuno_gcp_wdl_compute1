@@ -1,0 +1,377 @@
+#--
+
+##################
+### RNA INPUTS ###
+##################
+
+#see README for steps used to find these
+rna_sequence:
+  - sequence:
+      fastq1:
+        class: File
+        path: /storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz
+      fastq2:
+        class: File
+        path: /storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz
+    readgroup: "@RG\tID:1\tH3MYFBBXX.4\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
+  - sequence:
+      fastq1:
+        class: File
+        path: /storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz
+      fastq2:
+        class: File
+        path: /storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz
+    readgroup: "@RG\tID:2\tH3MYFBBXX.5\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
+
+#pulled from the header of the instrument_data_bams using samtools view -H
+read_group_fields:
+- - PU:H3MYFBBXX.4
+  - SM:HCC1395_TUMOR_RNA
+  - LB:HCC1395_TUMOR_RNA_LIB1
+  - PL:Illumina
+  - CN:WUGSC
+- - PU:H3MYFBBXX.5
+  - SM:HCC1395_TUMOR_RNA
+  - LB:HCC1395_TUMOR_RNA_LIB1
+  - PL:Illumina
+  - CN:WUGSC
+
+#pulled from the header of the instrument_data_bams using samtools view -H
+rna_readgroups:
+- '1'
+- '2'
+
+#pulled from SM field of header of the instrument_data_bams using samtools view -H
+sample_name: HCC1395_TUMOR_RNA
+
+#standard for human
+gene_transcript_lookup_table:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/ensembl95.transcriptToGene.tsv
+
+#standard for human
+kallisto_index:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.kallisto.idx
+
+#standard for human
+refFlat:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.refFlat.txt
+
+#standard for human
+reference_annotation:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.gtf
+
+#standard for human
+reference_index:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/hisat2.1.0_index/GRCh38DH
+
+#standard for human
+ribosomal_intervals:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.ribo_intervals
+
+#pulled from genome instrument-data list --show +library.transcript_strand --filter id=2895626107/2895626112, see README for more info
+strand: first
+
+#pulled from genome model list --filter id=fa351989a987455aacb4622a17204130 --show inputs, see README for more info
+trimming_adapter_min_overlap: 7
+
+#pulled from genome model list --filter id=fa351989a987455aacb4622a17204130 --show inputs, see README for more info
+trimming_adapter_trim_end: RIGHT
+
+#pulled from genome model list --filter id=fa351989a987455aacb4622a17204130 --show inputs, see README for more info
+trimming_adapters:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/illumina_adapters/illumina_multiplex.fa
+
+#pulled from genome model list --filter id=fa351989a987455aacb4622a17204130 --show inputs, see README for more info
+trimming_max_uncalled: 300
+
+#pulled from genome model list --filter id=fa351989a987455aacb4622a17204130 --show inputs, see README for more info
+trimming_min_readlength: 25
+
+#standard for human
+vep_ensembl_species: homo_sapiens
+
+#standard for human
+vep_ensembl_assembly: GRCh38
+
+######################
+### SOMATIC INPUTS ###
+######################
+
+#see README for bam source, readgroup pulled from bam using samtools view -H
+normal_sequence:
+  - sequence:
+      fastq1:
+        class: File
+        path: /storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test/raw_data/hcc1395/Exome_Norm/Exome_Norm_R1.fastq.gz
+      fastq2:
+        class: File
+        path: /storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test/raw_data/hcc1395/Exome_Norm/Exome_Norm_R2.fastq.gz
+    readgroup: "@RG\tID:2\tPU:C1TD1ACXX\tSM:HCC1395_NORMAL_DNA\tLB:HCC1395_NORMAL_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
+
+#ADDED BY ME Normal sample name.
+normal_sample_name: 'HCC1395_NORMAL_DNA'
+
+#see README for bam source, readgroup pulled from bam using samtools view -H
+tumor_sequence:
+  - sequence:
+      fastq1:
+        class: File
+        path: /storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test/raw_data/hcc1395/Exome_Tumor/Exome_Tumor_R1.fastq.gz
+      fastq2:
+        class: File
+        path: /storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test/raw_data/hcc1395/Exome_Tumor/Exome_Tumor_R2.fastq.gz
+    readgroup: "@RG\tID:1\tPU:C1TD1ACXX\tSM:HCC1395_TUMOR_DNA\tLB:HCC1395_TUMOR_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
+
+#ADDED BY ME Tumor sample name.
+tumor_sample_name: 'HCC1395_TUMOR_DNA'
+
+#inferred from inputs to reference model and yaml template model, see README
+bait_intervals:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/interval-list/af48f2f2abc54b92985517a1ff46eefd/94b23d66f667472690a7ee165e2037b6.interval_list
+
+#inferred from inputs to reference model and yaml template model, see README
+target_intervals:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/interval-list/c83be453937b44e7aa0d7e36f6806710/94b23d66f667472690a7ee165e2037b6.interval_list
+
+#standard for human- from config
+docm_vcf:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-16572-a6fc7db1ea124431af5271c8cb23ee26/snvs.hq.vcf.gz
+
+#standard for human- from config
+omni_vcf:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2709/info/production_reference_GRCh38DH/accessory_vcf/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz
+
+#standard for human- from config
+picard_metric_accumulation_level: LIBRARY
+
+#standard for human- from config
+reference: /storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa
+
+#standard for human- from config
+somalier_vcf:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/annotation_data/concordance_snps/GRC-human-build38_gnomad_exome_common_snps.vcf
+
+#standard for human- from config
+synonyms_file:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build50f99e75d14340ffb5b7d21b03887637/chromAlias.ensembl.txt
+
+#standard for human- from config
+vep_cache_dir: /storage1/fs1/bga/Active/gmsroot/gc2560/core/cwl/inputs/VEP_cache
+
+bqsr_known_sites:
+- class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-20211-26b393cc7ab04120ac68cc2cbd4a15df/indels.hq.vcf.gz
+- class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-20267-00cb8ff552914c17ad66d86031e10d30/indels.hq.vcf.gz
+- class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-19443-e48c595a620a432c93e8dd29e4af64f2/snvs.hq.vcf.gz
+
+#ADDED BY ME vep_custom_annotations.
+vep_custom_annotations:
+- method: 'exact'
+  force_report_coordinates: true
+  annotation:
+    file:
+      class: File
+      path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/genome-db-ensembl-gnomad/2dd4b53431674786b760adad60a29273/fixed_b38_exome.vcf.gz
+      secondaryFiles: [{class: File, path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/genome-db-ensembl-gnomad/2dd4b53431674786b760adad60a29273/fixed_b38_exome.vcf.gz.tbi}]
+    data_format: 'vcf'
+    name: 'gnomADe'
+    vcf_fields: ['AF','AF_AFR','AF_AMR','AF_ASJ','AF_EAS','AF_FIN','AF_NFE','AF_OTH','AF_SAS']
+    gnomad_filter: true
+    check_existing: true
+
+#standard for human- from config
+vep_ensembl_version: '95'
+
+#standard for human- from process_inputs.pl
+scatter_count: 50
+
+#standard for human- from process_inputs.pl
+vep_to_table_fields:
+- Consequence
+- SYMBOL
+- Feature_type
+- Feature
+- HGVSc
+- HGVSp
+- cDNA_position
+- CDS_position
+- Protein_position
+- Amino_acids
+- Codons
+- HGNC_ID
+- Existing_variation
+- gnomADe_AF
+- CLIN_SIG
+- SOMATIC
+- PHENO
+- clinvar_CLINSIGN
+- clinvar_PHENOTYPE
+- clinvar_SCORE
+- clinvar_RCVACC
+- clinvar_TESTEDINGTR
+- clinvar_PHENOTYPELIST
+- clinvar_NUMSUBMIT
+- clinvar_GUIDELINES
+
+#standard for human- from process_inputs.pl
+bqsr_intervals:
+- chr1
+- chr2
+- chr3
+- chr4
+- chr5
+- chr6
+- chr7
+- chr8
+- chr9
+- chr10
+- chr11
+- chr12
+- chr13
+- chr14
+- chr15
+- chr16
+- chr17
+- chr18
+- chr19
+- chr20
+- chr21
+- chr22
+
+#standard for human- from process_inputs.pl
+variants_to_table_fields:
+- CHROM
+- POS
+- REF
+- ALT
+- set
+
+#standard for human- from process_inputs.pl
+variants_to_table_genotype_fields:
+- GT
+- AD
+- AF
+- DP
+
+#standard for human- from process_inputs.pl
+per_base_intervals:
+- file: /storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/interval-list/01f4fae3699646c3af2fa47853da7a8c/06a82ecf9c434b7ab03d82e59eaa28c8.interval_list
+  label: clinvar
+
+#standard for human- from process_inputs.pl
+per_target_intervals:
+- file: /storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/interval-list/db8c25932fd94d2a8a073a2e20449878/a35b64d628b94df194040032d53b5616.interval_list
+  label: acmg_genes
+
+#standard for human- from process_inputs.pl
+summary_intervals: []
+
+#######################
+### GERMLINE INPUTS ###
+#######################
+
+#standard for human- from original test run
+gvcf_gq_bands: []
+
+#standard for human- from original test run
+gatk_haplotypecaller_intervals:
+- - chr1
+- - chr2
+- - chr3
+- - chr4
+- - chr5
+- - chr6
+- - chr7
+- - chr8
+- - chr9
+- - chr10
+- - chr11
+- - chr12
+- - chr13
+- - chr14
+- - chr15
+- - chr16
+- - chr17
+- - chr18
+- - chr19
+- - chr20
+- - chr21
+- - chr22
+- - chrX
+- - chrY
+
+####################
+### PHASE INPUTS ###
+####################
+
+#standard for human, from same dir as reference
+reference_dict:
+  class: File
+  path: /storage1/fs1/bga/Active/gmsroot/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.dict
+
+######################
+### PVACSEQ INPUTS ###
+######################
+
+#standard, at the advice of susanna kiwala
+prediction_algorithms:
+- NetMHC
+- NetMHCcons
+- PickPocket
+- SMM
+- SMMPMBEC
+- MHCflurry
+- MHCnuggetsI
+- NetMHCpan
+- NetMHCIIpan
+- SMMalign
+- NNalign
+- MHCnuggetsII
+
+#standard, at the advice of susanna kiwala
+
+epitope_lengths_class_i:
+- 8
+- 9
+- 10
+- 11
+
+epitope_lengths_class_ii:
+- 12
+- 13
+- 14
+- 15
+- 16
+- 17
+- 18
+
+binding_threshold: 500
+allele_specific_binding_thresholds: false
+minimum_fold_change: 0
+peptide_sequence_length: 21
+top_score_metric: median
+downstream_sequence_length: 100
+net_chop_method: cterm
+netmhc_stab: true
+pvacseq_threads: 8
+maximum_transcript_support_level: 1
+normal_vaf: 0.01
+tdna_vaf: 0.20
+trna_vaf: 0.20
+normal_cov: 50
+tdna_cov: 50
