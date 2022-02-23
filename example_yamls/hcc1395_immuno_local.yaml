@@ -216,8 +216,8 @@ immuno.maximum_transcript_support_level: 1
 immuno.normal_vaf: 0.01
 immuno.tdna_vaf: 0.2
 immuno.trna_vaf: 0.2
-immuno.normal_cov: 100
-immuno.tdna_cov: 100
+immuno.normal_cov: 50
+immuno.tdna_cov: 50
 
 # ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
 # Source of HLA types for hcc1395: ...
