@@ -35,7 +35,7 @@ export GROUP=compute-oncology
 export PROJECT=griffith-lab
 export GCS_BUCKET_NAME=griffith-lab-test-immuno-pipeline
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
-export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/gcp_wdl_test
+export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test
 ```
 
 ## Local setup
