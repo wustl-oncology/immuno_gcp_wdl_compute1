@@ -113,8 +113,8 @@ bsub -Is -q oncology-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workf
 Attempt to cloudize your workflow and inputs
 ```bash
 export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
-export LOCAL_YAML=hcc1395_immuno_local.yaml
-export CLOUD_YAML=hcc1395_immuno_cloud.yaml
+export LOCAL_YAML=hcc1395_immuno_local-WDL.yaml
+export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
 python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET_NAME $WORKFLOW_DEFINITION $WORKING_BASE/yamls/$LOCAL_YAML --output=$WORKING_BASE/yamls/$CLOUD_YAML
 ```
 
@@ -155,7 +155,7 @@ Now log into Google instance again and copy the YAML file to its local file syst
 gcloud compute ssh $INSTANCE_NAME
 
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
-export CLOUD_YAML=hcc1395_immuno_cloud.yaml
+export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
 
 gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
 
