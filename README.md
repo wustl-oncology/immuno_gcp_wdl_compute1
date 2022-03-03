@@ -74,15 +74,6 @@ bash resources.sh init-project --project griffith-lab --bucket griffith-lab-test
 
 This step should have created two new configuration files in your current directory: `cromwell.conf` and `workflow_options.json`.
 
-### Gather input data and reference files to your local system
-Create a directory for YAML files and create one for the desired pipeline that points to the location of input files on your local system
-
-```bash
-cd $WORKING_BASE
-mkdir yamls
-cd yamls
-```
-
 ### Setup input data and reference files
 
 Download RAW data for hcc1395
@@ -94,6 +85,15 @@ wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Tumor.tar
 wget http://genomedata.org/pmbio-workshop/fastqs/all/RNAseq_Tumor.tar
 tar -xvf Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
 rm -f Exome_Norm.tar Exome_Tumor.tar RNAseq_Tumor.tar
+```
+
+### Gather input data and reference files to your local system
+Create a directory for YAML files and create one for the desired pipeline that points to the location of input files on your local system
+
+```bash
+cd $WORKING_BASE
+mkdir yamls
+cd yamls
 ```
 
 Setup yaml files for an example run.
