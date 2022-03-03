@@ -36,6 +36,7 @@ export PROJECT=griffith-lab
 export GCS_BUCKET_NAME=griffith-lab-test-immuno-pipeline
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
 export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test
+export RAW_DATA_DIR=/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data
 ```
 
 ## Local setup
@@ -78,8 +79,8 @@ This step should have created two new configuration files in your current direct
 
 Download RAW data for hcc1395
 ```bash
-mkdir -p $WORKING_BASE/raw_data/hcc1395
-cd $WORKING_BASE/raw_data/hcc1395
+mkdir -p $RAW_DATA_DIR/hcc1395
+cd $RAW_DATA_DIR/hcc1395
 wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Norm.tar
 wget http://genomedata.org/pmbio-workshop/fastqs/all/Exome_Tumor.tar
 wget http://genomedata.org/pmbio-workshop/fastqs/all/RNAseq_Tumor.tar
