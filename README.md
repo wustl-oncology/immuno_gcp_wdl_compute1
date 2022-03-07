@@ -119,17 +119,20 @@ export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
 python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET_NAME $WORKFLOW_DEFINITION $WORKING_BASE/yamls/$LOCAL_YAML --output=$WORKING_BASE/yamls/$CLOUD_YAML
 ```
 
-### Start a Google VM that will run cromwell and orchestrate completion of the workflow
+### Start a Google VM that will run Cromwell and orchestrate completion of the workflow
 
+Note that Cromwell produces a large quantity of database logging. To ensure we have enough space for a least a few runs we will specify some extra disk space with `--boot-disk-size=50GB` (default would be 10GB).
 ```bash
 export INSTANCE_NAME=mg-immuno-test
 export SERVER_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
 
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
-bash start.sh $INSTANCE_NAME --server-account $SERVER_ACCOUNT
+bash start.sh $INSTANCE_NAME --server-account $SERVER_ACCOUNT --boot-disk-size=50GB
 ```
 
 ### Log into the VM and check status 
+
+In this step we will confirm that we can log into our Cromwell VM with `gcloud compute ssh` and make sure it is ready for use.
 
 After logging in, use journalctl to see if the instance start up has completed, and cromwell launch has completed.
 
