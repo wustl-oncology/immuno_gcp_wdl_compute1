@@ -199,10 +199,10 @@ Now save the workflow information in your google bucket
 ```bash
 export WORKFLOW_ID=<id from above>
 source /shared/helpers.sh
-save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts
+save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
 ```
 
-This command will upload the workflow's artifacts to your google bucketS so they can be used after the VM is deleted. They can be found at paths:
+This command will upload the workflow's artifacts to your google bucket so they can be used after the VM is deleted. They can be found at paths:
 
 ```bash
 $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/timing.html
