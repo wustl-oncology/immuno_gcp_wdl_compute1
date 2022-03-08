@@ -154,7 +154,7 @@ cd $WORKING_BASE/yamls/
 gsutil cp $CLOUD_YAML $GCS_BUCKET_PATH/yamls/$CLOUD_YAML
 ```
 
-Now log into Google instance again and copy the YAML file to its local file system
+Now log into Google Cromwell VM instance again and copy the YAML file to its local file system
 ```bash
 gcloud compute ssh $INSTANCE_NAME
 
@@ -167,7 +167,7 @@ gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
 
 ### Run the immuno workflow using everything setup thus far
 
-While logged into the google instance:
+While logged into the Google Cromwell VM instance:
 ```bash
 source /shared/helpers.sh
 submit_workflow /shared/analysis-wdls/definitions/immuno.wdl $CLOUD_YAML
@@ -209,9 +209,10 @@ $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/timing.html
 $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json
 ```
 
-Confirm that they were successfully transferred:
+Confirm that they were successfully transferred and logout of the Cromwell VM on GCP:
 ```bash
 gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
+exit
 ```
 
 The file `outputs.json` will simply be a map of output names to their GCS locations. The `pull_outputs.py` script can be used to retrieve the actual files.
