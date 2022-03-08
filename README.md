@@ -223,18 +223,31 @@ After the work in your compute instance is all done, including `save_artifacts`,
 On compute1 cluster, jump into a docker container with the script available
 
 ```bash
+export WORKFLOW_ID=<id from above>
 bsub -Is -q general-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
 ```
 
-Execute the script
+Execute the script:
 
 ```bash
-export WORKFLOW_ID=<id from above>
 cd $WORKING_BASE
 mkdir final_results
 cd final_results
 
 python3 /opt/scripts/pull_outputs.py --outputs-file=$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json --outputs-dir=$WORKING_BASE/final_results/
+exit
+```
+
+### Estimate the cost of executing your workflow
+
+On compute1 cluster, start an interactive docker session as describe below and then use the following python script to generate a cost estimate:
+
+```bash
+export WORKFLOW_ID=<id from above>
+bsub -Is -q general-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
+cd $WORKING_BASE/git/cloud-workflows/scripts
+python3 estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/metadata/
+exit
 ```
 
 ### Once the workflow is done and results retrieved, destroy the Cromwell VM on GCP to avoid wasting resources
