@@ -239,6 +239,14 @@ python3 /opt/scripts/pull_outputs.py --outputs-file=$GCS_BUCKET_PATH/workflow_ar
 exit
 ```
 
+Examine the outputs briefly:
+```bash 
+cd $WORKING_BASE/final_results
+ls -l
+du -h
+
+```
+
 ### Estimate the cost of executing your workflow
 
 On compute1 cluster, start an interactive docker session as describe below and then use the following python script to generate a cost estimate:
