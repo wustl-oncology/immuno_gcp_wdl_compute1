@@ -44,6 +44,7 @@ immuno.strand: first
 # ------------- Reference genome for DNA-seq alignments ---------------
 immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa"
 immuno.reference_fai: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.fai"
+immuno.reference_alt: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.alt"
 immuno.reference_dict: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.dict"
 immuno.reference_amb: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.amb"
 immuno.reference_ann: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/bwamem_0.7.15/all_sequences.fa.ann"
