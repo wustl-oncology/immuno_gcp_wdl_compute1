@@ -113,6 +113,7 @@ immuno.picard_metric_accumulation_level: LIBRARY
 #--------------------- VEP variant annotation settings ----------------------
 immuno.vep_ensembl_species: homo_sapiens
 immuno.vep_ensembl_assembly: GRCh38
+immuno.gnomad_field_name: gnomADe_AF
 immuno.vep_custom_annotations:
 - method: exact
   force_report_coordinates: true
