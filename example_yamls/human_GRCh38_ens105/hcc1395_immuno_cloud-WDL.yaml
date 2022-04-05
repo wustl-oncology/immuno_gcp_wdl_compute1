@@ -2,27 +2,27 @@
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-03-20/Exome_Tumor/Exome_Tumor_R1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-03-20/Exome_Tumor/Exome_Tumor_R2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-05/Exome_Tumor/Exome_Tumor_R1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-05/Exome_Tumor/Exome_Tumor_R2.fastq.gz"
   readgroup: "@RG\tID:1\tPU:C1TD1ACXX\tSM:HCC1395_TUMOR_DNA\tLB:HCC1395_TUMOR_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
 immuno.tumor_sample_name: HCC1395_TUMOR_DNA
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-03-20/Exome_Norm/Exome_Norm_R1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-03-20/Exome_Norm/Exome_Norm_R2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-05/Exome_Norm/Exome_Norm_R1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-05/Exome_Norm/Exome_Norm_R2.fastq.gz"
   readgroup: "@RG\tID:2\tPU:C1TD1ACXX\tSM:HCC1395_NORMAL_DNA\tLB:HCC1395_NORMAL_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
 immuno.normal_sample_name: HCC1395_NORMAL_DNA
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-03-20/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-03-20/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-05/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-05/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz"
 - sequence:
-    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-03-20/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-03-20/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-05/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-05/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
 immuno.read_group_fields:
 - - PU:H3MYFBBXX.4
   - SM:HCC1395_TUMOR_RNA
@@ -43,13 +43,13 @@ immuno.strand: first
 # ------------- Reference genome for DNA-seq alignments ---------------
 immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa"
 immuno.reference_fai: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa.fai"
-immuno.reference_alt: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa.alt"
 immuno.reference_dict: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.dict"
+immuno.reference_alt: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa.alt"
 immuno.reference_amb: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa.amb"
 immuno.reference_ann: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa.ann"
 immuno.reference_bwt: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa.bwt"
 immuno.reference_pac: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa.pac"
-immuno.reference_sa: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa.sa"
+immuno.reference_0123: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa.0123"
 immuno.synonyms_file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/reference_genome/chromAlias.ensembl.txt"
 
 # ------------- Reference genome for RNA-seq alignments ---------------
