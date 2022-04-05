@@ -108,7 +108,7 @@ Note that this YAML file has been set up to work with the HCC1395 raw data files
 
 Start an interactive docker session capable of running the "cloudize" scripts
 ```bash
-bsub -Is -q oncology-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:latest)" /bin/bash
 ```
 
 Attempt to cloudize your workflow and inputs
@@ -225,7 +225,7 @@ On compute1 cluster, jump into a docker container with the script available
 
 ```bash
 export WORKFLOW_ID=<id from above>
-bsub -Is -q general-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
+bsub -Is -q general-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:latest)" /bin/bash
 ```
 
 Execute the script:
@@ -253,7 +253,7 @@ On compute1 cluster, start an interactive docker session as describe below and t
 
 ```bash
 export WORKFLOW_ID=<id from above>
-bsub -Is -q general-interactive -G $GROUP -a "docker(jackmaruska/cloudize-workflow:latest)" /bin/bash
+bsub -Is -q general-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:latest)" /bin/bash
 cd $WORKING_BASE/git/cloud-workflows/scripts
 python3 estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/metadata/
 exit
