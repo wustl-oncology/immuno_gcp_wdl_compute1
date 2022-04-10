@@ -133,7 +133,7 @@ export SERVICE_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
 
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
 bash start.sh $INSTANCE_NAME --server-account $SERVICE_ACCOUNT --boot-disk-size=250GB
-exit #leave the docker image
+exit #leave the docker session
 ```
 
 ### Log into the VM and check status 
@@ -148,7 +148,7 @@ For details on how to recognize whether these processes have completed refer: [h
 gcloud compute ssh $INSTANCE_NAME
 journalctl -u google-startup-scripts -f
 journalctl -u cromwell -f
-exit
+exit #leave the google VM
 ```
 
 ### Localize your inputs file
@@ -218,7 +218,7 @@ $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json
 Confirm that they were successfully transferred and logout of the Cromwell VM on GCP:
 ```bash
 gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
-exit
+exit #leave the google VM
 ```
 
 The file `outputs.json` will simply be a map of output names to their GCS locations. The `pull_outputs.py` script can be used to retrieve the actual files.
@@ -242,7 +242,7 @@ mkdir final_results
 cd final_results
 
 python3 /opt/scripts/pull_outputs.py --outputs-file=$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json --outputs-dir=$WORKING_BASE/final_results/
-exit
+exit #leave the docker session
 ```
 
 Examine the outputs briefly:
@@ -262,7 +262,7 @@ export WORKFLOW_ID=<id from above>
 bsub -Is -q general-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:latest)" /bin/bash
 cd $WORKING_BASE/git/cloud-workflows/scripts
 python3 estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/metadata/
-exit
+exit #leave the docker session
 ```
 
 ### Once the workflow is done and results retrieved, destroy the Cromwell VM on GCP to avoid wasting resources
