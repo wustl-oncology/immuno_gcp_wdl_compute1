@@ -63,6 +63,7 @@ From the command line, you will need to authenticate your cloud access (using yo
 ```bash
 gcloud auth login
 gcloud config set project $PROJECT
+gcloud config list
 ```
 
 ### Set up cloud account and bucket
