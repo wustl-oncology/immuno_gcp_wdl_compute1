@@ -132,7 +132,7 @@ export INSTANCE_NAME=mg-immuno-test
 export SERVICE_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
 
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
-bash start.sh $INSTANCE_NAME --server-account $SERVICE_ACCOUNT --boot-disk-size=250GB
+bash start.sh $INSTANCE_NAME --server-account $SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB
 exit #leave the docker session
 ```
 
