@@ -33,7 +33,7 @@ The following environment variables are used merely for convenience and should b
 ```bash
 export GROUP=compute-oncology
 export GCS_PROJECT=griffith-lab
-export GCS_SERVICE_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
+export GCS_SERVICE_ACCOUNT=cromwell-server@$GCS_PROJECT.iam.gserviceaccount.com
 export GCS_BUCKET_NAME=griffith-lab-test-immuno-pipeline
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
 export GCS_INSTANCE_NAME=mg-immuno-test
