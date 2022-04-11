@@ -35,6 +35,8 @@ export GROUP=compute-oncology
 export GCS_PROJECT=griffith-lab
 export GCS_BUCKET_NAME=griffith-lab-test-immuno-pipeline
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
+export GSC_INSTANCE_NAME=mg-immuno-test
+export GCS_SERVICE_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
 export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test
 export RAW_DATA_DIR=/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data
 export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
@@ -128,11 +130,8 @@ If you get an error during this step, a common cause is that there is some disco
 
 Note that Cromwell produces a large quantity of database logging. To ensure we have enough space for a least a few runs and to localize intermediate and final results files from the workflow (which include numerous large BAMs) we will specify some extra disk space with `--boot-disk-size=250GB` (default would be 10GB). When not testing, this can probably be safely reduced to 20-40GB.
 ```bash
-export INSTANCE_NAME=mg-immuno-test
-export SERVICE_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
-
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
-bash start.sh $INSTANCE_NAME --server-account $SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB
+bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB
 exit #leave the docker session
 ```
 
@@ -145,7 +144,7 @@ After logging in, use journalctl to see if the instance start up has completed, 
 For details on how to recognize whether these processes have completed refer: [here](https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows#ssh-in-to-vm).
 
 ```bash
-gcloud compute ssh $INSTANCE_NAME
+gcloud compute ssh $GCS_INSTANCE_NAME
 journalctl -u google-startup-scripts -f
 journalctl -u cromwell -f
 exit #leave the google VM
@@ -162,7 +161,7 @@ gsutil cp $CLOUD_YAML $GCS_BUCKET_PATH/yamls/$CLOUD_YAML
 
 Now log into Google Cromwell VM instance again and copy the YAML file to its local file system
 ```bash
-gcloud compute ssh $INSTANCE_NAME
+gcloud compute ssh $GCS_INSTANCE_NAME
 
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
 export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
@@ -268,6 +267,6 @@ exit #leave the docker session
 ### Once the workflow is done and results retrieved, destroy the Cromwell VM on GCP to avoid wasting resources
 
 ```bash
-gcloud compute instances delete $INSTANCE_NAME
+gcloud compute instances delete $GCS_INSTANCE_NAME
 ```
 
