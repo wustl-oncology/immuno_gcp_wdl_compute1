@@ -33,10 +33,10 @@ The following environment variables are used merely for convenience and should b
 ```bash
 export GROUP=compute-oncology
 export GCS_PROJECT=griffith-lab
+export GCS_SERVICE_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
 export GCS_BUCKET_NAME=griffith-lab-test-immuno-pipeline
 export GCS_BUCKET_PATH=gs://griffith-lab-test-immuno-pipeline
 export GCS_INSTANCE_NAME=mg-immuno-test
-export GCS_SERVICE_ACCOUNT=cromwell-server@griffith-lab.iam.gserviceaccount.com
 export WORKING_BASE=/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/gcp_wdl_test
 export RAW_DATA_DIR=/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data
 export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
