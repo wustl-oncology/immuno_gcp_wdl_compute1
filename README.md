@@ -191,7 +191,7 @@ You can also query the cromwell server using your $WORKFLOW_ID. This ID will hav
 
 Example commands that query the Cromwell server and get the current status, current timing diagram, and then save that to the Google Bucket for easy access:
 ```bash
-export $WORKFLOW_ID=<id from above>
+export WORKFLOW_ID=<id from above>
 curl http://localhost:8000/api/workflows/v1/$WORKFLOW_ID/status
 curl http://localhost:8000/api/workflows/v1/$WORKFLOW_ID/timing > $WORKFLOW_ID.timing.html
 gsutil cp $WORKFLOW_ID.timing.html gs://griffith-lab-test-immuno-pipeline/$WORKFLOW_ID.timing.html
