@@ -187,6 +187,18 @@ journalctl -f -u cromwell
 
 ```
 
+You can also query the cromwell server using your $WORKFLOW_ID. This ID will have been printed out when you launched the worflow. It will also be the top level UUID in the output files being generated in your Google Bucket.
+
+Example commands that query the Cromwell server and get the current status, current timing diagram, and then save that to the Google Bucket for easy access:
+```bash
+export $WORKFLOW_ID=<id from above>
+curl http://localhost:8000/api/workflows/v1/$WORKFLOW_ID/status
+curl http://localhost:8000/api/workflows/v1/$WORKFLOW_ID/timing > $WORKFLOW_ID.timing.html
+gsutil cp $WORKFLOW_ID.timing.html gs://griffith-lab-test-immuno-pipeline/$WORKFLOW_ID.timing.html
+
+```
+
+
 ### Save information about the workflow run itself - Timing Diagram and Outputs List
 
 After a workflow is run, before exiting and deleting your VM, make sure that the timing diagram and the list of outputs are available so you can make use of the data outside of the cloud.
