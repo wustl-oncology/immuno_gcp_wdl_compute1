@@ -220,6 +220,8 @@ immuno.trna_vaf: 0.2
 immuno.normal_cov: 50
 immuno.tdna_cov: 50
 
+immuno.hlaConsensus.hla_source_mode: consensus
+
 # ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
 # Source of HLA types for hcc1395: ...
 #immuno.clinical_mhc_classI_alleles:
