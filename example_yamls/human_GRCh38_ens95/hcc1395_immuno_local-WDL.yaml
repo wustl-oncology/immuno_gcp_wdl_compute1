@@ -24,20 +24,6 @@ immuno.rna_sequence:
   - sequence:
       fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
       fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
-immuno.read_group_fields:
-- - PU:H3MYFBBXX.4
-  - SM:HCC1395_TUMOR_RNA
-  - LB:HCC1395_TUMOR_RNA_LIB1
-  - PL:Illumina
-  - CN:WUGSC
-- - PU:H3MYFBBXX.5
-  - SM:HCC1395_TUMOR_RNA
-  - LB:HCC1395_TUMOR_RNA_LIB1
-  - PL:Illumina
-  - CN:WUGSC
-immuno.rna_readgroups:
-- 'Lane1'
-- 'Lane2'
 immuno.sample_name: HCC1395_TUMOR_RNA
 immuno.strand: first
 
@@ -54,15 +40,15 @@ immuno.reference_sa: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/align
 immuno.synonyms_file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/reference_genome/chromAlias.ensembl.txt"
 
 # ------------- Reference genome for RNA-seq alignments ---------------
-immuno.reference_index: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH"
-immuno.reference_index_1ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.1.ht2"
-immuno.reference_index_2ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.2.ht2"
-immuno.reference_index_3ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.3.ht2"
-immuno.reference_index_4ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.4.ht2"
-immuno.reference_index_5ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.5.ht2"
-immuno.reference_index_6ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.6.ht2"
-immuno.reference_index_7ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.7.ht2"
-immuno.reference_index_8ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/hisat2.1.0_index/GRCh38DH.8.ht2"
+immuno.star_aligner_genome_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/star_2.7.8a_index.zip"
+
+# ------------- Reference files and settings for STAR-fusion calling
+immuno.star_fusion_genome_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/star-fusion_1.10.1_index.zip"
+immuno.examine_coding_effect: true
+immuno.fusioninspector_mode: "validate"
+immuno.cdna_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/star-fusion_1.10.1_index/ref_annot.cdna.fa"
+immuno.agfusion_database: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/agfusion_1.2_database/agfusion.homo_sapiens.95.db"
+immuno.agfusion_annotate_noncanonical: true
 
 # ------------- RNA transcript annotations ------------
 immuno.ribosomal_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/rna_seq_annotation/Homo_sapiens.GRCh38.95.ribo_intervals"
@@ -220,6 +206,10 @@ immuno.tdna_vaf: 0.2
 immuno.trna_vaf: 0.2
 immuno.normal_cov: 50
 immuno.tdna_cov: 50
+
+immuno.blastp_db: refseq_select_prot
+immuno.iedb_retries: 3
+pvacfuse_keep_tmp_files: true
 
 # ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
 # Source of HLA types for hcc1395: ...
