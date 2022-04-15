@@ -207,6 +207,7 @@ immuno.trna_vaf: 0.2
 immuno.normal_cov: 50
 immuno.tdna_cov: 50
 
+immuno.hla_source_mode: consensus
 immuno.blastp_db: refseq_select_prot
 immuno.iedb_retries: 3
 pvacfuse_keep_tmp_files: true
