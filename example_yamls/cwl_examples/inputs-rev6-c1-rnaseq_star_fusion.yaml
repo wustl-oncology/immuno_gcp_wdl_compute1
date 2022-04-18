@@ -1,0 +1,51 @@
+---
+agfusion_annotate_noncanonical: true
+cdna_fasta:
+    class: File
+    path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.gz
+agfusion_database:
+    class: File
+    path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/agfusion_1.2_database/agfusion.homo_sapiens.95.db
+examine_coding_effect: true
+fusioninspector_mode: validate
+gene_transcript_lookup_table:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/ensembl95.transcriptToGene.tsv
+kallisto_index:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.kallisto.idx
+refFlat:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.refFlat.txt
+reference: /gscmnt/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa
+reference_annotation:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.gtf
+ribosomal_intervals:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.ribo_intervals
+star_fusion_genome_dir:
+    class: Directory
+    path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/star-fusion_1.10.1_index/
+star_genome_dir:
+    class: Directory
+    path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/star_2.7.8a_index/
+strand: first
+trimming_adapter_min_overlap: 7
+trimming_adapter_trim_end: RIGHT
+trimming_adapters:
+  class: File
+  path: /gscmnt/gc2560/core/illumina_adapters/illumina_multiplex.fa
+trimming_max_uncalled: 300
+trimming_min_readlength: 25
+sample_name: mcdb020-cancer-rna
+unaligned:
+- readgroup: "ID:A\tSM:mcdb020-cancer-rna\tPL:Illumina"
+  sequence:
+    fastq1:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/15_CANCER-GILLANDERS-2/220406-JLF-100-014-MCDB020-pvacfuse/1.fastq/mcdb020_rna_read1.fastq.gz
+    fastq2:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/15_CANCER-GILLANDERS-2/220406-JLF-100-014-MCDB020-pvacfuse/1.fastq/mcdb020_rna_read2.fastq.gz
+unzip_fastqs: true

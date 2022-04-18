@@ -1,0 +1,313 @@
+---
+clinical_mhc_classI_alleles:
+  - HLA-A*29:02
+  - HLA-B*45:01
+  - HLA-C*06:02
+clinical_mhc_classII_alleles:
+  - DPB1*01:01
+  - DQA1*03:02
+  - DQB1*03:02
+  - DRB1*04:05
+  - DQA1*03:02-DQB1*03:02
+allele_specific_binding_thresholds: false
+binding_threshold: 500
+downstream_sequence_length: 100
+epitope_lengths_class_i:
+  - 8
+  - 9
+  - 10
+  - 11
+epitope_lengths_class_ii:
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+expression_tool: kallisto
+minimum_fold_change: 1
+prediction_algorithms:
+- NetMHC
+- NetMHCcons
+- PickPocket
+- SMM
+- SMMPMBEC
+- MHCflurry
+- MHCnuggetsI
+- NetMHCpan
+- NetMHCIIpan
+- SMMalign
+- NNalign
+- MHCnuggetsII
+top_score_metric: lowest
+net_chop_method: cterm
+netmhc_stab: true
+run_reference_proteome_similarity: true
+pvacseq_threads: 8
+hla_source_mode: clinical_only
+reference_annotation:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.gtf
+rna_sequence:
+- readgroup: "ID:2895626107\tPU:H3MYFBBXX.4.GCCAAT\tSM:H_NJ-HCC1395-HCC1395_RNA\tLB:Pooled_RNA_2891007020-cD1-lib1\tPL:Illumina\tCN:WUGSC"
+  sequence:
+    fastq1:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395_RNA-H3MYFBBXX.4.R1.fastq.gz
+    fastq2:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395_RNA-H3MYFBBXX.4.R2.fastq.gz
+- readgroup: "ID:2895626112\tPU:H3MYFBBXX.5.GCCAAT\tSM:H_NJ-HCC1395-HCC1395_RNA\tLB:Pooled_RNA_2891007020-cD1-lib1\tPL:Illumina\tCN:WUGSC"
+  sequence:
+    fastq1:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395_RNA-H3MYFBBXX.5.R1.fastq.gz
+    fastq2:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395_RNA-H3MYFBBXX.5.R2.fastq.gz
+rna_sample_name: H_NJ-HCC1395-HCC1395
+trimming_adapter_min_overlap: 7
+trimming_adapter_trim_end: RIGHT
+trimming_adapters:
+  class: File
+  path: /gscmnt/gc2560/core/illumina_adapters/illumina_multiplex.fa
+trimming_max_uncalled: 300
+trimming_min_readlength: 25
+kallisto_index:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.kallisto.idx
+gene_transcript_lookup_table:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/ensembl95.transcriptToGene.tsv
+strand: first
+refFlat:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.refFlat.txt
+ribosomal_intervals:
+  class: File
+  path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.95.ribo_intervals
+star_fusion_genome_dir: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/star-fusion_1.10.1_index/
+star_aligner_genome_dir: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/star_2.7.8a_index/
+cdna_fasta:
+    class: File
+    path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.gz
+agfusion_database:
+    class: File
+    path: /gscmnt/gc2560/core/GRC-human-build38_human_95_38_U2AF1_fix/rna_seq_annotation/agfusion_1.2_database/agfusion.homo_sapiens.95.db
+agfusion_annotate_noncanonical: true
+examine_coding_effect: true
+fusioninspector_mode: validate
+reference: /gscmnt/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.fa
+reference_dict:
+  class: File
+  path: /gscmnt/gc2560/core/model_data/2887491634/build21f22873ebe0486c8e6f69c15435aa96/all_sequences.dict
+tumor_sample_name: H_NJ-HCC1395-HCC1395
+tumor_filename: H_NJ-HCC1395-HCC1395
+tumor_sequence:
+- readgroup: "@RG\tID:2895499223\tPU:H7HY2CCXX.3.ATCACGGT\tSM:H_NJ-HCC1395-HCC1395\tLB:H_NJ-HCC1395-HCC1395-lg24-lib1\tPL:Illumina\tCN:WUGSC"
+  sequence:
+    fastq1:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395-H7HY2CCXX.3.R1.fastq.gz
+    fastq2:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395-H7HY2CCXX.3.R2.fastq.gz
+- readgroup: "@RG\tID:2895499237\tPU:H7HY2CCXX.4.ATCACGGT\tSM:H_NJ-HCC1395-HCC1395\tLB:H_NJ-HCC1395-HCC1395-lg24-lib1\tPL:Illumina\tCN:WUGSC"
+  sequence:
+    fastq1:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395-H7HY2CCXX.4.R1.fastq.gz
+    fastq2:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395-H7HY2CCXX.4.R2.fastq.gz
+normal_sample_name: H_NJ-HCC1395-HCC1395_BL
+normal_filename: H_NJ-HCC1395-HCC1395_BL
+normal_sequence:
+- readgroup: "@RG\tID:2895499331\tPU:H7HY2CCXX.3.TGACCACG\tSM:H_NJ-HCC1395-HCC1395_BL\tLB:H_NJ-HCC1395-HCC1395_BL-lg21-lib1\tPL:Illumina\tCN:WUGSC"
+  sequence:
+    fastq1:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395_BL-H7HY2CCXX.3.R1.fastq.gz
+    fastq2:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395_BL-H7HY2CCXX.3.R2.fastq.gz
+- readgroup: "@RG\tID:2895499399\tPU:H7HY2CCXX.4.TGACCACG\tSM:H_NJ-HCC1395-HCC1395_BL\tLB:H_NJ-HCC1395-HCC1395_BL-lg21-lib1\tPL:Illumina\tCN:WUGSC"
+  sequence:
+    fastq1:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395_BL-H7HY2CCXX.4.R1.fastq.gz
+    fastq2:
+      class: File
+      path: /storage1/fs1/bga/Active/gchang/work/14_BGA-WALKER/211012-immuno2cwl-fastq/2.fastq/H_NJ-HCC1395-HCC1395_BL-H7HY2CCXX.4.R2.fastq.gz
+bait_intervals:
+  class: File
+  path: /gscmnt/gc2560/core/model_data/interval-list/af48f2f2abc54b92985517a1ff46eefd/94b23d66f667472690a7ee165e2037b6.interval_list
+bqsr_intervals:
+- chr1
+- chr2
+- chr3
+- chr4
+- chr5
+- chr6
+- chr7
+- chr8
+- chr9
+- chr10
+- chr11
+- chr12
+- chr13
+- chr14
+- chr15
+- chr16
+- chr17
+- chr18
+- chr19
+- chr20
+- chr21
+- chr22
+bqsr_known_sites:
+- class: File
+  path: /gscmnt/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-19443-e48c595a620a432c93e8dd29e4af64f2/snvs.hq.vcf.gz
+- class: File
+  path: /gscmnt/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-20267-00cb8ff552914c17ad66d86031e10d30/indels.hq.vcf.gz
+- class: File
+  path: /gscmnt/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-20211-26b393cc7ab04120ac68cc2cbd4a15df/indels.hq.vcf.gz
+target_intervals:
+  class: File
+  path: /gscmnt/gc2560/core/model_data/interval-list/c83be453937b44e7aa0d7e36f6806710/94b23d66f667472690a7ee165e2037b6.interval_list
+target_interval_padding: 100
+per_base_intervals:
+- file: /gscmnt/gc2560/core/model_data/interval-list/01f4fae3699646c3af2fa47853da7a8c/06a82ecf9c434b7ab03d82e59eaa28c8.interval_list
+  label: clinvar
+per_target_intervals:
+- file: /gscmnt/gc2560/core/model_data/interval-list/db8c25932fd94d2a8a073a2e20449878/a35b64d628b94df194040032d53b5616.interval_list
+  label: acmg_genes
+summary_intervals: []
+omni_vcf:
+  class: File
+  path: /gscmnt/gc2709/info/production_reference_GRCh38DH/accessory_vcf/omni25-ld-pruned-20000-2000-0.5-annotated.wchr.sites_only.b38.autosomes_only.vcf.gz
+picard_metric_accumulation_level: LIBRARY
+scatter_count: 50
+docm_vcf:
+  class: File
+  path: /gscmnt/gc2560/core/build_merged_alignments/detect-variants--linus2112.gsc.wustl.edu-jwalker-16572-a6fc7db1ea124431af5271c8cb23ee26/snvs.hq.vcf.gz
+vep_cache_dir: /gscmnt/gc2560/core/cwl/inputs/VEP_cache
+vep_custom_annotations:
+- annotation:
+    check_existing: 'true'
+    data_format: vcf
+    file:
+      class: File
+      path: /gscmnt/gc2560/core/model_data/genome-db-ensembl-gnomad/2dd4b53431674786b760adad60a29273/fixed_b38_exome.vcf.gz
+      secondaryFiles:
+      - class: File
+        path: /gscmnt/gc2560/core/model_data/genome-db-ensembl-gnomad/2dd4b53431674786b760adad60a29273/fixed_b38_exome.vcf.gz.tbi
+    gnomad_filter: 'true'
+    name: gnomADe
+    vcf_fields:
+    - AF
+    - AF_AFR
+    - AF_AMR
+    - AF_ASJ
+    - AF_EAS
+    - AF_FIN
+    - AF_NFE
+    - AF_OTH
+    - AF_SAS
+  force_report_coordinates: 'true'
+  method: exact
+- annotation:
+    check_existing: 'false'
+    data_format: vcf
+    file:
+      class: File
+      path: /gscmnt/gc2560/core/custom_clinvar_vcf/v20181028/custom.vcf.gz
+      secondaryFiles:
+      - class: File
+        path: /gscmnt/gc2560/core/custom_clinvar_vcf/v20181028/custom.vcf.gz.tbi
+    gnomad_filter: 'false'
+    name: clinvar
+    vcf_fields:
+    - CLINSIGN
+    - PHENOTYPE
+    - SCORE
+    - RCVACC
+    - TESTEDINGTR
+    - PHENOTYPELIST
+    - NUMSUBMIT
+    - GUIDELINES
+  force_report_coordinates: 'true'
+  method: exact
+vep_ensembl_assembly: GRCh38
+vep_ensembl_species: homo_sapiens
+vep_ensembl_version: '95'
+vep_to_table_fields:
+- Consequence
+- SYMBOL
+- Feature_type
+- Feature
+- HGVSc
+- HGVSp
+- cDNA_position
+- CDS_position
+- Protein_position
+- Amino_acids
+- Codons
+- HGNC_ID
+- Existing_variation
+- gnomADe_AF
+- CLIN_SIG
+- SOMATIC
+- PHENO
+- clinvar_CLINSIGN
+- clinvar_PHENOTYPE
+- clinvar_SCORE
+- clinvar_RCVACC
+- clinvar_TESTEDINGTR
+- clinvar_PHENOTYPELIST
+- clinvar_NUMSUBMIT
+- clinvar_GUIDELINES
+synonyms_file:
+  class: File
+  path: /gscmnt/gc2560/core/cwl/inputs/chromAlias.ensembl.txt
+variants_to_table_fields:
+- CHROM
+- POS
+- REF
+- ALT
+- set
+variants_to_table_genotype_fields:
+- GT
+- AD
+- AF
+- DP
+somalier_vcf:
+  class: File
+  path: /gscmnt/gc2560/core/annotation_data/concordance_snps/GRC-human-build38_gnomad_exome_common_snps.vcf
+gatk_haplotypecaller_intervals:
+- - chr1
+- - chr2
+- - chr3
+- - chr4
+- - chr5
+- - chr6
+- - chr7
+- - chr8
+- - chr9
+- - chr10
+- - chr11
+- - chr12
+- - chr13
+- - chr14
+- - chr15
+- - chr16
+- - chr17
+- - chr18
+- - chr19
+- - chr20
+- - chr21
+- - chr22
+- - chrX
+- - chrY
+gvcf_gq_bands: []
