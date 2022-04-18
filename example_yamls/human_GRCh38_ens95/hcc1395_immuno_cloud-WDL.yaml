@@ -20,9 +20,11 @@ immuno.rna_sequence:
 - sequence:
     fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
     fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz"
+  readgroup: "ID:3\tPU:H3MYFBBXX.4\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
 - sequence:
     fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
     fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
+  readgroup: "ID:4\tPU:H3MYFBBXX.5\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
 immuno.sample_name: HCC1395_TUMOR_RNA
 immuno.strand: first
 
