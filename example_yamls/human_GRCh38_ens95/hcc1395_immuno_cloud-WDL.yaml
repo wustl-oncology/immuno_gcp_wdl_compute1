@@ -45,7 +45,7 @@ immuno.star_aligner_genome_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRC
 immuno.star_fusion_genome_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/star-fusion_1.10.1_index.zip"
 immuno.examine_coding_effect: true
 immuno.fusioninspector_mode: "validate"
-immuno.cdna_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/aligner_indices/ref_annot.cdna.fa"
+immuno.cdna_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.gz"
 immuno.agfusion_database: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens95/agfusion_1.2_database/agfusion.homo_sapiens.95.db"
 immuno.agfusion_annotate_noncanonical: true
 
