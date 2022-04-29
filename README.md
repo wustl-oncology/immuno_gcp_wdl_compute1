@@ -138,7 +138,7 @@ For more options on configuration of the VM refer to: `gcloud compute instances 
 
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
-bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --machine-type=e2-highmem-2 --boot-disk-size=150GB --boot-disk-type=pd-ssd
+bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=150GB --boot-disk-type=pd-ssd --machine-type=e2-highmem-2
 exit #leave the docker session
 ```
 
