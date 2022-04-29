@@ -128,11 +128,18 @@ If you get an error during this step, a common cause is that there is some disco
 
 ### Start a Google VM that will run Cromwell and orchestrate completion of the workflow
 
-By default, the following command will launch a `e2-standard-2` Google VM (2 cpus and 8 GB memory).  Note that Cromwell produces a large quantity of database logging. To ensure we have enough space for a least a few runs and to localize intermediate and final results files from the workflow (which include numerous large BAMs) we will specify some extra disk space with `--boot-disk-size=250GB` (default would be 10GB). When not testing, this can probably be safely reduced to 30-40GB. For performance reasons you might also also increase memory with `--custom-memory=16GB`. For more options on configuration of the VM refer to: `gcloud compute instances create --help`.
+By default, the following command will launch a `e2-standard-2` Google VM (2 cpus and 8 GB memory).  Note that Cromwell produces a large quantity of database logging. To ensure we have enough space for a least a few runs and to localize intermediate and final results files from the workflow (which include numerous large BAMs) you should add more disk. When not testing, this can probably be safely reduced to 30-40GB. For performance reasons you might also also increase memory. Similarly, you might chose to use faster disk (instead of standard) for the boot disk. To customize these settings add the following parameters to your `start.sh` command below: 
+
+- `--boot-disk-size=150GB`. Increase boot disk to 150 GB (default would be 10 GB).
+- `--boot-disk-type=pd-ssd`. Use SSD disk (default would HDD).
+- `--custom-memory=16GB`. Increase memory to 8 GB (default would be 8 GB for an `e2-standard-2` instance).
+
+
+For more options on configuration of the VM refer to: `gcloud compute instances create --help`.
 
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
-bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB --custom-memory=16GB
+bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=150GB --boot-disk-type=pd-ssd --custom-memory=16GB 
 exit #leave the docker session
 ```
 
