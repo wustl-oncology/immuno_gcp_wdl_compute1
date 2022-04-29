@@ -206,6 +206,10 @@ gsutil cp $WORKFLOW_ID.timing.html $GCS_BUCKET_PATH/$WORKFLOW_ID.timing.html
 
 ```
 
+Note that if you have been testing and have several workflows that have been run on the same server it can get confusing to tell which workflow is which and in what order they were started.  The following command will parse the cromwell log for records of workflows that were started, in order and at what time:
+```bash
+journalctl -u cromwell | grep "Starting workflow UUID" | perl -ne 'if ($_ =~ /(\w+\s+\d+\s+\d+\:\d+\:\d+).*UUID\((\S+)\)/){print "$2\tstarted $1\n"}'
+```
 
 ### Save information about the workflow run itself - Timing Diagram and Outputs List
 
