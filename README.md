@@ -134,7 +134,7 @@ By default, the following command will launch a `e2-standard-2` Google VM (2 CPU
 - `--boot-disk-size=150GB`. Increase boot disk to 150 GB (default would be 10 GB).
 - `--boot-disk-type=pd-ssd`. Use SSD disk (default would HDD).
 
-For more options on configuration of the VM refer to: `gcloud compute instances create --help`.
+For more options on configuration of the VM refer to: `gcloud compute instances create --help`. For more information on instance types and costs refer to the [vm-instance-pricing guide](https://cloud.google.com/compute/vm-instance-pricing).
 
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
