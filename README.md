@@ -301,6 +301,9 @@ cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do 
 cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 10 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_cpu_condensed.tsv
 cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 11 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_disk_condensed.tsv
 
+paste costs_total_condensed.tsv costs_cpu_condensed.tsv costs_memory_condensed.tsv costs_disk_condensed.tsv | cut -f 1,2,4,6,8 > costs_report.tsv
+echo -e "task\ttotal\tcpu\tmemory\tdisk" > header.tsv
+sort -n -k 2 -r costs_report.tsv | cat header.tsv - > costs_report_final.tsv
 
 ```
 
