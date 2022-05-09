@@ -295,7 +295,11 @@ gsutil cp -r  $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID .
 exit #leave the docker session
 
 cd $WORKING_BASE/final_results/workflow_artifacts
-cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 13 | awk '{ SUM += $1} END { print SUM}')";done > costs_condensed.tsv
+cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 13 | awk '{ SUM += $1} END { print SUM}')";done > costs_total_condensed.tsv
+cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 9 | awk '{ SUM += $1} END { print SUM}')";done > costs_memory_condensed.tsv
+cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 10 | awk '{ SUM += $1} END { print SUM}')";done > costs_cpu_condensed.tsv
+cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 11 | awk '{ SUM += $1} END { print SUM}')";done > costs_disk_condensed.tsv
+
 
 ```
 
