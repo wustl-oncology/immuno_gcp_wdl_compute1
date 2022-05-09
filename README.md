@@ -292,9 +292,11 @@ python3 $WORKING_BASE/git/cloud-workflows/scripts/costs_json_to_csv.py costs.jso
 
 gsutil cp -r  $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID .
 
+exit #leave the docker session
+
+cd $WORKING_BASE/final_results/workflow_artifacts
 cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 13 | awk '{ SUM += $1} END { print SUM}')";done > costs_condensed.tsv
 
-exit #leave the docker session
 ```
 
 ### Once the workflow is done and results retrieved, destroy the Cromwell VM on GCP to avoid wasting resources
