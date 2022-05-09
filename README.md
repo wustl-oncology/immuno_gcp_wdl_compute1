@@ -289,16 +289,17 @@ cd workflow_artifacts
 
 python3 $WORKING_BASE/git/cloud-workflows/scripts/estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/metadata/ > costs.json
 python3 $WORKING_BASE/git/cloud-workflows/scripts/costs_json_to_csv.py costs.json > costs.csv
+cat costs.csv | sed 's/,/\t/g' > costs.tsv
 
 gsutil cp -r  $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID .
 
 exit #leave the docker session
 
 cd $WORKING_BASE/final_results/workflow_artifacts
-cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 13 | awk '{ SUM += $1} END { print SUM}')";done > costs_total_condensed.tsv
-cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 9 | awk '{ SUM += $1} END { print SUM}')";done > costs_memory_condensed.tsv
-cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 10 | awk '{ SUM += $1} END { print SUM}')";done > costs_cpu_condensed.tsv
-cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 11 | awk '{ SUM += $1} END { print SUM}')";done > costs_disk_condensed.tsv
+cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 13 | awk '{ SUM += $1} END { print SUM}')";done > costs_total_condensed.tsv
+cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 9 | awk '{ SUM += $1} END { print SUM}')";done > costs_memory_condensed.tsv
+cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 10 | awk '{ SUM += $1} END { print SUM}')";done > costs_cpu_condensed.tsv
+cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 11 | awk '{ SUM += $1} END { print SUM}')";done > costs_disk_condensed.tsv
 
 
 ```
