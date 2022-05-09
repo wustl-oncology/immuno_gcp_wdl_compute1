@@ -287,8 +287,8 @@ cd $WORKING_BASE/final_results/
 mkdir workflow_artifacts
 cd workflow_artifacts
 
-python3 $WORKING_BASE/git/cloud-workflows/scripts/estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/metadata/ > costs.csv
-python3 $WORKING_BASE/git/cloud-workflows/scripts/costs_json_to_csv.py costs.csv
+python3 $WORKING_BASE/git/cloud-workflows/scripts/estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/metadata/ > costs.json
+python3 $WORKING_BASE/git/cloud-workflows/scripts/costs_json_to_csv.py costs.json > costs.csv
 
 gsutil cp -r  $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID .
 
