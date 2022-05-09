@@ -20,24 +20,12 @@ immuno.normal_sample_name: HCC1395_NORMAL_DNA
 immuno.rna_sequence:
   - sequence:
       fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
-      fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz" 
+      fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz"
+    readgroup: "ID:3\tPU:H3MYFBBXX.4\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
   - sequence:
       fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
       fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
-immuno.read_group_fields:
-- - PU:H3MYFBBXX.4
-  - SM:HCC1395_TUMOR_RNA
-  - LB:HCC1395_TUMOR_RNA_LIB1
-  - PL:Illumina
-  - CN:WUGSC
-- - PU:H3MYFBBXX.5
-  - SM:HCC1395_TUMOR_RNA
-  - LB:HCC1395_TUMOR_RNA_LIB1
-  - PL:Illumina
-  - CN:WUGSC
-immuno.rna_readgroups:
-- 'Lane1'
-- 'Lane2'
+    readgroup: "ID:4\tPU:H3MYFBBXX.5\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
 immuno.sample_name: HCC1395_TUMOR_RNA
 immuno.strand: first
 
@@ -54,15 +42,15 @@ immuno.reference_0123: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/al
 immuno.synonyms_file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/reference_genome/chromAlias.ensembl.txt"
 
 # ------------- Reference genome for RNA-seq alignments ---------------
-immuno.reference_index: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/hisat2.1.0_index/GRCh38DH"
-immuno.reference_index_1ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/hisat2.1.0_index/GRCh38DH.1.ht2"
-immuno.reference_index_2ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/hisat2.1.0_index/GRCh38DH.2.ht2"
-immuno.reference_index_3ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/hisat2.1.0_index/GRCh38DH.3.ht2"
-immuno.reference_index_4ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/hisat2.1.0_index/GRCh38DH.4.ht2"
-immuno.reference_index_5ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/hisat2.1.0_index/GRCh38DH.5.ht2"
-immuno.reference_index_6ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/hisat2.1.0_index/GRCh38DH.6.ht2"
-immuno.reference_index_7ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/hisat2.1.0_index/GRCh38DH.7.ht2"
-immuno.reference_index_8ht2: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/hisat2.1.0_index/GRCh38DH.8.ht2"
+immuno.star_aligner_genome_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/star_2.7.8a_index.zip"
+
+# ------------- Reference files and settings for STAR-fusion calling
+immuno.star_fusion_genome_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/star-fusion_1.10.1_index.zip"
+immuno.examine_coding_effect: true
+immuno.fusioninspector_mode: "validate"
+immuno.cdna_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.gz"
+immuno.agfusion_database: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/agfusion_1.3_database/agfusion.homo_sapiens.105.db"
+immuno.agfusion_annotate_noncanonical: true
 
 # ------------- RNA transcript annotations ------------
 immuno.ribosomal_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.105.ribo_intervals"
@@ -221,7 +209,10 @@ immuno.trna_vaf: 0.2
 immuno.normal_cov: 50
 immuno.tdna_cov: 50
 
-immuno.hlaConsensus.hla_source_mode: consensus
+immuno.hla_source_mode: consensus
+immuno.blastp_db: refseq_select_prot
+immuno.iedb_retries: 3
+pvacfuse_keep_tmp_files: true
 
 # ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
 # Source of HLA types for hcc1395: ...
@@ -248,31 +239,6 @@ immuno.hlaConsensus.hla_source_mode: consensus
 #- DQA1*01:02-DQB1*06:02
 #- DQA1*05:01-DQB1*02:01
 #- DQA1*05:01-DQB1*06:02
-
-# -------------- Intervals to use for base quality score recalibration step during alignment -----------------
-immuno.bqsr_intervals:
-- chr1
-- chr2
-- chr3
-- chr4
-- chr5
-- chr6
-- chr7
-- chr8
-- chr9
-- chr10
-- chr11
-- chr12
-- chr13
-- chr14
-- chr15
-- chr16
-- chr17
-- chr18
-- chr19
-- chr20
-- chr21
-- chr22
 
 # -------------- Intervals to use during GATK germline variant calling -----------------
 immuno.gatk_haplotypecaller_intervals:
