@@ -282,8 +282,17 @@ On compute1 cluster, start an interactive docker session as describe below and t
 ```bash
 export WORKFLOW_ID=<id from above>
 bsub -Is -q general-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:latest)" /bin/bash
-cd $WORKING_BASE/git/cloud-workflows/scripts
-python3 estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/metadata/
+
+cd $WORKING_BASE/final_results/
+mkdir workflow_artifacts
+cd workflow_artifacts
+
+python3 $WORKING_BASE/git/cloud-workflows/scripts/estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/metadata/ > costs.csv
+
+gsutil cp -r  $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID .
+
+cut -d "," -f 1 costs.csv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.csv | cut -d "," -f 13 | awk '{ SUM += $1} END { print SUM}')";done > costs_condensed.tsv
+
 exit #leave the docker session
 ```
 
