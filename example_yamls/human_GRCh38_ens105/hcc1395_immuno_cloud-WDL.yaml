@@ -2,28 +2,28 @@
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/Exome_Tumor/Exome_Tumor_R1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/Exome_Tumor/Exome_Tumor_R2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-05-16/Exome_Tumor/Exome_Tumor_R1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-05-16/Exome_Tumor/Exome_Tumor_R2.fastq.gz"
   readgroup: "@RG\tID:1\tPU:C1TD1ACXX\tSM:HCC1395_TUMOR_DNA\tLB:HCC1395_TUMOR_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
 immuno.tumor_sample_name: HCC1395_TUMOR_DNA
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/Exome_Norm/Exome_Norm_R1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/Exome_Norm/Exome_Norm_R2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-05-16/Exome_Norm/Exome_Norm_R1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-05-16/Exome_Norm/Exome_Norm_R2.fastq.gz"
   readgroup: "@RG\tID:2\tPU:C1TD1ACXX\tSM:HCC1395_NORMAL_DNA\tLB:HCC1395_NORMAL_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
 immuno.normal_sample_name: HCC1395_NORMAL_DNA
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-05-16/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-05-16/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz"
   readgroup: "ID:3\tPU:H3MYFBBXX.4\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
 - sequence:
-    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-04-14/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-05-16/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-immuno-pipeline/input_data/mgriffit/2022-05-16/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
   readgroup: "ID:4\tPU:H3MYFBBXX.5\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
 immuno.sample_name: HCC1395_TUMOR_RNA
 immuno.strand: first
@@ -212,8 +212,6 @@ immuno.hla_source_mode: consensus
 immuno.blastp_db: refseq_select_prot
 immuno.iedb_retries: 3
 immuno.pvacfuse_keep_tmp_files: true
-
-# -------------- Intervals to use during GATK germline variant calling -----------------
 immuno.gatk_haplotypecaller_intervals:
 - - chr1
 - - chr2
