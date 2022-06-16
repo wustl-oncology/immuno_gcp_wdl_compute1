@@ -54,13 +54,13 @@ cd $WORKING_BASE
 ```
 
 ### Clone git repositories that have the workflows (pipelines) and scripts to help run them
-The following repositories contain: this tutorial (immuno_gcp_wdl), the WDL workflows (analysis-wdls), and tools for running these on the cloud (cloud-workflows).
+The following repositories contain: this tutorial (immuno_gcp_wdl), the WDL workflows (analysis-wdls), and tools for running these on the cloud (cloud-workflows). Note that the command below will clone the main branch of each repo. But as a comment at the end of each command in brackets is a specific tag of that repo. The combination of these tags for each repo were tested together and verified to work for this tutorial.
 ```bash
 mkdir git
 cd git
-git clone git@github.com:griffithlab/immuno_gcp_wdl_compute1.git
-git clone git@github.com:griffithlab/analysis-wdls.git
-git clone git@github.com:griffithlab/cloud-workflows.git
+git clone git@github.com:griffithlab/immuno_gcp_wdl_compute1.git # (v1.0.1)
+git clone git@github.com:griffithlab/analysis-wdls.git # (v1.0.0)
+git clone git@github.com:griffithlab/cloud-workflows.git # (v1.3.0)
 ```
 
 ### Login to GCP and set the desired project
