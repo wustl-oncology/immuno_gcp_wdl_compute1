@@ -72,7 +72,13 @@ gcloud config list
 ```
 
 ### Set up cloud account and bucket
-Run the following command and make note of the "Service Account" returned (e.g. "cromwell-server@griffith-lab.iam.gserviceaccount.com"). Note that the IP ranges or "CIDRs" specified below specify all the IP addresses that a user from WASHU might be coming from. A firewall rule is created based on these two ranges to limit access to only those users on the WASHU network.
+Run the following command and make note of the "Service Account" returned (e.g. "cromwell-server@griffith-lab.iam.gserviceaccount.com").
+
+This inititialization step does several things: creates a few service accounts (`cromwell-server` and `cromwell-compute`), updates some user IAM permissions for these accounts, creates a network (`cloud-workflows`) and sub-network (`cloud-workflows-default`), and creates a Google bucket.
+
+Note that the IP ranges or "CIDRs" specified below specify all the IP addresses that a user from WASHU might be coming from. A firewall rule is created based on these two ranges to limit access to only those users on the WASHU network. Details of this firewall rule will appear in the Google Cloud console under: `VPC network` -> `Firewall` -> `cloud-workflows-allow-ssh`.
+
+Note that if any of these things are already initialized already (due to a previous run), the script will report errors, but if the message describes that the resource already exists, this is fine.
 
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
