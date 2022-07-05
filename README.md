@@ -72,11 +72,11 @@ gcloud config list
 ```
 
 ### Set up cloud account and bucket
-Run the following command and make note of the "Service Account" returned (e.g. "cromwell-server@griffith-lab.iam.gserviceaccount.com").
+Run the following command and make note of the "Service Account" returned (e.g. "cromwell-server@griffith-lab.iam.gserviceaccount.com"). Note that the IP ranges or "CIDRs" specified below specify all the IP addresses that a user from WASHU might be coming from. A firewall rule is created based on these two ranges to limit access to only those users on the WASHU network.
 
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
-bash resources.sh init-project --project $GCS_PROJECT --bucket $GCS_BUCKET_NAME
+bash resources.sh init-project --project $GCS_PROJECT --bucket $GCS_BUCKET_NAME --ip-range "128.252.0.0/16,65.254.96.0/19"
 ```
 
 This step should have created two new configuration files in your current directory: `cromwell.conf` and `workflow_options.json`.
