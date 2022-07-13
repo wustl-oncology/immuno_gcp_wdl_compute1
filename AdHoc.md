@@ -117,7 +117,7 @@ df -h
 
 ```bash
 # uninstall old versions of Docker components
-sudo apt-get remove docker docker-engine docker.io containerd runc
+sudo apt-get remove docker docker.io containerd runc
 
 # set up repository
 sudo apt-get update
