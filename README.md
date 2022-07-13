@@ -47,7 +47,7 @@ export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
 ## Local setup
 
 ### First create a working directory on your local system
-The following directory on the local system will contain: (a) a git repository for this tutorial including an example YAML file set up to work with the test HCC139 data, (b) git repository for the WDL workflows, including the immuno worflow, (c) git repository for tools that help provision and manage our workflow runs on the cloud, (d) raw data that we will download for this tutorial, (e) a YAML file describing the input data and paramters for the analysis, and (f) final results file from the workflow that we will pull down from the cloud after a successful run.
+The following directory on the local system will contain: (a) a git repository for this tutorial including an example YAML file set up to work with the test HCC1395 data, (b) git repository for the WDL workflows, including the immuno worflow, (c) git repository for tools that help provision and manage our workflow runs on the cloud, (d) raw data that we will download for this tutorial, (e) a YAML file describing the input data and paramters for the analysis, and (f) final results file from the workflow that we will pull down from the cloud after a successful run.
 ```bash
 mkdir $WORKING_BASE
 cd $WORKING_BASE
