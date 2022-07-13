@@ -115,6 +115,9 @@ journalctl -u google-startup-scripts -f
 #check for expected disk space
 df -h 
 
+#turn off the cromwell service if you don't intend to use it
+sudo systemctl stop cromwell
+
 ```
 
 ### Install Docker engine on the Google VM
