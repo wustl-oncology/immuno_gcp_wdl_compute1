@@ -173,6 +173,12 @@ gget seq --translate ENST00000328435 2>/dev/null > CTAG1B_aa.fa
 
 ### Use `pVACbind` to perform neoantigen analysis on the protein sequences obtained
 
+Start an interactive session using the latest slim (no BLAST DB) version of the pvactools docker image
+```bash
+docker pull griffithlab/pvactools:latest-slim
+docker run -it -v $HOME/:$HOME/ griffithlab/pvactools:latest-slim /bin/bash
+
+```
 
 
 
