@@ -179,6 +179,10 @@ export WORKING_DIR=$HOME/analysis
 docker pull griffithlab/pvactools:latest-slim
 docker run -it -v $HOME/:$HOME/ --env WORKING_DIR griffithlab/pvactools:latest-slim /bin/bash
 cd $WORKING_DIR
+pvacbind run --help
+
+mkdir -p $WORKING_DIR/pvacbind/
+pvacbind run -e1 9 --iedb-install-directory /opt/iedb/ $WORKING_DIR/protein_seqs/CTAG1B_aa.fa sample1 HLA-A*02:01,HLA-A*01:06,HLA-B*08:02 all_class_i $WORKING_DIR/pvacbind/ 
 
 ```
 
