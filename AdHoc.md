@@ -149,9 +149,15 @@ docker run hello-world
 
 ```
 
-
-
 ### Use `gget` to obtain test sequences
+
+Install gget and update path
+```bash
+pip install --upgrade gget
+echo "PATH=$PATH:$HOME/.local/bin" >> ~/.bashrc 
+source ~/.bashrc
+```
+
 
 
 ### Use `pVACbind` to perform neoantigen analysis on the protein sequences obtained
