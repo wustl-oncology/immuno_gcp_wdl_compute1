@@ -40,7 +40,6 @@ The following directory on the local system will contain: (a) a git repository f
 mkdir $WORKING_BASE
 ```
 
-
 ### Clone git repositories that have the workflows (pipelines) and scripts to help run them
 The following repositories contain: this tutorial (immuno_gcp_wdl) and tools for running these on the cloud (cloud-workflows). Note that the command below will clone the main branch of each repo.
 
@@ -81,9 +80,6 @@ bash resources.sh init-project --project $GCS_PROJECT --bucket $GCS_BUCKET_NAME 
 
 Note that a lot of the above is needed to run automated WDL workflows with cromwell.  We don't need that here but we are taking advantage of the same setup functionality to make sure we have a Google bucket to store data and the instance we setup will only be accessible from WASHU's network.
 
-
-
-
 ### Start a Google VM and configure resources for some ad hoc analysis
 
 By default, the following command will launch a `e2-standard-2` Google VM (2 CPUs and 8 GB memory). To customize these settings you can add things like the following to your `start.sh` command below:
@@ -97,6 +93,19 @@ For more options on configuration of the VM refer to: `gcloud compute instances 
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
 bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB --boot-disk-type=pd-ssd --machine-type=e2-standard-8
+```
+
+### Log into the VM and check status
+
+In this step we will confirm that we can log into our Google VM with `gcloud compute ssh` and make sure it is ready for use.
+
+After logging in, use journalctl to see if the instance start up has completed.
+
+
+```bash
+gcloud compute ssh $GCS_INSTANCE_NAME
+journalctl -u google-startup-scripts -f
+exit #leave the google VM
 ```
 
 
