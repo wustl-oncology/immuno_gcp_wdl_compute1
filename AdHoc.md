@@ -136,6 +136,13 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plu
 sudo usermod -a -G docker $USER
 sudo reboot
 
+```
+
+The reboot will will kick you out of the instance.  Log in again and test
+
+```bash
+gcloud compute ssh $GCS_INSTANCE_NAME
+
 # test install
 docker run hello-world
 
