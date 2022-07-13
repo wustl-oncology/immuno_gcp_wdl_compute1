@@ -154,7 +154,7 @@ docker run hello-world
 ### Use `gget` to obtain test sequences
 
 
-### Use pVACbind to perform neoantigen analysis on the protein sequences obtained
+### Use `pVACbind` to perform neoantigen analysis on the protein sequences obtained
 
 
 
