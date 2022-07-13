@@ -185,7 +185,7 @@ cd $WORKING_DIR
 pvacbind run --help
 
 mkdir -p $WORKING_DIR/pvacbind/
-pvacbind run -e1 9 --n-threads 6 --iedb-install-directory /opt/iedb/ $WORKING_DIR/protein_seqs/CTAG1B_aa.fa sample1 HLA-A*02:01,HLA-A*01:06,HLA-B*08:02 all_class_i $WORKING_DIR/pvacbind/ 
+pvacbind run $WORKING_DIR/protein_seqs/CTAG1B_aa.fa sample1 HLA-A*02:01,HLA-A*01:06,HLA-B*08:02 all_class_i $WORKING_DIR/pvacbind/ -e1 9 --n-threads 6
 
 ```
 
