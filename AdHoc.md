@@ -90,6 +90,8 @@ By default, the following command will launch a `e2-standard-2` Google VM (2 CPU
 
 For more options on configuration of the VM refer to: `gcloud compute instances create --help`. For more information on instance types and costs refer to the [vm-instance-pricing guide](https://cloud.google.com/compute/vm-instance-pricing).
 
+Note on the Operating System.  The start.sh script will use this Google Image as a base: `debian-11-bullseye-v20220621, debian-cloud, debian-11`.
+
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
 bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB --boot-disk-type=pd-ssd --machine-type=e2-standard-8
