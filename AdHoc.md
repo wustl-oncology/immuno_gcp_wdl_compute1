@@ -114,6 +114,7 @@ df -h
 ```
 
 ### Install Docker engine on the Google VM
+If you know your analysis will not require running tasks within Docker, you can skip this step.  However, the following just take a few minutes and will allow your user to run tools that are available as Docker images.
 
 ```bash
 # uninstall old versions of Docker components
