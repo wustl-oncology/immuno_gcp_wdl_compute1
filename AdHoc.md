@@ -104,8 +104,13 @@ After logging in, use journalctl to see if the instance start up has completed.
 
 ```bash
 gcloud compute ssh $GCS_INSTANCE_NAME
+
+#confirm start up scripts have completed. use <ctrl> <c> to exit
 journalctl -u google-startup-scripts -f
-exit #leave the google VM
+
+#check for expected disk space
+df -h 
+
 ```
 
 
@@ -119,4 +124,10 @@ exit #leave the google VM
 
 
 
+
+### Once the analysis is done and results retrieved, destroy the Google  VM on GCP to avoid wasting resources
+
+```bash
+gcloud compute instances delete $GCS_INSTANCE_NAME
+```
 
