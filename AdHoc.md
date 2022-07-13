@@ -79,6 +79,28 @@ cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
 bash resources.sh init-project --project $GCS_PROJECT --bucket $GCS_BUCKET_NAME --ip-range "128.252.0.0/16,65.254.96.0/19"
 ```
 
+Note that a lot of the above is needed to run automated WDL workflows with cromwell.  We don't need that here but we are taking advantage of the same setup functionality to make sure we have a Google bucket to store data and the instance we setup will only be accessible from WASHU's network.
+
+
+
+
+### Start a Google VM and configure resources for some ad hoc analysis
+
+By default, the following command will launch a `e2-standard-2` Google VM (2 CPUs and 8 GB memory). To customize these settings you can add things like the following to your `start.sh` command below:
+
+- `--machine-type=e2-standard-8`. Use an instance with 8 CPUs and 32GB memory (default would be 8 GB for an `e2-standard-2` instance).
+- `--boot-disk-size=250GB`. Increase boot disk to 250 GB (default would be 10 GB).
+- `--boot-disk-type=pd-ssd`. Use SSD disk (default would HDD).
+
+For more options on configuration of the VM refer to: `gcloud compute instances create --help`. For more information on instance types and costs refer to the [vm-instance-pricing guide](https://cloud.google.com/compute/vm-instance-pricing).
+
+```bash
+cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
+bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB --boot-disk-type=pd-ssd --machine-type=e2-standard-8
+```
+
+
+
 
 
 ### Use `gget` to obtain test sequences
