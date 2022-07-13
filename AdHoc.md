@@ -141,7 +141,7 @@ sudo reboot
 
 ```
 
-The reboot will will kick you out of the instance.  Log in again and test
+The reboot will will kick you out of the instance.  Log in again and test the docker install
 
 ```bash
 gcloud compute ssh $GCS_INSTANCE_NAME
@@ -158,8 +158,15 @@ Install gget and update path
 pip install --upgrade gget
 echo "PATH=\$PATH:$HOME/.local/bin" >> ~/.bashrc 
 source ~/.bashrc
+gget
 ```
 
+Download a test protein sequence for `CTAG1B` (aka `CTAG; ESO1; CT6.1; CTAG1; LAGE-2; LAGE2B; NY-ESO-1`). The MANE select transcript for this gene is `ENST00000328435.3`. The protein ID for this transcript is: `ENSP00000332602.2`.
+
+```bash
+gget seq --translate ENST00000328435 2>/dev/null
+
+```
 
 
 ### Use `pVACbind` to perform neoantigen analysis on the protein sequences obtained
