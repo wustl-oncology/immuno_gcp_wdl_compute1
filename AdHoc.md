@@ -97,6 +97,8 @@ cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
 bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB --boot-disk-type=pd-ssd --machine-type=e2-standard-8
 ```
 
+Note that you may see a warning about a "need to resize the root partition manually if the operating system does not support automatic resizing". This is a not a concern. The operating system we are using here should do this automatic resizing for you.
+
 ### Log into the VM and check status
 
 In this step we will confirm that we can log into our Google VM with `gcloud compute ssh` and make sure it is ready for use.
