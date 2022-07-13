@@ -121,8 +121,6 @@ df -h
 If you know your analysis will not require running tasks within Docker, you can skip this step.  However, the following just take a few minutes and will allow your user to run tools that are available as Docker images.
 
 ```bash
-# uninstall old versions of Docker components
-sudo apt-get remove docker docker.io containerd runc
 
 # set up repository
 sudo apt-get update
