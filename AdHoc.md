@@ -1,7 +1,7 @@
 # Simple tutorial for simple ad hoc analysis within Docker on a Google VM
 
 ## Preamble
-The following tutorial explains how to do a project setup that will configure Google credentials and security settings for someone working at WASHU. It will only work for a user on the WASHU internet network (or VPN). However, it is designed to work from your personal computer and not rely on compute1/storage1 access. The example analysis in this tutorial will download some protein sequences and use pVACtools to perform neoantigen predictions on these sequences.
+The following tutorial explains how to do a project setup that will configure Google credentials and security settings for someone working at WASHU. It will only work for a user on the WASHU internet network (or VPN). However, it is designed to work from your personal computer and not rely on compute1/storage1 access. The example analysis in this tutorial will download some protein sequences using `gget` and use `pVACbind` to perform neoantigen predictions on these sequences.
 
 ### Prerequisites
 - google-cloud-sdk (for things like `gcloud` and `gsutil`)
