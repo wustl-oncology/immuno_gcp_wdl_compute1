@@ -22,12 +22,22 @@ Bills will be issued monthly to the lab PI via "Burwood" a Google Cloud reseller
 ### Set some Google Cloud and other environment variables
 The following environment variables are used merely for convenience and should be customized to produce intuitive labeling for your own analysis:
 ```bash
+# project name that must match your pre-configured Google Billing Project name
 export GCS_PROJECT=griffith-lab
+
+# variable that you should leave as state here
 export GCS_SERVICE_ACCOUNT=cromwell-server@$GCS_PROJECT.iam.gserviceaccount.com
+export GCS_NETWORK=cloud-workflows
+export GCS_SUBNET=cloud-workflows-default
+
+# you might change to another valid Google compute zone, depending on your current location
+export GCS_ZONE=us-central1-c
+
+# variables that you can customize
+export WORKING_BASE=~/gcp_adhoc
 export GCS_BUCKET_NAME=griffith-lab-malachi-adhoc
 export GCS_BUCKET_PATH=gs://griffith-lab-malachi-adhoc
 export GCS_INSTANCE_NAME=malachi-adhoc
-export WORKING_BASE=~/gcp_adhoc
 ```
 
 Note that the project name used above can not be anything.  It must match a project created in the Google Console by WUIT and linked to a funding source.
@@ -90,34 +100,22 @@ By default, the following command will launch a `e2-standard-2` Google VM (2 CPU
 
 For more options on configuration of the VM refer to: `gcloud compute instances create --help`. For more information on instance types and costs refer to the [vm-instance-pricing guide](https://cloud.google.com/compute/vm-instance-pricing).
 
-Note on the Operating System.  The start.sh script will use this Google Image as a base: `debian-11-bullseye-v20220621, debian-cloud, debian-11`.
+Note on the Operating System.  In the following example we will use this Google Image as a base: `ubuntu-2204-jammy-v20220712a, ubuntu-os-cloud, ubuntu-2204-lts`. To see a full list of available public images you can use: `gcloud compute images list`.
 
-Using the start.sh script
-```bash
-cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
-bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB --boot-disk-type=pd-ssd --machine-type=e2-standard-8
-```
-
-Using `gcloud compute` directly
+Using `gcloud compute` directly to launch a custom instance:
 
 ```
-NETWORK="cloud-workflows"
-SUBNET="cloud-workflows-default"
-ZONE="us-central1-c"
-MACHINE_TYPE="e2-standard-8"
 
 gcloud compute instances create $GCS_INSTANCE_NAME --project $GCS_PROJECT \
        --service-account=$GCS_SERVICE_ACCOUNT --scopes=cloud-platform \
        --image-family ubuntu-2204-lts --image-project ubuntu-os-cloud \
-       --machine-type=$MACHINE_TYPE --zone $ZONE --network=$NETWORK --subnet=$SUBNET \
-       --boot-disk-size=250GB --boot-disk-type=pd-ssd
-
+       --zone $GCS_ZONE --network=$GCS_NETWORK --subnet=$GCS_SUBNET \
+       --boot-disk-size=250GB --boot-disk-type=pd-ssd --machine-type=e2-standard-8
 ```
 
 Note that you may see a warning about a "need to resize the root partition manually if the operating system does not support automatic resizing". This is a not a concern. The operating system we are using here should do this automatic resizing for you.
 
-
-
+To view the current list of instances associated with your Google Account: `gcloud compute instances list`.
 
 ### Log into the VM and check status
 
