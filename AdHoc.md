@@ -92,12 +92,32 @@ For more options on configuration of the VM refer to: `gcloud compute instances 
 
 Note on the Operating System.  The start.sh script will use this Google Image as a base: `debian-11-bullseye-v20220621, debian-cloud, debian-11`.
 
+Using the start.sh script
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
 bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB --boot-disk-type=pd-ssd --machine-type=e2-standard-8
 ```
 
+Using `gcloud compute` directly
+
+```
+NETWORK="cloud-workflows"
+SUBNET="cloud-workflows-default"
+ZONE="us-central1-c"
+MACHINE_TYPE="e2-standard-8"
+
+gcloud compute instances create $INSTANCE_NAME --project $PROJECT 
+       --service-account=$SERVER_ACCOUNT --scopes=cloud-platform \
+       --image-family ubuntu-2204-lts --image-project ubuntu-os-cloud \
+       --machine-type=$MACHINE_TYPE --zone $ZONE --network=$NETWORK --subnet=$SUBNET \ 
+       --boot-disk-size=250GB --boot-disk-type=pd-ssd
+
+```
+
 Note that you may see a warning about a "need to resize the root partition manually if the operating system does not support automatic resizing". This is a not a concern. The operating system we are using here should do this automatic resizing for you.
+
+
+
 
 ### Log into the VM and check status
 
