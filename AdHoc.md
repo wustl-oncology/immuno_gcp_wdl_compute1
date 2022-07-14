@@ -180,7 +180,7 @@ docker run hello-world
 
 Install gget and update path
 ```bash
-sudo apt install python3-pip
+sudo apt install python3-pip -y
 pip install --upgrade gget
 echo "PATH=\$PATH:$HOME/.local/bin" >> ~/.bashrc 
 source ~/.bashrc
