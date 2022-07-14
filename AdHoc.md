@@ -20,7 +20,8 @@ Bills will be issued monthly to the lab PI via "Burwood" a Google Cloud reseller
 ## Step-by-step instructions
 
 ### Set some Google Cloud and other environment variables
-The following environment variables are used merely for convenience and should be customized to produce intuitive labeling for your own analysis:
+The following environment variables are used mostly for convenience. Some should be customized to produce intuitive labeling for your own analysis, others should be left aloneas indicated below:
+
 ```bash
 # project name that must match your pre-configured Google Billing Project name
 export GCS_PROJECT=griffith-lab
@@ -92,7 +93,7 @@ Note that a lot of the above is needed to run automated WDL workflows with cromw
 
 ### Start a Google VM and configure resources for some ad hoc analysis
 
-By default, the following command will launch a `e2-standard-2` Google VM (2 CPUs and 8 GB memory). To customize these settings you can add things like the following to your `start.sh` command below:
+You will probably want to customize a few of the settings below based on how much compute resources you need. For example, `e2-standard-8` will create a VM with 8 CPUs and 32 GB memory. To customize these settings you can add things like the following to your `gcloud compute` command below:
 
 - `--machine-type=e2-standard-8`. Use an instance with 8 CPUs and 32GB memory (default would be 8 GB for an `e2-standard-2` instance).
 - `--boot-disk-size=250GB`. Increase boot disk to 250 GB (default would be 10 GB).
@@ -102,10 +103,7 @@ For more options on configuration of the VM refer to: `gcloud compute instances 
 
 Note on the Operating System.  In the following example we will use this Google Image as a base: `ubuntu-2204-jammy-v20220712a, ubuntu-os-cloud, ubuntu-2204-lts`. To see a full list of available public images you can use: `gcloud compute images list`.
 
-Using `gcloud compute` directly to launch a custom instance:
-
 ```
-
 gcloud compute instances create $GCS_INSTANCE_NAME --project $GCS_PROJECT \
        --service-account=$GCS_SERVICE_ACCOUNT --scopes=cloud-platform \
        --image-family ubuntu-2204-lts --image-project ubuntu-os-cloud \
