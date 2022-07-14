@@ -109,7 +109,7 @@ MACHINE_TYPE="e2-standard-8"
 gcloud compute instances create $GCS_INSTANCE_NAME --project $GCS_PROJECT \
        --service-account=$GCS_SERVICE_ACCOUNT --scopes=cloud-platform \
        --image-family ubuntu-2204-lts --image-project ubuntu-os-cloud \
-       --machine-type=$MACHINE_TYPE --zone $ZONE --network=$NETWORK --subnet=$SUBNET \ 
+       --machine-type=$MACHINE_TYPE --zone $ZONE --network=$NETWORK --subnet=$SUBNET \
        --boot-disk-size=250GB --boot-disk-type=pd-ssd
 
 ```
