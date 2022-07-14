@@ -106,7 +106,7 @@ SUBNET="cloud-workflows-default"
 ZONE="us-central1-c"
 MACHINE_TYPE="e2-standard-8"
 
-gcloud compute instances create $INSTANCE_NAME --project $PROJECT 
+gcloud compute instances create $INSTANCE_NAME --project $PROJECT \
        --service-account=$SERVER_ACCOUNT --scopes=cloud-platform \
        --image-family ubuntu-2204-lts --image-project ubuntu-os-cloud \
        --machine-type=$MACHINE_TYPE --zone $ZONE --network=$NETWORK --subnet=$SUBNET \ 
