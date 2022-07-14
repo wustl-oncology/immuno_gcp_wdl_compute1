@@ -199,7 +199,7 @@ gget seq --translate ENST00000328435 --out CTAG1B_aa.fa
 
 ### Use `pVACbind` to perform neoantigen analysis on the protein sequences obtained
 
-Start an interactive session using the latest slim (no BLAST DB) version of the pvactools docker image
+Start an interactive docker session using the latest slim (no BLAST DB) version of the pvactools docker image
 ```bash
 export WORKING_DIR=$HOME/analysis
 docker pull griffithlab/pvactools:latest-slim
@@ -210,13 +210,39 @@ pvacbind run --help
 mkdir -p $WORKING_DIR/pvacbind/
 pvacbind run $WORKING_DIR/protein_seqs/CTAG1B_aa.fa sample1 HLA-A*02:01,HLA-A*01:06,HLA-B*08:02 all_class_i $WORKING_DIR/pvacbind/ -e1 9 --n-threads 2 --iedb-install-directory /opt/iedb/
 
+#leave the interactive docker session
+exit
 ```
 
+### Save final results from the analysis in the Google Bucket you created above
+The tool `gsutil` is used to perform all operations on Google storage. For example to save our results and then confirm they are in the bucket, do the following:
 
+```bash
+# use the same bucket path that was setup near the beginning of this tutorial
+export GCS_BUCKET_PATH=gs://griffith-lab-malachi-adhoc
+cd $HOME
+gsutil ls $GCS_BUCKET_PATH
+gsutil cp -r analysis $GCS_BUCKET_PATH
+gsutil ls $GCS_BUCKET_PATH/*
+
+# leave the Google VM 
+exit
+```
 
 ### Once the analysis is done and results retrieved, destroy the Google  VM on GCP to avoid wasting resources
 
 ```bash
 gcloud compute instances delete $GCS_INSTANCE_NAME
+```
+
+Note that any data you transferred to your Google Bucket is still there (and will have storage costs). You can use `gsutil` to transfer those results back to your local compute environment and delete the bucket when ready. You can also clean up storage using the Google Web Console.
+
+For example:
+
+```bash
+cd $WORKING_BASE
+gsutil cp -r $GCS_BUCKET_PATH/analysis .
+find .
+
 ```
 
