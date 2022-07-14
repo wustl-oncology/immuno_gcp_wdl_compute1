@@ -123,7 +123,7 @@ After logging in, use journalctl to see if the instance start up has completed.
 
 
 ```bash
-gcloud compute ssh $GCS_INSTANCE_NAME
+gcloud compute ssh $GCS_INSTANCE_NAME --zone $GCS_ZONE
 
 #confirm start up scripts have completed. use <ctrl> <c> to exit
 journalctl -u google-startup-scripts -f
@@ -137,7 +137,7 @@ sudo apt full-upgrade -y
 sudo reboot
 
 #wait a few seconds to allow reboot to complete and then login again
-gcloud compute ssh $GCS_INSTANCE_NAME
+gcloud compute ssh $GCS_INSTANCE_NAME --zone $GCS_ZONE
 
 ```
 
@@ -151,9 +151,9 @@ sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg lsb-release
 sudo mkdir -p /etc/apt/keyrings
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 # install docker engine
 sudo apt-get update
@@ -168,7 +168,7 @@ sudo reboot
 The reboot will will kick you out of the instance.  Log in again and test the docker install
 
 ```bash
-gcloud compute ssh $GCS_INSTANCE_NAME
+gcloud compute ssh $GCS_INSTANCE_NAME --zone $GCS_ZONE
 
 # test install
 docker run hello-world
