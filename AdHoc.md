@@ -192,7 +192,7 @@ Download a test protein sequence for `CTAG1B` (`cancer/testis antigen 1B` aka `C
 ```bash
 mkdir -p $HOME/analysis/protein_seqs
 cd $HOME/analysis/protein_seqs
-gget seq --translate ENST00000328435 2>/dev/null > CTAG1B_aa.fa
+gget seq --translate ENST00000328435 --out CTAG1B_aa.fa
 
 ```
 
