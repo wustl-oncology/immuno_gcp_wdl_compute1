@@ -131,8 +131,13 @@ journalctl -u google-startup-scripts -f
 #check for expected disk space
 df -h 
 
-#turn off the cromwell service if you don't intend to use it
-sudo systemctl stop cromwell
+#do some basic security updates (hit enter if prompted with any questions)
+sudo apt update
+sudo apt full-upgrade -y
+sudo reboot
+
+#wait a few seconds to allow reboot to complete and then login again
+gcloud compute ssh $GCS_INSTANCE_NAME
 
 ```
 
