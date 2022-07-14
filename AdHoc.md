@@ -134,6 +134,7 @@ df -h
 #do some basic security updates (hit enter if prompted with any questions)
 sudo apt update
 sudo apt full-upgrade -y
+sudo apt autoremove -y
 sudo reboot
 
 #wait a few seconds to allow reboot to complete and then login again
@@ -179,6 +180,7 @@ docker run hello-world
 
 Install gget and update path
 ```bash
+sudo apt install python3-pip
 pip install --upgrade gget
 echo "PATH=\$PATH:$HOME/.local/bin" >> ~/.bashrc 
 source ~/.bashrc
