@@ -178,7 +178,7 @@ Now log into Google Cromwell VM instance again and copy the YAML file to its loc
 gcloud compute ssh $GCS_INSTANCE_NAME
 
 export GCS_BUCKET_PATH=gs://griffith-lab-test-malachi
-export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
+export CLOUD_YAML=mcdb024_immuno_cloud-WDL.yaml
 
 gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
 
