@@ -322,3 +322,5 @@ sort -n -k 2 -r costs_report.tsv | cat header.tsv - > costs_report_final.tsv
 gcloud compute instances delete $GCS_INSTANCE_NAME
 ```
 
+Note that this does NOT empty your bucket. Once you are satisfied that your results are acceptable and you will no longer need to access the cromwell-executions files in your bucket you can clean it up to prevent billing for cloud bucket storage.
+
