@@ -232,11 +232,14 @@ gsutil ls $GCS_BUCKET_PATH/cromwell-executions/immuno/
 journalctl -u cromwell | tail | grep "Workflow actor"
 ```
 
-Now save the workflow information in your google bucket
+Now save the workflow information in your google bucket. Include the YAML and WDLs used for this run.
 ```bash
 export WORKFLOW_ID=<id from above>
 source /shared/helpers.sh
 save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
+gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$CLOUD_YAML
+gsutil cp /shared/analysis_workflows.zip $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/analysis_workflows.zip
+
 ```
 
 This command will upload the workflow's artifacts to your google bucket so they can be used after the VM is deleted. They can be found at paths:
@@ -284,10 +287,7 @@ du -h
 
 ```
 
-### Estimate the cost of executing your workflow
-
-On compute1 cluster, start an interactive docker session as describe below and then use the following python script to generate a cost estimate:
-
+### Store a local copy of workflow artifacts
 ```bash
 export WORKFLOW_ID=<id from above>
 bsub -Is -q general-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:latest)" /bin/bash
@@ -296,15 +296,30 @@ cd $WORKING_BASE/final_results/
 mkdir workflow_artifacts
 cd workflow_artifacts
 
+gsutil cp -r  $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/ .
+
+exit
+```
+
+### Estimate the cost of executing your workflow
+
+On compute1 cluster, start an interactive docker session as describe below and then use the following python script to generate a cost estimate:
+
+```bash
+export WORKFLOW_ID=<id from above>
+bsub -Is -q general-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:latest)" /bin/bash
+
+cd $WORKING_BASE/final_results/workflow_artifacts
+mkdir costs
+cd costs
+
 python3 $WORKING_BASE/git/cloud-workflows/scripts/estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/metadata/ > costs.json
 python3 $WORKING_BASE/git/cloud-workflows/scripts/costs_json_to_csv.py costs.json > costs.csv
 cat costs.csv | sed 's/,/\t/g' > costs.tsv
 
-gsutil cp -r  $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID .
-
 exit #leave the docker session
 
-cd $WORKING_BASE/final_results/workflow_artifacts
+cd $WORKING_BASE/final_results/workflow_artifacts/costs/
 cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 13 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_total_condensed.tsv
 cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 9 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_memory_condensed.tsv
 cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 10 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_cpu_condensed.tsv
