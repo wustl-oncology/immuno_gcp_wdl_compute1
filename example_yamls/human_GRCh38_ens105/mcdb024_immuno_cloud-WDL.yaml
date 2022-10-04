@@ -22,7 +22,7 @@ immuno.rna_sequence:
     fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/RNA/TL-22-NWKERP4S_T_RSQ1_3.fastq.gz"
   readgroup: "ID:3\tPU:HCCMGDMXY\tSM:mcdb024_TUMOR_RNA\tLB:mcdb024_TUMOR_RNA_LIB1\tPL:Illumina\tCN:TEMPUS"
 immuno.sample_name: mcdb024_TUMOR_RNA
-immuno.strand: first
+immuno.strand: second
 
 # ------------- Reference genome for DNA-seq alignments ---------------
 immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa"
