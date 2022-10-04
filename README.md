@@ -40,7 +40,8 @@ export GCS_INSTANCE_NAME=malachi-immuno-test
 export BASE=/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/
 export WORKING_BASE=$BASE/malachi
 export RAW_DATA_DIR=$BASE/raw_data
-export WORKFLOW_DEFINITION=$WORKING_BASE/git/analysis-wdls/definitions/immuno.wdl
+export WORKFLOW=immuno.wdl
+export WORKFLOW_PATH=$WORKING_BASE/git/analysis-wdls/definitions/$WORKFLOW
 export LOCAL_YAML=mcdb024_immuno_local-WDL.yaml
 export CLOUD_YAML=mcdb024_immuno_cloud-WDL.yaml
 ```
@@ -128,7 +129,7 @@ bsub -Is -q oncology-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:l
 
 Attempt to cloudize your workflow and inputs
 ```bash
-python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET_NAME $WORKFLOW_DEFINITION $WORKING_BASE/yamls/$LOCAL_YAML --output=$WORKING_BASE/yamls/$CLOUD_YAML
+python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET_NAME $WORKFLOW_PATH $WORKING_BASE/yamls/$LOCAL_YAML --output=$WORKING_BASE/yamls/$CLOUD_YAML
 ```
 
 Note that this "cloudize" step is primarily about staging input files that you may have locally on your system that need to be copied to a google cloud bucket so that they can be accessed during your workflow run on the cloud. It therefore takes the desired Google Cloud Bucket Name as input. It also takes your Workflow Definition (WDL file) for your pipeline.  It will perform some basic checks of the input expectations of this workflow against the input YAML configuration file you provide. The final input to this script is your input YAML configuration file (the LOCAL YAML). This should contain all the input parameters needed by your workflow, including paths to reference, annotation and data files. If any of the file paths in your input YAML are local paths, this script will attempt to copy them into your bucket. If a file path is already specified as a Google Cloud Bucket path (e.g. gs://PATH ) it will be skipped. The output of the script (the CLOUD YAML), is a version of your YAML that has been updated to point to new paths for any files that were copied into the cloud bucket. This is the YAML you will use to launch your workflow run in the following steps.
@@ -181,6 +182,7 @@ gcloud compute ssh $GCS_INSTANCE_NAME
 
 export GCS_BUCKET_PATH=gs://griffith-lab-test-malachi
 export CLOUD_YAML=mcdb024_immuno_cloud-WDL.yaml
+export WORKFLOW=immuno.wdl
 
 gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
 
@@ -191,7 +193,7 @@ gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
 While logged into the Google Cromwell VM instance:
 ```bash
 source /shared/helpers.sh
-submit_workflow /shared/analysis-wdls/definitions/immuno.wdl $CLOUD_YAML
+submit_workflow /shared/analysis-wdls/definitions/$WORKFLOW $CLOUD_YAML
 
 ```
 
@@ -232,13 +234,14 @@ gsutil ls $GCS_BUCKET_PATH/cromwell-executions/immuno/
 journalctl -u cromwell | tail | grep "Workflow actor"
 ```
 
-Now save the workflow information in your google bucket. Include the YAML and WDLs used for this run.
+Now save the workflow information in your google bucket. Include the YAML and WDLs used for this run for analysis provenance.
 ```bash
 export WORKFLOW_ID=<id from above>
 source /shared/helpers.sh
 save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
 gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$CLOUD_YAML
-gsutil cp /shared/analysis_workflows.zip $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/analysis_workflows.zip
+gsutil cp /shared/analysis-wdls/workflows.zip $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/workflows.zip
+gsutil cp /shared/analysis-wdls/definitions/$WORKFLOW $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW
 
 ```
 
