@@ -212,7 +212,7 @@ Example commands that query the Cromwell server and get the current status, curr
 export WORKFLOW_ID=<id from above>
 curl http://localhost:8000/api/workflows/v1/$WORKFLOW_ID/status
 curl http://localhost:8000/api/workflows/v1/$WORKFLOW_ID/timing > $WORKFLOW_ID.timing.html
-gsutil cp $WORKFLOW_ID.timing.html $GCS_BUCKET_PATH/$WORKFLOW_ID.timing.html
+gsutil cp $WORKFLOW_ID.timing.html $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$WORKFLOW_ID.timing.html
 
 ```
 
