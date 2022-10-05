@@ -322,6 +322,7 @@ cat costs.csv | sed 's/,/\t/g' > costs.tsv
 
 exit #leave the docker session
 
+#### THE FOLLOWING IS NOT WORKING PROPERLY !!! ####
 cd $WORKING_BASE/final_results/workflow_artifacts/costs/
 cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 13 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_total_condensed.tsv
 cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 9 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_memory_condensed.tsv
@@ -332,6 +333,21 @@ paste costs_total_condensed.tsv costs_cpu_condensed.tsv costs_memory_condensed.t
 echo -e "task\ttotal\tcpu\tmemory\tdisk" > header.tsv
 sort -n -k 2 -r costs_report.tsv | cat header.tsv - > costs_report_final.tsv
 rm -f costs_report.tsv header.tsv costs.csv
+
+```
+
+### View high level cost details
+```bash
+cd $WORKING_BASE/final_results/workflow_artifacts/costs/
+
+#Summarize overall costs
+tail costs.json | head -n 9 | tr -d \" | tr -d "," | grep -v durationSeconds | grep -v Time
+
+#List top 20 tasks by cost
+head -n 21 costs_report_final.tsv | column -t
+
+#Summarize tasks that were preempted
+cat costs.tsv | grep -P -i "preempted|startTime" | cut -f 1,3,8,13 | column -t 
 
 ```
 
