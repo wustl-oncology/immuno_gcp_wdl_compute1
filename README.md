@@ -299,7 +299,7 @@ cd $WORKING_BASE/final_results/
 mkdir workflow_artifacts
 cd workflow_artifacts
 
-gsutil cp -r  $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/ .
+gsutil cp -r  $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/* .
 
 exit
 ```
