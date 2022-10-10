@@ -334,6 +334,7 @@ echo -e "task\ttotal\tcpu\tmemory\tdisk" > header.tsv
 sort -n -k 2 -r costs_report.tsv | cat header.tsv - > costs_report_final.tsv
 rm -f costs_report.tsv header.tsv costs.csv
 
+exit
 ```
 
 ### View high level cost details
