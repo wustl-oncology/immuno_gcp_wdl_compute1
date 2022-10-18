@@ -112,8 +112,10 @@ gsutil cp $GCS_BUCKET_PATH/yamls/$PATIENT/$TUMOR/$CLOUD_YAML .
 
 ### Merge in the class ii PR
 ```bash
-
-#TO DO!!!
+cd /shared/analysis-wdls/
+sudo git fetch origin pull/57/head:classii
+sudo git merge classii
+refresh_zip_deps
 
 ```
 
