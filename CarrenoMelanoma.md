@@ -64,7 +64,7 @@ python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET_NAME $WORKFLOW_PATH $WORKI
 ### Start a Google VM that will run Cromwell and orchestrate completion of the workflow
 
 ```bash
-cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
+cd $BASE/git/cloud-workflows/manual-workflows/
 bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=250GB --boot-disk-type=pd-standard --machine-type=e2-standard-2
 exit #leave the docker session
 ```
