@@ -116,6 +116,7 @@ cd /shared/analysis-wdls/
 sudo git fetch origin pull/57/head:classii
 sudo git merge classii
 refresh_zip_deps
+cd ~
 
 ```
 
