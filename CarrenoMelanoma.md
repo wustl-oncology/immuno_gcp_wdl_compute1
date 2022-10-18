@@ -101,11 +101,12 @@ gcloud compute ssh $GCS_INSTANCE_NAME
 /storage1/fs1/carreno-upenn/Active/adhoc/melanoma_cell_line_vaccines/pipeline_runs/MEL21/MEL21_Tumor_Skin1/MEL21_Tumor_Skin1_immuno_cloud-WDL.envs
 #export GCS_BUCKET_NAME=griffith-lab-carreno
 #export GCS_BUCKET_PATH=gs://$GCS_BUCKET_NAME
+#export PATIENT=MEL21
 #export TUMOR=MEL21_Tumor_Skin1
 #export CLOUD_YAML="$TUMOR"_immuno_cloud-WDL.yaml
 #export WORKFLOW=immuno.wdl
 
-gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
+gsutil cp $GCS_BUCKET_PATH/yamls/$PATIENT/$TUMOR/$CLOUD_YAML .
 
 ``` 
 
