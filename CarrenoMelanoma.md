@@ -203,7 +203,7 @@ mkdir final_results
 cd final_results
 
 python3 /opt/scripts/pull_outputs.py --outputs-file=$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/outputs.json --outputs-dir=$WORKING_BASE/final_results/
-exit #leave the docker session
+
 ```
 
 Examine the outputs briefly:
@@ -217,7 +217,6 @@ du -h
 ### Store a local copy of workflow artifacts
 ```bash
 export WORKFLOW_ID=<id from above>
-bsub -Is -q general-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:latest)" /bin/bash
 
 cd $WORKING_BASE/final_results/
 mkdir workflow_artifacts
