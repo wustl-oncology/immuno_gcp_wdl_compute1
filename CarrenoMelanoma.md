@@ -98,7 +98,7 @@ Now log into Google Cromwell VM instance again and copy the YAML file to its loc
 gcloud compute ssh $GCS_INSTANCE_NAME
 
 #ADD ENVS TO BASHRC. e.g.
-/storage1/fs1/carreno-upenn/Active/adhoc/melanoma_cell_line_vaccines/pipeline_runs/MEL21/MEL21_Tumor_Skin1/MEL21_Tumor_Skin1_immuno_cloud-WDL.envs
+# e.g. /storage1/fs1/carreno-upenn/Active/adhoc/melanoma_cell_line_vaccines/pipeline_runs/MEL21/MEL21_Tumor_Skin1/MEL21_Tumor_Skin1_immuno_cloud-WDL.envs
 #export GCS_BUCKET_NAME=griffith-lab-carreno
 #export GCS_BUCKET_PATH=gs://$GCS_BUCKET_NAME
 #export PATIENT=MEL21
