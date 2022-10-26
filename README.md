@@ -42,8 +42,8 @@ export WORKING_BASE=$BASE/malachi
 export RAW_DATA_DIR=$BASE/raw_data
 export WORKFLOW=immuno.wdl
 export WORKFLOW_PATH=$WORKING_BASE/git/analysis-wdls/definitions/$WORKFLOW
-export LOCAL_YAML=mcdb024_immuno_local-WDL.yaml
-export CLOUD_YAML=mcdb024_immuno_cloud-WDL.yaml
+export LOCAL_YAML=hcc1395_immuno_local-WDL.yaml
+export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
 ```
 
 ## Local setup
@@ -181,7 +181,7 @@ Now log into Google Cromwell VM instance again and copy the YAML file to its loc
 gcloud compute ssh $GCS_INSTANCE_NAME
 
 export GCS_BUCKET_PATH=gs://griffith-lab-test-malachi
-export CLOUD_YAML=mcdb024_immuno_cloud-WDL.yaml
+export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
 export WORKFLOW=immuno.wdl
 
 gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
