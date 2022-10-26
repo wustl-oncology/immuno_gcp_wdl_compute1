@@ -20,6 +20,18 @@ https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows
 - google-cloud-sdk
 - git
 
+### Security
+Access to resources and data needed to perform the following tutorial are controlled in several ways. The following tutorial describes some practices to work securely but ultimately the security of data and compute resources is subject to how carefully these practices are followed.
+
+Overview of security approach:
+- We use Google Accounts linked to our institution for billing. Our central IT adminstrators must create Google Billing projects for us. 
+- Use of granular billing alerts to help detect any unexpected resource use.
+- Our institutional Google Accounts use an OAuth approach that means login/authentication is controlled by our institution and is subject to their password change policy, accounts can be revoked by the institution, etc.
+- In the setup below we describe how to configure the Google Cloud network so that access is only allowed from IP addresses of our institutions secure network
+- Google buckets used to store data are not public and can only be accessed by users authorized within the Google Project
+- In the setup below, the Google Cloud is only being used for temporary data processing. The practice described below involves using the cloud just long enough to run the workflow, after which all compute resourse and data buckets should be destroyed.
+- We are also working on improving security in the following ways: (1) use of only private VMs for workflow tasks, (2) setting the Public Access Prevention flag on buckets used to store data, (3) determining the minimal IAM user permissions/roles needed for a user to run a workflow, (4) establishing policies for the monitoring/auditing of IAM accounts.
+
 ### The example data set and analysis to be performed
 To demonstrate an analysis on the Google cloud we will run the WASHU immunogenomics pipeline on a publicly available set of exome and bulk RNA-seq data generated for a tumor/normal cell line pair (HCC1395 and HCC1395/BL). The HCC1395 cell line is a well known breast cancer cell line that can be purchased and is commonly used for benchmarking cancer genomics analysis and methods development. The datasets we will use here are realistic deeply sequenced exome and RNA-seq data. The immunogenomics pipeline is a very elaborate end-to-end pipeline that starts with raw data and performs data QC, germline variant calling, somatic variant calling (multiple variant callers and variant types), HLA typing, RNA expression analysis and neoantigen identification.  
 
