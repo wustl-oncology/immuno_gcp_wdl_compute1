@@ -41,7 +41,7 @@ immuno.reference_0123: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/al
 immuno.synonyms_file: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/reference_genome/chromAlias.ensembl.txt"
 
 # ------------- Reference genome for RNA-seq alignments ---------------
-immuno.star_aligner_genome_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/star_2.7.8a_index.zip"
+#immuno.star_aligner_genome_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/star_2.7.8a_index.zip"
 
 # ------------- Reference files and settings for STAR-fusion calling
 immuno.star_fusion_genome_dir_zip: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/star-fusion_1.10.1_index.zip"
