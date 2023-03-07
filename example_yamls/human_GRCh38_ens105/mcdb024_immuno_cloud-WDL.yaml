@@ -46,6 +46,7 @@ immuno.fusioninspector_mode: "validate"
 immuno.cdna_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.gz"
 immuno.agfusion_database: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/agfusion_1.3_database/agfusion.homo_sapiens.105.db"
 immuno.agfusion_annotate_noncanonical: true
+immuno.min_ffpm_level: 0.025
 
 # ------------- RNA transcript annotations ------------
 immuno.ribosomal_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.105.ribo_intervals"
