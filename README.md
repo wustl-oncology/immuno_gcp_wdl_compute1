@@ -14,7 +14,8 @@ storage1 disk and ability to launch jobs on compute1 using LSF (bsub).
 
 ### Source of instructions
 This tutorial is a specific example of how to run a specific pipeline (immuno) on a specific example dataset (HCC1395 Tumor/normal cell line pair). The steps below are taken from the following link where you will find a  more generic set of documentation that explains in detail how to run any WDL pipeline on the Google Cloud using tools created to assist this process. 
-https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows
+https://github.com/wustl-oncology/cloud-workflows/tree/main/manual-workflows
+
 
 ### Prerequisites
 - google-cloud-sdk
