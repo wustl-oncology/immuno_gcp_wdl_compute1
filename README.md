@@ -73,9 +73,9 @@ The following repositories contain: this tutorial (immuno_gcp_wdl), the WDL work
 ```bash
 mkdir git
 cd git
-git clone git@github.com:griffithlab/immuno_gcp_wdl_compute1.git # (v1.0.1)
-git clone git@github.com:griffithlab/analysis-wdls.git # (v1.0.0)
-git clone git@github.com:griffithlab/cloud-workflows.git # (v1.3.0)
+git clone git@github.com:wustl-oncology/immuno_gcp_wdl_compute1.git # (v1.0.1)
+git clone git@github.com:wustl-oncology/analysis-wdls.git # (v1.0.0)
+git clone git@github.com:wustl-oncology/cloud-workflows.git # (v1.3.0)
 ```
 
 ### Login to GCP and set the desired project
@@ -171,7 +171,7 @@ In this step we will confirm that we can log into our Cromwell VM with `gcloud c
 
 After logging in, use journalctl to see if the instance start up has completed, and cromwell launch has completed.
 
-For details on how to recognize whether these processes have completed refer: [here](https://github.com/griffithlab/cloud-workflows/tree/main/manual-workflows#ssh-in-to-vm).
+For details on how to recognize whether these processes have completed refer: [here](https://github.com/wustl-oncology/cloud-workflows/tree/main/manual-workflows#ssh-in-to-vm).
 
 ```bash
 gcloud compute ssh $GCS_INSTANCE_NAME
