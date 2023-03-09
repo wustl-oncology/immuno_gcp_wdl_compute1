@@ -47,6 +47,7 @@ immuno.fusioninspector_mode: "validate"
 immuno.cdna_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.gz"
 immuno.agfusion_database: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/agfusion_1.3_database/agfusion.homo_sapiens.105.db"
 immuno.agfusion_annotate_noncanonical: true
+immuno.min_ffpm_level: 0.025
 
 # ------------- RNA transcript annotations ------------
 immuno.ribosomal_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.105.ribo_intervals"
@@ -193,17 +194,17 @@ immuno.epitope_lengths_class_ii:
 - 18
 immuno.binding_threshold: 500
 immuno.minimum_fold_change: 0
-immuno.top_score_metric: median
+immuno.top_score_metric: lowest
 immuno.downstream_sequence_length: 100
-immuno.net_chop_method: cterm
-immuno.netmhc_stab: true
+#immuno.net_chop_method: cterm
+immuno.netmhc_stab: false
 immuno.pvacseq_threads: 8
 immuno.maximum_transcript_support_level: 1
 immuno.normal_vaf: 0.01
-immuno.tdna_vaf: 0.2
-immuno.trna_vaf: 0.2
-immuno.normal_cov: 50
-immuno.tdna_cov: 50
+immuno.tdna_vaf: 0.1
+immuno.trna_vaf: 0.1
+immuno.normal_cov: 30
+immuno.tdna_cov: 30
 
 immuno.hla_source_mode: consensus
 immuno.blastp_db: refseq_select_prot
@@ -266,4 +267,26 @@ immuno.gatk_haplotypecaller_intervals:
 # ------------- miscellaneous settings ------------------
 immuno.summary_intervals: []
 immuno.gvcf_gq_bands: []
+
+# ------------- fda qc report values --------------------
+immuno.reference_genome_name: "Custom GRCh38 https://zenodo.org/record/4684553"
+immuno.dna_sequencing_platform: "Illumina"
+immuno.dna_sequencing_instrument: "NovaSeq 6000"
+immuno.dna_sequencing_kit: "NovaSeq 6000 S4 Reagent Kit v1.5"
+immuno.dna_sequencing_type: "Whole Exome Sequencing"
+immuno.dna_single_or_paired_end: "Paired End"
+immuno.normal_dna_spike_in_error_rate: "<=0.50% (R1), <=0.75% (R2)"
+immuno.tumor_dna_spike_in_error_rate: "<=0.50% (R1), <=0.75% (R2)"
+immuno.normal_dna_total_DNA: "Not provided"
+immuno.tumor_dna_total_DNA: "Not provided"
+immuno.rna_sequencing_platform: "Illumina"
+immuno.rna_sequencing_instrument: "NovaSeq 6000"
+immuno.rna_sequencing_kit: "RNA Directional Library Prep Kit"
+immuno.rna_sequencing_type: "Riboreduced total RNA Sequencing"
+immuno.rna_single_or_paired_end: "Paired end"
+immuno.rna_spike_in_error_rate: "Not provided"
+immuno.rna_total_RNA: "Not provided"
+immuno.rna_RIN_score: "Not provided"
+immuno.rna_freq_normalization_method: "TPM"
+immuno.rna_annotation_file: "http://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.gtf.gz"
 
