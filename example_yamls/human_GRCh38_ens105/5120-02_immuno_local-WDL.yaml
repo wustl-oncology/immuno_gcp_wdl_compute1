@@ -274,6 +274,7 @@ immuno.summary_intervals: []
 immuno.gvcf_gq_bands: []
 
 # ------------- fda qc report values --------------------
+# DISABLE UNTIL THIS ISSUE IS FIXED: https://github.com/wustl-oncology/analysis-wdls/issues/89
 #immuno.reference_genome_name: "Custom GRCh38 https://zenodo.org/record/4684553"
 #immuno.dna_sequencing_platform: "Illumina"
 #immuno.dna_sequencing_instrument: "NovaSeq 6000"
