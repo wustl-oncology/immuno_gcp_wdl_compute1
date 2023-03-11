@@ -217,14 +217,14 @@ pvacfuse_keep_tmp_files: true
 
 # ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
 # Source of HLA types for hcc1395: ...
-#immuno.clinical_mhc_classI_alleles:
+immuno.clinical_mhc_classI_alleles:
 - HLA-A*03:01
 - HLA-A*32:01
 - HLA-B*08:01
 - HLA-B*56:01
 - HLA-C*01:02
 - HLA-C*07:01
-#immuno.clinical_mhc_classII_alleles:
+immuno.clinical_mhc_classII_alleles:
 - DRB1*01:01
 - DRB1*03:01
 - DRB3*01:01
