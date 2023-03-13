@@ -3,31 +3,31 @@
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/3acbcefcc54e4e1b99968bb2748623d1/CGAACATTCG-ACCACTGTTA_S16_L001_R1_001.fastq.gz"
-    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/3acbcefcc54e4e1b99968bb2748623d1/CGAACATTCG-ACCACTGTTA_S16_L001_R2_001.fastq.gz"
-  readgroup: "@RG\tID:3acbcefcc54e4e1b99968bb2748623d1\tPU:HL2JHDSX5\tSM:TWJF-5120-02-5120-02_tumor_lysate\tLB:TWJF-5120-02-5120-02_tumor_lysate_lib1\tPL:Illumina\tCN:WASHU"
-immuno.tumor_sample_name: TWJF-5120-02-5120-02_tumor_lysate
+    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/39f191eaf6e84442bc189b1a9ff1cdd6/CATGTACCAC-TACCACGGCT_S5_L002_R1_001.fastq.gz"
+    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/39f191eaf6e84442bc189b1a9ff1cdd6/CATGTACCAC-TACCACGGCT_S5_L002_R2_001.fastq.gz"
+  readgroup: "@RG\tID:39f191eaf6e84442bc189b1a9ff1cdd6\tPU:HL2Y2DSX5\tSM:TWJF-5120-03-tumor-lysate\tLB:TWJF-5120-03-tumor-lysate_lib1\tPL:Illumina\tCN:WASHU"
+immuno.tumor_sample_name: TWJF-5120-03-tumor-lysate
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/d0c5bc730ab54c39a75000575e3a0a25/GTAACGAACG-GAAGACATTC_S28_L001_R1_001.fastq.gz"
-    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/d0c5bc730ab54c39a75000575e3a0a25/GTAACGAACG-GAAGACATTC_S28_L001_R2_001.fastq.gz"
-  readgroup: "@RG\tID:d0c5bc730ab54c39a75000575e3a0a25\tPU:HL2JHDSX5\tSM:TWJF-5120-02-1802595a_2_PBMC\tLB:TWJF-5120-02-1802595a_2_PBMC_lib1\tPL:Illumina\tCN:WASHU"
-immuno.normal_sample_name: TWJF-5120-02-1802595a_2_PBMC
+    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/b91c14157ac34a99bedbfc6dac12a9ab/CATAACTCGC-TATAGGACAC_S16_L001_R1_001.fastq.gz"
+    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/b91c14157ac34a99bedbfc6dac12a9ab/CATAACTCGC-TATAGGACAC_S16_L001_R2_001.fastq.gz"
+  readgroup: "@RG\tID:b91c14157ac34a99bedbfc6dac12a9ab\tPU:HL2Y2DSX5\tSM:TWJF-5120-03-1803544a-2-PBMC0-Pellet\tLB:TWJF-5120-03-1803544a-2-PBMC0-Pellet_lib1\tPL:Illumina\tCN:WASHU"
+immuno.normal_sample_name: TWJF-5120-03-1803544a-2-PBMC0-Pellet
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
   - sequence:
-      fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/2ac0969387d3470387fc612eb7a98e4a/GACCTGAAAT-ACTTGGTGAG_S8_L002_R1_001.fastq.gz"
-      fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/2ac0969387d3470387fc612eb7a98e4a/GACCTGAAAT-ACTTGGTGAG_S8_L002_R2_001.fastq.gz"
-    readgroup: "ID:2ac0969387d3470387fc612eb7a98e4a\tPU:HL2K7DSX5\tSM:H_MT-135066-5120-02-tumorRNA_1\tLB:H_MT-135066-5120-02-tumorRNA_1_lib1\tPL:Illumina\tCN:WASHU"
-immuno.sample_name: H_MT-135066-5120-02-tumorRNA_1
+      fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/24b8b4c3cd2d41d59d5915fa178bc901/TCTCTACTAT-ACCGCGGTTC_S13_L002_R1_001.fastq.gz"
+      fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/gmsroot/instrument_data/imported/24b8b4c3cd2d41d59d5915fa178bc901/TCTCTACTAT-ACCGCGGTTC_S13_L002_R2_001.fastq.gz"
+    readgroup: "ID:24b8b4c3cd2d41d59d5915fa178bc901\tPU:HL2K7DSX5\tSM:H_MT-135067-5120-03-tumorRNA_1\tLB:H_MT-135067-5120-03-tumorRNA_1_lib1\tPL:Illumina\tCN:WASHU"
+immuno.sample_name: H_MT-135067-5120-03-tumorRNA_1
 immuno.strand: first
 
 # ------------- CLE validated variants for intersection/filtering --------------------
-immuno.validated_variants: /storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-02_BGA-2103/cle_results/annotated_filtered.vcf.gz.commented.gz.commented.gz
-immuno.validated_variants_tbi: /storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-02_BGA-2103/cle_results/annotated_filtered.vcf.gz.commented.gz.commented.gz.tbi
+immuno.validated_variants: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-03_BGA-2102/cle_results/annotated_filtered.vcf.gz.commented.gz.commented.gz"
+immuno.validated_variants_tbi: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-03_BGA-2102/cle_results/annotated_filtered.vcf.gz.commented.gz.commented.gz.tbi"
 
 # ------------- Reference genome for DNA-seq alignments ---------------
 immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa"
@@ -216,31 +216,37 @@ immuno.iedb_retries: 3
 pvacfuse_keep_tmp_files: true
 
 # ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
-# Source of HLA types for this sample: Histogenetics
+# Source of HLA types for this sample: Histogenetics typing
+# DRB1*14:ECMYC -> DRB1*14:54/DRB1*14:216/DRB1*14:227/DRB1*14:240/DRB1*14:243 (https://hml.nmdp.org/MacUI/)
 immuno.clinical_mhc_classI_alleles:
-- HLA-A*03:01
+- HLA-A*11:01
 - HLA-A*32:01
-- HLA-B*08:01
-- HLA-B*56:01
-- HLA-C*01:02
-- HLA-C*07:01
+- HLA-B*35:03
+- HLA-B*55:01
+- HLA-C*03:03
+- HLA-C*04:01
 immuno.clinical_mhc_classII_alleles:
-- DRB1*01:01
 - DRB1*03:01
+- DRB1*14:54
+- DRB1*14:216
+- DRB1*14:227
+- DRB1*14:240
+- DRB1*14:243
 - DRB3*01:01
+- DRB3*02:02
 - DPA1*01:03
-- DPB1*03:01
+- DPB1*02:01
 - DPB1*04:01
 - DQA1*01:01
 - DQA1*05:01
 - DQB1*02:01
-- DQB1*05:01
-- DPA1*01:03-DPB1*03:01
+- DQB1*05:03
+- DPA1*01:03-DPB1*02:01
 - DPA1*01:03-DPB1*04:01
 - DQA1*01:01-DQB1*02:01
-- DQA1*01:01-DQB1*05:01
+- DQA1*01:01-DQB1*05:03
 - DQA1*05:01-DQB1*02:01
-- DQA1*05:01-DQB1*05:01
+- DQA1*05:01-DQB1*05:03
 
 # -------------- Intervals to use during GATK germline variant calling -----------------
 immuno.gatk_haplotypecaller_intervals:
