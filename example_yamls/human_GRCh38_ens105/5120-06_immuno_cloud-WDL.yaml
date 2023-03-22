@@ -1,4 +1,3 @@
----
 #Pull key information from metadata YAML files
 #grep -P "PU|index_sequence|full_name" */*.yaml
 
@@ -6,31 +5,31 @@
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-06_BGA-2108/instrument_data/csf_184097990/ACTTGTTGCG-TAAGGCCGGT_S11_L001_R1_001.fastq.gz"
-    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-06_BGA-2108/instrument_data/csf_184097990/ACTTGTTGCG-TAAGGCCGGT_S11_L001_R2_001.fastq.gz"
+    fastq1: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-03-21/csf_184097990/ACTTGTTGCG-TAAGGCCGGT_S11_L001_R1_001.fastq.gz"
+    fastq2: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-03-21/csf_184097990/ACTTGTTGCG-TAAGGCCGGT_S11_L001_R2_001.fastq.gz"
   readgroup: "@RG\tID:csf_184097990\tPU:HL237DSX5\tSM:TWJF-5120-06-5120-06_tumor_lysate\tLB:TWJF-5120-06-5120-06_tumor_lysate-lib1\tPL:Illumina\tCN:WASHU"
 immuno.tumor_sample_name: TWJF-5120-06-5120-06_tumor_lysate
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-06_BGA-2108/instrument_data/csf_184097770/CCTCTGCTTA-ATCGCGGTTC_S24_L001_R1_001.fastq.gz"
-    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-06_BGA-2108/instrument_data/csf_184097770/CCTCTGCTTA-ATCGCGGTTC_S24_L001_R2_001.fastq.gz"
+    fastq1: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-03-21/csf_184097770/CCTCTGCTTA-ATCGCGGTTC_S24_L001_R1_001.fastq.gz"
+    fastq2: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-03-21/csf_184097770/CCTCTGCTTA-ATCGCGGTTC_S24_L001_R2_001.fastq.gz"
   readgroup: "@RG\tID:csf_184097770\tPU:HL237DSX5\tSM:TWJF-5120-06-1804529a_2_PBMC\tLB:TWJF-5120-06-1804529a_2_PBMC-lib1\tPL:Illumina\tCN:WASHU"
 immuno.normal_sample_name: TWJF-5120-06-1804529a_2_PBMC
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
-  - sequence:
-      fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-06_BGA-2108/instrument_data/HL2JGDSX5/5120-06-TumorRNA1_S1_L001_R1_001.fastq.gz"
-      fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-06_BGA-2108/instrument_data/HL2JGDSX5/5120-06-TumorRNA1_S1_L001_R2_001.fastq.gz"
-    readgroup: "ID:CAGTAGGCAT_ATTCGTCAGT\tPU:HL2JGDSX5\tSM:TWJF-5120-06-TumorRNA\tLB:TWJF-5120-06-TumorRNA-lib1\tPL:Illumina\tCN:WASHU"
+- sequence:
+    fastq1: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-03-21/HL2JGDSX5/5120-06-TumorRNA1_S1_L001_R1_001.fastq.gz"
+    fastq2: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-03-21/HL2JGDSX5/5120-06-TumorRNA1_S1_L001_R2_001.fastq.gz"
+  readgroup: "ID:CAGTAGGCAT_ATTCGTCAGT\tPU:HL2JGDSX5\tSM:TWJF-5120-06-TumorRNA\tLB:TWJF-5120-06-TumorRNA-lib1\tPL:Illumina\tCN:WASHU"
 immuno.sample_name: TWJF-5120-06-TumorRNA
 immuno.strand: first
 
 # ------------- CLE validated variants for intersection/filtering --------------------
-immuno.validated_variants: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-06_BGA-2108/cle_results/TWJF-5120-06/annotated_filtered.vcf.gz.commented.gz.commented.gz"
-immuno.validated_variants_tbi: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-06_BGA-2108/cle_results/TWJF-5120-06/annotated_filtered.vcf.gz.commented.gz.commented.gz.tbi"
+immuno.validated_variants: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-03-21/cle_results/TWJF-5120-06/annotated_filtered.vcf.gz.commented.gz.commented.gz"
+immuno.validated_variants_tbi: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-03-21/cle_results/TWJF-5120-06/annotated_filtered.vcf.gz.commented.gz.commented.gz.tbi"
 
 # ------------- Reference genome for DNA-seq alignments ---------------
 immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa"
@@ -216,15 +215,7 @@ immuno.tdna_cov: 30
 immuno.hla_source_mode: consensus
 immuno.blastp_db: refseq_select_prot
 immuno.iedb_retries: 3
-pvacfuse_keep_tmp_files: true
-
-# ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
-# Source of HLA types for this sample: Histogenetics typing
-# Resolve any ambiguous alleles (https://hml.nmdp.org/MacUI/) -> Decode MAC option.
-# e.g. for this case 
-# DRB4*01:DJJXS -> DRB4*01:03/DRB4*01:124/DRB4*01:134
-# DQB1*02:ECPTR -> DQB1*02:02/DQB1*02:97/DQB1*02:110/DQB1*02:131/DQB1*02:156/DQB1*02:165/DQB1*02:175/DQB1*02:187/DQB1*02:199
-
+immuno.pvacfuse_keep_tmp_files: true
 immuno.clinical_mhc_classI_alleles:
 - HLA-A*01:01
 - HLA-A*11:01
