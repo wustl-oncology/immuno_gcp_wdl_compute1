@@ -195,8 +195,8 @@ immuno.binding_threshold: 500
 immuno.minimum_fold_change: 0
 immuno.top_score_metric: median
 immuno.downstream_sequence_length: 100
-immuno.net_chop_method: cterm
-immuno.netmhc_stab: true
+#immuno.net_chop_method: cterm
+immuno.netmhc_stab: false
 immuno.pvacseq_threads: 8
 immuno.maximum_transcript_support_level: 1
 immuno.normal_vaf: 0.01
@@ -209,6 +209,22 @@ immuno.hla_source_mode: consensus
 immuno.blastp_db: refseq_select_prot
 immuno.iedb_retries: 3
 immuno.pvacfuse_keep_tmp_files: true
+
+# ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype/Phlat calls ---------------
+# Source of HLA types for mcdb024: from NGS data, included here to test consensus tasks
+immuno.clinical_mhc_classI_alleles:
+- HLA-A*03:01
+- HLA-B*07:02
+- HLA-B*41:01
+- HLA-C*07:02
+- HLA-C*17:01
+immuno.clinical_mhc_classII_alleles:
+- DQA1*01:02
+- DQB1*04:02
+- DQB1*06:02
+- DRB1*04:04
+- DRB1*15:01
+
 immuno.gatk_haplotypecaller_intervals:
 - - chr1
 - - chr2
@@ -240,25 +256,24 @@ immuno.summary_intervals: []
 immuno.gvcf_gq_bands: []
 
 # ------------- fda qc report values --------------------
-# DISABLE UNTIL THIS ISSUE IS FIXED: https://github.com/wustl-oncology/analysis-wdls/issues/89
-#immuno.reference_genome_name: "Custom GRCh38 https://zenodo.org/record/4684553"
-#immuno.dna_sequencing_platform: "Illumina"
-#immuno.dna_sequencing_instrument: "NovaSeq 6000"
-#immuno.dna_sequencing_kit: "NovaSeq 6000 S4 Reagent Kit v1.5"
-#immuno.dna_sequencing_type: "Whole Exome Sequencing"
-#immuno.dna_single_or_paired_end: "Paired End"
-#immuno.normal_dna_spike_in_error_rate: "Less than 0.50% for Read 1 and less than 0.75% for Read 2"
-#immuno.tumor_dna_spike_in_error_rate: "Less than 0.50% for Read 1 and less than 0.75% for Read 2"
-#immuno.normal_dna_total_dna: "Not provided"
-#immuno.tumor_dna_total_dna: "Not provided"
-#immuno.rna_sequencing_platform: "Illumina"
-#immuno.rna_sequencing_instrument: "NovaSeq 6000"
-#immuno.rna_sequencing_kit: "RNA Directional Library Prep Kit"
-#immuno.rna_sequencing_type: "Riboreduced total RNA Sequencing"
-#immuno.rna_single_or_paired_end: "Paired end"
-#immuno.rna_spike_in_error_rate: "Not provided"
-#immuno.rna_total_rna: "Not provided"
-#immuno.rna_rin_score: "Not provided"
-#immuno.rna_freq_normalization_method: "TPM"
-#immuno.rna_annotation_file: "http://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.gtf.gz"
+immuno.reference_genome_name: "Custom GRCh38 https://zenodo.org/record/4684553"
+immuno.dna_sequencing_platform: "Illumina"
+immuno.dna_sequencing_instrument: "NovaSeq 6000"
+immuno.dna_sequencing_kit: "NovaSeq 6000 S4 Reagent Kit v1.5"
+immuno.dna_sequencing_type: "Whole Exome Sequencing"
+immuno.dna_single_or_paired_end: "Paired End"
+immuno.normal_dna_spike_in_error_rate: "Less than 0.50% for Read 1 and less than 0.75% for Read 2"
+immuno.tumor_dna_spike_in_error_rate: "Less than 0.50% for Read 1 and less than 0.75% for Read 2"
+immuno.normal_dna_total_dna: "Not provided"
+immuno.tumor_dna_total_dna: "Not provided"
+immuno.rna_sequencing_platform: "Illumina"
+immuno.rna_sequencing_instrument: "NovaSeq 6000"
+immuno.rna_sequencing_kit: "RNA Directional Library Prep Kit"
+immuno.rna_sequencing_type: "Riboreduced total RNA Sequencing"
+immuno.rna_single_or_paired_end: "Paired end"
+immuno.rna_spike_in_error_rate: "Not provided"
+immuno.rna_total_rna: "Not provided"
+immuno.rna_rin_score: "Not provided"
+immuno.rna_freq_normalization_method: "TPM"
+immuno.rna_annotation_file: "http://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.gtf.gz"
 
