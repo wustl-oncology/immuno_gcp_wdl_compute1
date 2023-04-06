@@ -153,6 +153,7 @@ immuno.vep_to_table_fields:
 - clinvar_PHENOTYPELIST
 - clinvar_NUMSUBMIT
 - clinvar_GUIDELINES
+#note that if you are comparing to a set of known variants (e.g. from a CLIA/CAP lab, add "VALIDATED" to the following list
 immuno.variants_to_table_fields:
 - CHROM
 - POS
@@ -194,7 +195,7 @@ immuno.epitope_lengths_class_ii:
 - 18
 immuno.binding_threshold: 500
 immuno.minimum_fold_change: 0
-immuno.top_score_metric: lowest
+immuno.top_score_metric: median
 immuno.downstream_sequence_length: 100
 #immuno.net_chop_method: cterm
 immuno.netmhc_stab: false
@@ -205,11 +206,19 @@ immuno.tdna_vaf: 0.1
 immuno.trna_vaf: 0.1
 immuno.normal_cov: 30
 immuno.tdna_cov: 30
-
 immuno.hla_source_mode: consensus
-immuno.blastp_db: refseq_select_prot
 immuno.iedb_retries: 3
-pvacfuse_keep_tmp_files: true
+immuno.pvacfuse_keep_tmp_files: true
+immuno.blastp_db: refseq_select_prot
+
+#pvacseq v4 modifications
+#DELETE immuno.blastp_db
+immuno.run_reference_proteome_similarity: true
+immuno.peptide_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.pep.all.fa.gz"
+immuno.aggregate_inclusion_binding_threshold : 1500
+immuno.allele_specific_anchors: true
+immuno.problematic_amino_acids:
+- C
 
 # ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype/Phlat calls ---------------
 # Source of HLA types for mcdb024: from NGS data, included here to test consensus tasks
