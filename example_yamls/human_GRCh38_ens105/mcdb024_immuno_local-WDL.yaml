@@ -168,18 +168,7 @@ immuno.variants_to_table_genotype_fields:
 
 # --------------------- pVACtools settings ----------------------
 immuno.prediction_algorithms:
-- NetMHC
-- NetMHCcons
-- PickPocket
-- SMM
-- SMMPMBEC
-- MHCflurry
-- MHCnuggetsI
-- NetMHCpan
-- NetMHCIIpan
-- SMMalign
-- NNalign
-- MHCnuggetsII
+- all
 immuno.epitope_lengths_class_i:
 - 8
 - 9
@@ -209,7 +198,7 @@ immuno.tdna_cov: 30
 immuno.hla_source_mode: consensus
 immuno.iedb_retries: 3
 immuno.pvacfuse_keep_tmp_files: true
-immuno.blastp_db: refseq_select_prot
+#immuno.blastp_db: refseq_select_prot
 
 #pvacseq v4 modifications
 #DELETE immuno.blastp_db
