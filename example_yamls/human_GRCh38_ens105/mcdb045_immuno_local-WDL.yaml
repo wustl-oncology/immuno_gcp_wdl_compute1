@@ -1,28 +1,36 @@
+---
+#Pull key information from metadata YAML files
+#grep -P "PU|index_sequence|full_name" */*.yaml
 
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/DNA/TL-22-NWKERP4S_T_DSQ1_1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/DNA/TL-22-NWKERP4S_T_DSQ1_2.fastq.gz"
-  readgroup: "@RG\tID:1\tPU:HC7JNDMXY\tSM:mcdb024_TUMOR_DNA\tLB:mcdb024_TUMOR_DNA_LIB1\tPL:Illumina\tCN:TEMPUS"
-immuno.tumor_sample_name: mcdb024_TUMOR_DNA
+    fastq1: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb045/Raw_Sequencing_Data/BG002997/Tumor_Exome/BG002997_WES-tumor_1.fastq.gz"
+    fastq2: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb045/Raw_Sequencing_Data/BG002997/Tumor_Exome/BG002997_WES-tumor_2.fastq.gz"
+  readgroup: "@RG\tID:1\tPU:HTH5NDRX2\tSM:mcdb045-tumor-exome\tLB:mcdb045-tumor-exome-lib1\tPL:Illumina\tCN:BostonGene"
+immuno.tumor_sample_name: mcdb045-tumor-exome
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/DNA/TL-22-NWKERP4S_N_DSQ1_1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/DNA/TL-22-NWKERP4S_N_DSQ1_2.fastq.gz"
-  readgroup: "@RG\tID:2\tPU:HC7JMDMXY\tSM:mcdb024_NORMAL_DNA\tLB:mcdb024_NORMAL_DNA_LIB1\tPL:Illumina\tCN:TEMPUS"
-immuno.normal_sample_name: mcdb024_NORMAL_DNA
+    fastq1: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb045/Raw_Sequencing_Data/BG002997/Other_Raw_Data/normal-exome/BG002997_WES-normal_1.fastq.gz"
+    fastq2: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb045/Raw_Sequencing_Data/BG002997/Other_Raw_Data/normal-exome/BG002997_WES-normal_1.fastq.gz"
+  readgroup: "@RG\tID:2\tPU:HK7NYDRX2\tSM:mcdb045-normal-exome\tLB:mcdb045-normal-exome-lib1\tPL:Illumina\tCN:BostonGene"
+immuno.normal_sample_name: mcdb045-normal-exome
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
-- sequence:
-    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/RNA/TL-22-NWKERP4S_T_RSQ1_1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/RNA/TL-22-NWKERP4S_T_RSQ1_3.fastq.gz"
-  readgroup: "ID:3\tPU:HCCMGDMXY\tSM:mcdb024_TUMOR_RNA\tLB:mcdb024_TUMOR_RNA_LIB1\tPL:Illumina\tCN:TEMPUS"
-immuno.sample_name: mcdb024_TUMOR_RNA
-immuno.strand: second
+  - sequence:
+      fastq1: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb045/Raw_Sequencing_Data/BG002997/RNA/BG002997_RNASeq-tumor_1.fastq.gz"
+      fastq2: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb045/Raw_Sequencing_Data/BG002997/RNA/BG002997_RNASeq-tumor_2.fastq.gz"
+    readgroup: "ID:3\tPU:HMTLHDRX2\tSM:mcdb045-tumor-rna\tLB:mcdb045-tumor-rna-lib1\tPL:Illumina\tCN:BostonGene"
+immuno.sample_name: mcdb045-tumor-rna
+immuno.strand: unstranded
+
+# ------------- CLE validated variants for intersection/filtering --------------------
+#Not applicable to this case since sequencing was done outside WASHU CLE lab and we did not receive a VCF from Tempus
+#immuno.validated_variants: ""
+#immuno.validated_variants_tbi: ""
 
 # ------------- Reference genome for DNA-seq alignments ---------------
 immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa"
@@ -207,21 +215,30 @@ immuno.allele_specific_anchors: true
 immuno.problematic_amino_acids:
 - C
 
-# ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype/Phlat calls ---------------
-# Source of HLA types for mcdb024: from NGS data, included here to test consensus tasks
-immuno.clinical_mhc_classI_alleles:
-- HLA-A*03:01
-- HLA-B*07:02
-- HLA-B*41:01
-- HLA-C*07:02
-- HLA-C*17:01
-immuno.clinical_mhc_classII_alleles:
-- DQA1*01:02
-- DQB1*04:02
-- DQB1*06:02
-- DRB1*04:04
-- DRB1*15:01
+# ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
+# Source of HLA types for this sample: Histogenetics typing
+# Resolve any ambiguous alleles (https://hml.nmdp.org/MacUI/) -> Decode MAC option.
 
+#immuno.clinical_mhc_classI_alleles:
+#- HLA-A*02:01
+#- HLA-A*26:01
+#- HLA-B*15:01
+#- HLA-B*40:02
+#- HLA-C*03:03
+#- HLA-C*03:04
+#immuno.clinical_mhc_classII_alleles:
+#- DRB1*01:01
+#- DRB1*15:01
+#- DRB5*01:01
+#- DQB1*05:01
+#- DQB1*06:02
+#- DQA1*01:01
+#- DQA1*01:02
+#- DPB1*04:01
+#- DPB1*04:02
+#- DPA1*01:03
+
+# -------------- Intervals to use during GATK germline variant calling -----------------
 immuno.gatk_haplotypecaller_intervals:
 - - chr1
 - - chr2
@@ -266,7 +283,7 @@ immuno.tumor_dna_total_dna: "Not provided"
 immuno.rna_sequencing_platform: "Illumina"
 immuno.rna_sequencing_instrument: "NovaSeq 6000"
 immuno.rna_sequencing_kit: "RNA Directional Library Prep Kit"
-immuno.rna_sequencing_type: "Riboreduced total RNA Sequencing"
+immuno.rna_sequencing_type: "Riboreduction followed by cDNA capture sequencing"
 immuno.rna_single_or_paired_end: "Paired end"
 immuno.rna_spike_in_error_rate: "Not provided"
 immuno.rna_total_rna: "Not provided"
