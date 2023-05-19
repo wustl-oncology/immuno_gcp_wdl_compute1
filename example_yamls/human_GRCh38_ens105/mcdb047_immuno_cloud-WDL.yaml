@@ -1,29 +1,28 @@
----
 #Pull key information from metadata YAML files
 #grep -P "PU|index_sequence|full_name" */*.yaml
 
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb047/Raw_Sequencing_Data/BG003160/Tumor_Exome/BG003160_WES-tumor_1.fastq.gz"
-    fastq2: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb047/Raw_Sequencing_Data/BG003160/Tumor_Exome/BG003160_WES-tumor_2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-05-08/Tumor_Exome/BG003160_WES-tumor_1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-05-08/Tumor_Exome/BG003160_WES-tumor_2.fastq.gz"
   readgroup: "@RG\tID:1\tPU:HJ3YVDMXY\tSM:mcdb047-tumor-exome\tLB:mcdb047-tumor-exome-lib1\tPL:Illumina\tCN:BostonGene"
 immuno.tumor_sample_name: mcdb047-tumor-exome
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb047/Raw_Sequencing_Data/BG003160/Other_Raw_Data/normal-exome/BG003160_WES-normal_1.fastq.gz"
-    fastq2: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb047/Raw_Sequencing_Data/BG003160/Other_Raw_Data/normal-exome/BG003160_WES-normal_2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-05-08/Other_Raw_Data/normal-exome/BG003160_WES-normal_1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-05-08/Other_Raw_Data/normal-exome/BG003160_WES-normal_2.fastq.gz"
   readgroup: "@RG\tID:2\tPU:HJ3YVDMXY\tSM:mcdb047-normal-exome\tLB:mcdb047-normal-exome-lib1\tPL:Illumina\tCN:BostonGene"
 immuno.normal_sample_name: mcdb047-normal-exome
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
-  - sequence:
-      fastq1: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb047/Raw_Sequencing_Data/BG003160/RNA/BG003160_RNASeq-tumor_1.fastq.gz"
-      fastq2: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb047/Raw_Sequencing_Data/BG003160/RNA/BG003160_RNASeq-tumor_2.fastq.gz"
-    readgroup: "ID:3\tPU:HJ3YVDMXY\tSM:mcdb047-tumor-rna\tLB:mcdb047-tumor-rna-lib1\tPL:Illumina\tCN:BostonGene"
+- sequence:
+    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-05-08/RNA/BG003160_RNASeq-tumor_1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-05-08/RNA/BG003160_RNASeq-tumor_2.fastq.gz"
+  readgroup: "ID:3\tPU:HJ3YVDMXY\tSM:mcdb047-tumor-rna\tLB:mcdb047-tumor-rna-lib1\tPL:Illumina\tCN:BostonGene"
 immuno.sample_name: mcdb047-tumor-rna
 immuno.strand: first
 
@@ -210,7 +209,7 @@ immuno.pvacfuse_keep_tmp_files: true
 #pvacseq v4 modifications
 immuno.run_reference_proteome_similarity: true
 immuno.peptide_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.pep.all.fa.gz"
-immuno.aggregate_inclusion_binding_threshold : 1500
+immuno.aggregate_inclusion_binding_threshold: 1500
 immuno.allele_specific_anchors: true
 immuno.problematic_amino_acids:
 - C
