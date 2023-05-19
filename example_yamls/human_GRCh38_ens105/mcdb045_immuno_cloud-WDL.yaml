@@ -24,7 +24,7 @@ immuno.rna_sequence:
     fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-05-08/RNA/BG002997_RNASeq-tumor_2.fastq.gz"
   readgroup: "ID:3\tPU:HMTLHDRX2\tSM:mcdb045-tumor-rna\tLB:mcdb045-tumor-rna-lib1\tPL:Illumina\tCN:BostonGene"
 immuno.sample_name: mcdb045-tumor-rna
-immuno.strand: unstranded
+immuno.strand: first
 
 # ------------- CLE validated variants for intersection/filtering --------------------
 #Not applicable to this case since sequencing was done outside WASHU CLE lab and we did not receive a VCF from Tempus
