@@ -1,35 +1,34 @@
----
 #Pull key information from metadata YAML files
 #grep -P "PU|index_sequence|full_name" */*.yaml
 
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-11/instrument_data/csf_184720414/AGAATGGAGG-TAAGAACGCG_S4_L002_R1_001.fastq.gz"
-    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-11/instrument_data/csf_184720414/AGAATGGAGG-TAAGAACGCG_S4_L002_R2_001.fastq.gz"
+    fastq1: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-05-17/instrument_data/csf_184720414/AGAATGGAGG-TAAGAACGCG_S4_L002_R1_001.fastq.gz"
+    fastq2: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-05-17/instrument_data/csf_184720414/AGAATGGAGG-TAAGAACGCG_S4_L002_R2_001.fastq.gz"
   readgroup: "@RG\tID:csf_184720414\tPU:HLYJCDSX5.2\tSM:TWJF-5120-11-5120-11_tumor_lysate\tLB:TWJF-5120-11-5120-11_tumor_lysate-lib1\tPL:Illumina\tCN:WASHU"
 immuno.tumor_sample_name: "TWJF-5120-11-5120-11_tumor_lysate"
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-11/instrument_data/csf_184720781/AGTCGTCACG-GACCTTCCGA_S6_L002_R1_001.fastq.gz"
-    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-11/instrument_data/csf_184720781/AGTCGTCACG-GACCTTCCGA_S6_L002_R2_001.fastq.gz"
+    fastq1: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-05-17/instrument_data/csf_184720781/AGTCGTCACG-GACCTTCCGA_S6_L002_R1_001.fastq.gz"
+    fastq2: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-05-17/instrument_data/csf_184720781/AGTCGTCACG-GACCTTCCGA_S6_L002_R2_001.fastq.gz"
   readgroup: "@RG\tID:csf_184720781\tPU:HLYJCDSX5.2\tSM:TWJF-5120-11-1812725a_2_PBMC\tLB:TWJF-5120-11-1812725a_2_PBMC-lib1\tPL:Illumina\tCN:WASHU"
 immuno.normal_sample_name: "TWJF-5120-11-1812725a_2_PBMC"
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
-  - sequence:
-      fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-11/instrument_data/csf_184720190/GGCATTCTAT-ACCTAGCTTG_S3_L003_R1_001.fastq.gz"
-      fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-11/instrument_data/csf_184720190/GGCATTCTAT-ACCTAGCTTG_S3_L003_R2_001.fastq.gz"
-    readgroup: "ID:csf_184720190\tPU:HLYJCDSX5.3\tSM:H_MT-5120-11-TumorRNA-1-137668\tLB:H_MT-5120-11-TumorRNA-1-137668\tPL:Illumina\tCN:WASHU"
+- sequence:
+    fastq1: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-05-17/instrument_data/csf_184720190/GGCATTCTAT-ACCTAGCTTG_S3_L003_R1_001.fastq.gz"
+    fastq2: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-05-17/instrument_data/csf_184720190/GGCATTCTAT-ACCTAGCTTG_S3_L003_R2_001.fastq.gz"
+  readgroup: "ID:csf_184720190\tPU:HLYJCDSX5.3\tSM:H_MT-5120-11-TumorRNA-1-137668\tLB:H_MT-5120-11-TumorRNA-1-137668\tPL:Illumina\tCN:WASHU"
 immuno.sample_name: "H_MT-5120-11-TumorRNA-1-137668"
 immuno.strand: first
 
 # ------------- CLE validated variants for intersection/filtering --------------------
-immuno.validated_variants: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-11/cle_results/TWJF-5120-11/annotated_filtered.vcf.gz.commented.gz.commented.gz"
-immuno.validated_variants_tbi: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pancreas_leidos/analysis/TWJF-5120-11/cle_results/TWJF-5120-11/annotated_filtered.vcf.gz.commented.gz.commented.gz.tbi" 
+immuno.validated_variants: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-05-17/cle_results/TWJF-5120-11/annotated_filtered.vcf.gz.commented.gz.commented.gz"
+immuno.validated_variants_tbi: "gs://griffith-lab-test-kartik/input_data/k.singhal/2023-05-17/cle_results/TWJF-5120-11/annotated_filtered.vcf.gz.commented.gz.commented.gz.tbi"
 
 # ------------- Reference genome for DNA-seq alignments ---------------
 immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa"
@@ -210,7 +209,7 @@ immuno.pvacfuse_keep_tmp_files: true
 #pvacseq v4 modifications
 immuno.run_reference_proteome_similarity: true
 immuno.peptide_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.pep.all.fa.gz"
-immuno.aggregate_inclusion_binding_threshold : 1500
+immuno.aggregate_inclusion_binding_threshold: 1500
 immuno.allele_specific_anchors: true
 immuno.problematic_amino_acids:
 - C
