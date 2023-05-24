@@ -25,7 +25,7 @@ immuno.rna_sequence:
       fastq2: "/storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb047/Raw_Sequencing_Data/BG003160/RNA/BG003160_RNASeq-tumor_2.fastq.gz"
     readgroup: "ID:3\tPU:HJ3YVDMXY\tSM:mcdb047-tumor-rna\tLB:mcdb047-tumor-rna-lib1\tPL:Illumina\tCN:BostonGene"
 immuno.sample_name: mcdb047-tumor-rna
-immuno.strand: unstranded
+immuno.strand: first
 
 # ------------- CLE validated variants for intersection/filtering --------------------
 #Not applicable to this case since sequencing was done outside WASHU CLE lab and we did not receive a VCF from Tempus
