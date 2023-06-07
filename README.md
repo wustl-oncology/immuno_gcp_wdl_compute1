@@ -335,7 +335,6 @@ cat costs.csv | sed 's/,/\t/g' > costs.tsv
 
 exit #leave the docker session
 
-#### THE FOLLOWING IS NOT WORKING PROPERLY !!! ####
 cd $WORKING_BASE/final_results/workflow_artifacts/costs/
 cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 13 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_total_condensed.tsv
 cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 9 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_memory_condensed.tsv
