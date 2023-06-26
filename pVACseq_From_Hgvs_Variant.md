@@ -1,10 +1,10 @@
 ### Run pVACseq on a single variant in HGVS format
 
-####Goal figure out how to feed a variant provided by "name" only into pVACseq
+#### Goal figure out how to feed a variant provided by "name" only into pVACseq
 
 e.g. ERBB3 p.S846I
 
-####Step 1. Use ClinGen Allele Registry to resolve it to HGVS
+#### Step 1. Use ClinGen Allele Registry to resolve it to HGVS
 
 This works out to:
 
@@ -13,7 +13,7 @@ NC_000012.12:g.56097861G>T / ENST00000267101.8:c.2537G>T / ENSP00000267101.4:p.S
 
 Create a simple text file: erbb3-variant-hgvs.txt with a single HGVS g. entry: `NC_000012.12:g.56097861G>T`
 
-####Step 2. Use VEP to create an annotated VCF - using the HGVS format as input
+#### Step 2. Use VEP to create an annotated VCF - using the HGVS format as input
 
 docker: "mgibio/vep_helper-cwl:vep_105.0_v1"
 
@@ -44,7 +44,7 @@ Using the docker image above, annotate the variant with Ensembl VEP as follows
 --species homo_sapiens
 ```
 
-####Step 3. Add tumor/normal genotype information to the VCF
+#### Step 3. Add tumor/normal genotype information to the VCF
 
 `isub -m 64 -n 8 --preserve false -i 'griffithlab/vatools:4.1.0'`
 
@@ -56,7 +56,7 @@ vcf-genotype-annotator /storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb022/erbb
 vcf-genotype-annotator /storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb022/erbb3/erbb3-pvacseq/annotated.genotyped.1.vcf JLF-100-016-normal 0/0 -o /storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb022/erbb3/erbb3-pvacseq/annotated.genotyped.2.vcf
 ```
 
-####Step 3. Run pVACseq on the genotyped VCF
+#### Step 4. Run pVACseq on the genotyped VCF
 
 `isub -m 64 -n 8 --preserve false -i 'susannakiwala/pvactools:4.0.0_rc_pvacview_v21'`
 
