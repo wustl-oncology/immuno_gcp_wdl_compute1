@@ -1,10 +1,10 @@
 ### Run pVACseq on a single variant in HGVS format
 
-#### Goal figure out how to feed a variant provided by "name" only into pVACseq
+#### Goal. Ffigure out how to feed a single variant, provided by "name" only, into pVACseq
 
 e.g. ERBB3 p.S846I
 
-#### Step 1. Use ClinGen Allele Registry to resolve it to HGVS
+#### Step 1. Use the [ClinGen Allele Registry](https://reg.clinicalgenome.org/redmine/projects/registry/genboree_registry/landing) to resolve it to HGVS
 
 This works out to:
 
