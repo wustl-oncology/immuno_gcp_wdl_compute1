@@ -368,6 +368,46 @@ cat costs.tsv | grep -P -i "preempted|startTime" | cut -f 1,3,8,13 | column -t
 ```bash
 gcloud compute instances delete $GCS_INSTANCE_NAME
 ```
-
 Note that this does NOT empty your bucket. Once you are satisfied that your results are acceptable and you will no longer need to access the cromwell-executions files in your bucket you can clean it up to prevent billing for cloud bucket storage.
+
+
+## Creating Case Final Report
+
+### Before Immunogenomics Tumor Board Review
+
+A written case final report will be created which includes a Genomics Review Report document. This document includes a section of a basic data QC review and a table summarizing values that pass/fail the FDA quality thresholds.
+
+### Basic data QC
+
+Pull the basic data qc from various files. This script will output a file final_results/qc_file.txt and also print the summary to to screen.
+
+```
+cd $WORKING_BASE
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(evelyns2000/neoang_scripts:latest)" /bin/bash
+python3 /opt/scripts/get_neoantigen_qc.py -WB $WORKING_BASE -f final_results --yaml $WORKING_BASE/yamls/$CLOUD_YAML
+```
+
+### FDA Quality Thresholds
+
+This script will output a file final_results/fda_quality_thresholds_report.tsv and also print the summary to to screen.
+
+```
+python3 /opt/scripts/get_FDA_thresholds.py -WB  $WORKING_BASE -f final_results
+exit
+```
+
+### After Immunogenomics Tumor Board Review
+
+To generate files needed for manual review, save the pVAC results from the Immunogenomics Tumor Board Review meeting as $SAMPLE.revd.Annotated.Neoantigen_Candidates.xlsx (Note: if the file is not saved under this exact name the below command will need to be modified).
+
+```
+cd $WORKING_BASE
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(evelyns2000/neoang_scripts:latest)" /bin/bash
+
+export SAMPLE=SAMPLE_NAME
+
+python3 /opt/scripts/setup_review.py -a ../itb-review-files/$SAMPLE.revd.Annotated.Neoantigen_Candidates.xlsx -c ../generate_protein_fasta/candidates/$SAMPLE.annotated_filtered.vcf-pass-51mer.fa.manufacturability.tsv -samp $SAMPLE  -classI $WORKING_BASE/final_results/pVACseq/mhc_i/$SAMPLE-tumor-exome.all_epitopes.aggregated.tsv -classII $WORKING_BASE/final_results/pVACseq/mhc_ii/$SAMPLE-tumor-exome.all_epitopes.aggregated.tsv -o colored_peptides51mer.html
+```
+Open colored_peptides51mer.html and copy the table into an excel spreadsheet. The formatting should remain. Utilizing the Annotated.Neoantigen_Candidates and colored Peptides_51-mer for manual review.
+
 
