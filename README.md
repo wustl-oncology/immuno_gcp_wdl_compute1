@@ -407,9 +407,7 @@ cd ../generate_protein_fasta
 mkdir candidates
 mkdir all
 
-# Set sample ID and set it as SAMPLE ID
-# Found in the #CHROM header of VCF
-zcat $WORKING_BASE/final_results/annotated.expression.vcf.gz | less
+zcat $WORKING_BASE/final_results/annotated.expression.vcf.gz | less # Get sample ID Found in the #CHROM header of VCF
 export SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
 export ITB_REVIEW_FILE=10146-0029.Annotated.Neoantigen_Candidates.Revd.tsv
 
@@ -433,6 +431,8 @@ pvacseq generate_protein_fasta \
   $WORKING_BASE/final_results/annotated.expression.vcf.gz \
   25  \
   $WORKING_BASE/../generate_protein_fasta/all/annotated_filtered.vcf-pass-51mer.fa
+
+exit 
 ```
 
 To generate files needed for manual review, save the pVAC results from the Immunogenomics Tumor Board Review meeting as $SAMPLE.revd.Annotated.Neoantigen_Candidates.xlsx (Note: if the file is not saved under this exact name the below command will need to be modified).
@@ -443,7 +443,7 @@ bsub -Is -q oncology-interactive -G $GROUP -a "docker(evelyns2000/neoang_scripts
 
 export SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
 
-python3 /opt/scripts/setup_review.py -a ../itb-review-files/$SAMPLE.Annotated.Neoantigen_Candidates.Revd.xlsx -c ../generate_protein_fasta/candidates/annotated_filtered.vcf-pass-51mer.fa.manufacturability.tsv -samp $SAMPLE_ID  -classI $WORKING_BASE/final_results/pVACseq/mhc_i/${SAMPLE_ID}.all_epitopes.aggregated.tsv -classII $WORKING_BASE/final_results/pVACseq/mhc_ii/${SAMPLE_ID}.all_epitopes.aggregated.tsv -o colored_peptides51mer.html
+python3 /opt/scripts/setup_review.py -a ../itb-review-files/*.xlsx -c ../generate_protein_fasta/candidates/annotated_filtered.vcf-pass-51mer.fa.manufacturability.tsv -samp $SAMPLE_ID  -classI $WORKING_BASE/final_results/pVACseq/mhc_i/${SAMPLE_ID}.all_epitopes.aggregated.tsv -classII $WORKING_BASE/final_results/pVACseq/mhc_ii/${SAMPLE_ID}.all_epitopes.aggregated.tsv -o colored_peptides51mer.html
 ```
 Open colored_peptides51mer.html and copy the table into an excel spreadsheet. The formatting should remain. Utilizing the Annotated.Neoantigen_Candidates and colored Peptides_51-mer for manual review.
 
