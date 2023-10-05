@@ -383,7 +383,7 @@ Pull the basic data qc from various files. This script will output a file final_
 
 ```
 cd $WORKING_BASE
-bsub -Is -q oncology-interactive -G $GROUP -a "docker(evelyns2000/neoang_scripts:latest)" /bin/bash
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts)" /bin/bash
 python3 /opt/scripts/get_neoantigen_qc.py -WB $WORKING_BASE -f final_results --yaml $WORKING_BASE/yamls/$CLOUD_YAML
 ```
 
@@ -439,7 +439,7 @@ To generate files needed for manual review, save the pVAC results from the Immun
 
 ```
 cd $WORKING_BASE
-bsub -Is -q oncology-interactive -G $GROUP -a "docker(evelyns2000/neoang_scripts:latest)" /bin/bash
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts)" /bin/bash
 
 export SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
 
