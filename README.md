@@ -398,6 +398,42 @@ exit
 
 ### After Immunogenomics Tumor Board Review
 
+#### Generate Protein Fasta
+
+```bash
+cd $WORKING_BASE
+mkdir ../generate_protein_fasta
+cd ../generate_protein_fasta
+mkdir candidates
+mkdir all
+
+# Check the sample ID in the #CHROM header of VCF
+zcat $WORKING_BASE/final_results/annotated.expression.vcf.gz | less
+export SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
+export ITB_REVIEW_FILE=10146-0029.Annotated.Neoantigen_Candidates.Revd.tsv
+
+
+bsub -Is -q general-interactive -G $GROUP -a "docker(griffithlab/pvactools:4.0.1)" /bin/bash
+
+pvacseq generate_protein_fasta \
+  -p $WORKING_BASE/final_results/pVACseq/phase_vcf/phased.vcf.gz \
+  --pass-only --mutant-only -d 150 \
+  -s $SAMPLE_ID \
+  --aggregate-report-evaluation {Accept,Review} \
+  --input-tsv ../itb-review-files/$ITB_REVIEW_FILE  \
+  $WORKING_BASE/final_results/annotated.expression.vcf.gz \
+  25 \
+  ../$WORKING_BASE/generate_protein_fasta/candidates/annotated_filtered.vcf-pass-51mer.fa
+
+pvacseq generate_protein_fasta \
+  -p $WORKING_BASE/final_results/pVACseq/phase_vcf/phased.vcf.gz \
+  --pass-only --mutant-only -d 150 \
+  -s $SAMPLE_ID  \
+  $WORKING_BASE/final_results/annotated.expression.vcf.gz \
+  25  \
+  ../$WORKING_BASE/generate_protein_fasta/all/annotated_filtered.vcf-pass-51mer.fa
+```
+
 To generate files needed for manual review, save the pVAC results from the Immunogenomics Tumor Board Review meeting as $SAMPLE.revd.Annotated.Neoantigen_Candidates.xlsx (Note: if the file is not saved under this exact name the below command will need to be modified).
 
 ```
