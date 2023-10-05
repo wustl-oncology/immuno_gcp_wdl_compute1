@@ -382,7 +382,9 @@ A written case final report will be created which includes a Genomics Review Rep
 Pull the basic data qc from various files. This script will output a file final_results/qc_file.txt and also print the summary to to screen.
 
 ```
-cd $WORKING_BASE
+mkdir $WORKING_BASE/../manual_review
+cd $WORKING_BASE/../manual_review
+
 bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts)" /bin/bash
 python3 /opt/scripts/get_neoantigen_qc.py -WB $WORKING_BASE -f final_results --yaml $WORKING_BASE/yamls/$CLOUD_YAML
 ```
@@ -438,12 +440,12 @@ exit
 To generate files needed for manual review, save the pVAC results from the Immunogenomics Tumor Board Review meeting as $SAMPLE.revd.Annotated.Neoantigen_Candidates.xlsx (Note: if the file is not saved under this exact name the below command will need to be modified).
 
 ```
-cd $WORKING_BASE
+cd $WORKING_BASE/../manual_review
 bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts)" /bin/bash
 
-export SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
+export SAMPLE="TWJF-10146-0029"
 
-python3 /opt/scripts/setup_review.py -a ../itb-review-files/*.xlsx -c ../generate_protein_fasta/candidates/annotated_filtered.vcf-pass-51mer.fa.manufacturability.tsv -samp $SAMPLE_ID  -classI $WORKING_BASE/final_results/pVACseq/mhc_i/${SAMPLE_ID}.all_epitopes.aggregated.tsv -classII $WORKING_BASE/final_results/pVACseq/mhc_ii/${SAMPLE_ID}.all_epitopes.aggregated.tsv -o colored_peptides51mer.html
+python3 /opt/scripts/setup_review.py -WB $WORKING_BASE -a $WORKING_BASE/ -a ../itb-review-files/*.xlsx -c $WORKING_BASE/../generate_protein_fasta/candidates/annotated_filtered.vcf-pass-51mer.fa.manufacturability.tsv -samp $SAMPLE  -classI $WORKING_BASE/final_results/pVACseq/mhc_i/*.all_epitopes.aggregated.tsv -classII $WORKING_BASE/final_results/pVACseq/mhc_ii/*.all_epitopes.aggregated.tsv 
 ```
 Open colored_peptides51mer.html and copy the table into an excel spreadsheet. The formatting should remain. Utilizing the Annotated.Neoantigen_Candidates and colored Peptides_51-mer for manual review.
 
