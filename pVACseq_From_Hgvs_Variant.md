@@ -1,8 +1,10 @@
 ### Run pVACseq on a single variant in HGVS format
 
-#### Goal. Ffigure out how to feed a single variant, provided by "name" only, into pVACseq
+#### Goal. Feed a single variant, provided by "name" only, into pVACseq
 
 e.g. ERBB3 p.S846I
+
+In this version the pVACseq analysis is focused on the variant only, to cover the use case where we may not even have access to tumor normal exome and tumor RNAseq data (and thus have no BAMs, no phased VCF, etc.).
 
 #### Step 1. Use the [ClinGen Allele Registry](https://reg.clinicalgenome.org/redmine/projects/registry/genboree_registry/landing) to resolve it to HGVS
 
@@ -46,7 +48,7 @@ Using the docker image above, annotate the variant with Ensembl VEP as follows
 
 #### Step 3. Add tumor/normal genotype information to the VCF
 
-`isub -m 64 -n 8 --preserve false -i 'griffithlab/vatools:4.1.0'`
+`isub -m 64 -n 8 --preserve false -i 'griffithlab/vatools:latest'`
 
 Using the docker image above, use VA tools to add genotype columns to the VCF
 
@@ -58,7 +60,7 @@ vcf-genotype-annotator /storage1/fs1/mgriffit/Active/JLF_MCDB/cases/mcdb022/erbb
 
 #### Step 4. Run pVACseq on the genotyped VCF
 
-`isub -m 64 -n 8 --preserve false -i 'susannakiwala/pvactools:4.0.0_rc_pvacview_v21'`
+`isub -m 64 -n 8 --preserve false -i 'susannakiwala/pvactools:latest'`
 
 Using the docker image above, use pVACseq to perform neoantigen analysis on the VCF
 
