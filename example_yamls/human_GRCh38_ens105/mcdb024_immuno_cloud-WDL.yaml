@@ -2,24 +2,24 @@
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/DNA/TL-22-NWKERP4S_T_DSQ1_1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/DNA/TL-22-NWKERP4S_T_DSQ1_2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-11-09/mcdb024/DNA/TL-22-NWKERP4S_T_DSQ1_1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-11-09/mcdb024/DNA/TL-22-NWKERP4S_T_DSQ1_2.fastq.gz"
   readgroup: "@RG\tID:1\tPU:HC7JNDMXY\tSM:mcdb024_TUMOR_DNA\tLB:mcdb024_TUMOR_DNA_LIB1\tPL:Illumina\tCN:TEMPUS"
 immuno.tumor_sample_name: mcdb024_TUMOR_DNA
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/DNA/TL-22-NWKERP4S_N_DSQ1_1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/DNA/TL-22-NWKERP4S_N_DSQ1_2.fastq.gz"
+    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-11-09/mcdb024/DNA/TL-22-NWKERP4S_N_DSQ1_1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-11-09/mcdb024/DNA/TL-22-NWKERP4S_N_DSQ1_2.fastq.gz"
   readgroup: "@RG\tID:2\tPU:HC7JMDMXY\tSM:mcdb024_NORMAL_DNA\tLB:mcdb024_NORMAL_DNA_LIB1\tPL:Illumina\tCN:TEMPUS"
 immuno.normal_sample_name: mcdb024_NORMAL_DNA
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
 - sequence:
-    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/RNA/TL-22-NWKERP4S_T_RSQ1_1.fastq.gz"
-    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2022-06-16/RNA/TL-22-NWKERP4S_T_RSQ1_3.fastq.gz"
+    fastq1: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-11-09/mcdb024/RNA/TL-22-NWKERP4S_T_RSQ1_1.fastq.gz"
+    fastq2: "gs://griffith-lab-test-malachi/input_data/mgriffit/2023-11-09/mcdb024/RNA/TL-22-NWKERP4S_T_RSQ1_3.fastq.gz"
   readgroup: "ID:3\tPU:HCCMGDMXY\tSM:mcdb024_TUMOR_RNA\tLB:mcdb024_TUMOR_RNA_LIB1\tPL:Illumina\tCN:TEMPUS"
 immuno.sample_name: mcdb024_TUMOR_RNA
 immuno.strand: second
