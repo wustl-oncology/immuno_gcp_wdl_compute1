@@ -440,7 +440,7 @@ To generate files needed for manual review, save the pVAC results from the Immun
 
 ```
 cd $WORKING_BASE/../manual_review
-bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts)" /bin/bash
+bsub -Is -q general-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts)" /bin/bash
 
 export SAMPLE="TWJF-10146-0029"
 
