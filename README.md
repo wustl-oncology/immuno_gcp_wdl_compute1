@@ -411,7 +411,6 @@ mkdir all
 
 zcat $WORKING_BASE/final_results/annotated.expression.vcf.gz | less # Get sample ID Found in the #CHROM header of VCF
 export SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
-export ITB_REVIEW_FILE=10146-0029.Annotated.Neoantigen_Candidates.Revd.tsv
 
 
 bsub -Is -q general-interactive -G $GROUP -a "docker(griffithlab/pvactools:4.0.1)" /bin/bash
@@ -421,7 +420,7 @@ pvacseq generate_protein_fasta \
   --pass-only --mutant-only -d 150 \
   -s $SAMPLE_ID \
   --aggregate-report-evaluation {Accept,Review} \
-  --input-tsv ../itb-review-files/$ITB_REVIEW_FILE  \
+  --input-tsv ../itb-review-files/*.tsv  \
   $WORKING_BASE/final_results/annotated.expression.vcf.gz \
   25 \
   $WORKING_BASE/../generate_protein_fasta/candidates/annotated_filtered.vcf-pass-51mer.fa
