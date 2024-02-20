@@ -133,6 +133,9 @@ cp $WORKING_BASE/git/immuno_gcp_wdl_compute1/example_yamls/human_GRCh38_ens105/$
 
 Note that this YAML file has been set up to work with the HCC1395 raw data files downloaded above. If you are modifying this tutorial to work with your own data, you will need to modify the beginning of the YAML that relates to input sequence files.  For both DNA and RNA files, both FASTQ and Unaligned BAM files are supported as input.  Similarly, you have have your data in one file (or one file pair) or you may have multiple data files that will be merged together. Depending on how your input data is organized the YAML entries will look slightly different.
 
+A template YAML can be found here: [template_immuno_local-WDL.yaml](https://github.com/wustl-oncology/immuno_gcp_wdl_compute1/blob/main/template_yamls/template_immuno_local-WDL.yaml)
+
+
 ### Stage input files to cloud bucket
 
 Start an interactive docker session capable of running the "cloudize" scripts
