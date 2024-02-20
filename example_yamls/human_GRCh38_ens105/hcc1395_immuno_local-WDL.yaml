@@ -1,33 +1,39 @@
 ---
+#Pull key information from metadata YAML files
+#grep -P "PU|index_sequence|full_name" */*.yaml
 
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/Exome_Tumor/Exome_Tumor_R1.fastq.gz"
-    fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/Exome_Tumor/Exome_Tumor_R2.fastq.gz"
+    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pipeline_tests/hcc1395/rawdata/Exome_Tumor/Exome_Tumor_R1.fastq.gz"
+    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pipeline_tests/hcc1395/rawdata/Exome_Tumor/Exome_Tumor_R2.fastq.gz"
   readgroup: "@RG\tID:1\tPU:C1TD1ACXX\tSM:HCC1395_TUMOR_DNA\tLB:HCC1395_TUMOR_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
-immuno.tumor_sample_name: HCC1395_TUMOR_DNA
+immuno.tumor_sample_name: "HCC1395_TUMOR_DNA"
 
 # --------------- Normal DNA input data files and meta-data --------------
 immuno.normal_sequence:
 - sequence:
-    fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/Exome_Norm/Exome_Norm_R1.fastq.gz"
-    fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/Exome_Norm/Exome_Norm_R2.fastq.gz"
+    fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pipeline_tests/hcc1395/rawdata/Exome_Norm/Exome_Norm_R1.fastq.gz"
+    fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pipeline_tests/hcc1395/rawdata/Exome_Norm/Exome_Norm_R2.fastq.gz"
   readgroup: "@RG\tID:2\tPU:C1TD1ACXX\tSM:HCC1395_NORMAL_DNA\tLB:HCC1395_NORMAL_DNA_LIB1\tPL:Illumina\tCN:WUGSC"
-immuno.normal_sample_name: HCC1395_NORMAL_DNA
+immuno.normal_sample_name: "HCC1395_NORMAL_DNA"
 
 # ------------- Tumor RNA sample input data files and meta-data -----------------
 immuno.rna_sequence:
   - sequence:
-      fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
-      fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz"
+      fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pipeline_tests/hcc1395/rawdata/RNAseq_Tumor/RNAseq_Tumor_Lane1_R1.fastq.gz"
+      fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pipeline_tests/hcc1395/rawdata/RNAseq_Tumor/RNAseq_Tumor_Lane1_R2.fastq.gz"
     readgroup: "ID:3\tPU:H3MYFBBXX.4\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
   - sequence:
-      fastq1: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
-      fastq2: "/storage1/fs1/mgriffit/Active/griffithlab/pipeline_test/raw_data/hcc1395/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
+      fastq1: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pipeline_tests/hcc1395/rawdata/RNAseq_Tumor/RNAseq_Tumor_Lane2_R1.fastq.gz"
+      fastq2: "/storage1/fs1/gillandersw/Active/Project_0001_Clinical_Trials/pipeline_tests/hcc1395/rawdata/RNAseq_Tumor/RNAseq_Tumor_Lane2_R2.fastq.gz"
     readgroup: "ID:4\tPU:H3MYFBBXX.5\tSM:HCC1395_TUMOR_RNA\tLB:HCC1395_TUMOR_RNA_LIB1\tPL:Illumina\tCN:WUGSC"
-immuno.sample_name: HCC1395_TUMOR_RNA
-immuno.strand: first
+immuno.sample_name: "HCC1395_TUMOR_RNA"
+immuno.strand: "first"
+
+# ------------- CLE validated variants for intersection/filtering --------------------
+#immuno.validated_variants: ""
+#immuno.validated_variants_tbi: "" 
 
 # ------------- Reference genome for DNA-seq alignments ---------------
 immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa"
@@ -51,6 +57,7 @@ immuno.fusioninspector_mode: "validate"
 immuno.cdna_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.cdna.all.fa.gz"
 immuno.agfusion_database: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/agfusion_1.3_database/agfusion.homo_sapiens.105.db"
 immuno.agfusion_annotate_noncanonical: true
+immuno.min_ffpm_level: 0.025
 
 # ------------- RNA transcript annotations ------------
 immuno.ribosomal_intervals: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.105.ribo_intervals"
@@ -156,12 +163,14 @@ immuno.vep_to_table_fields:
 - clinvar_PHENOTYPELIST
 - clinvar_NUMSUBMIT
 - clinvar_GUIDELINES
+#note that if you are comparing to a set of known variants (e.g. from a CLIA/CAP lab, add "VALIDATED" to the following list
 immuno.variants_to_table_fields:
 - CHROM
 - POS
 - REF
 - ALT
 - set
+- VALIDATED
 immuno.variants_to_table_genotype_fields:
 - GT
 - AD
@@ -170,18 +179,7 @@ immuno.variants_to_table_genotype_fields:
 
 # --------------------- pVACtools settings ----------------------
 immuno.prediction_algorithms:
-- NetMHC
-- NetMHCcons
-- PickPocket
-- SMM
-- SMMPMBEC
-- MHCflurry
-- MHCnuggetsI
-- NetMHCpan
-- NetMHCIIpan
-- SMMalign
-- NNalign
-- MHCnuggetsII
+- all
 immuno.epitope_lengths_class_i:
 - 8
 - 9
@@ -199,46 +197,45 @@ immuno.binding_threshold: 500
 immuno.minimum_fold_change: 0
 immuno.top_score_metric: median
 immuno.downstream_sequence_length: 100
-immuno.net_chop_method: cterm
-immuno.netmhc_stab: true
+#immuno.net_chop_method: cterm
+immuno.netmhc_stab: false
 immuno.pvacseq_threads: 8
 immuno.maximum_transcript_support_level: 1
 immuno.normal_vaf: 0.01
-immuno.tdna_vaf: 0.2
-immuno.trna_vaf: 0.2
-immuno.normal_cov: 50
-immuno.tdna_cov: 50
-
+immuno.tdna_vaf: 0.1
+immuno.trna_vaf: 0.1
+immuno.normal_cov: 30
+immuno.tdna_cov: 30
 immuno.hla_source_mode: consensus
-immuno.blastp_db: refseq_select_prot
 immuno.iedb_retries: 3
-pvacfuse_keep_tmp_files: true
+immuno.pvacfuse_keep_tmp_files: true
+#immuno.blastp_db: refseq_select_prot
+
+#pvacseq v4 modifications
+immuno.run_reference_proteome_similarity: true
+immuno.peptide_fasta: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/rna_seq_annotation/Homo_sapiens.GRCh38.pep.all.fa.gz"
+immuno.aggregate_inclusion_binding_threshold : 1500
+immuno.allele_specific_anchors: true
+immuno.problematic_amino_acids:
+- C
 
 # ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
-# Source of HLA types for hcc1395: ...
+# Source of HLA types for this sample: Histogenetics typing
+# Resolve any ambiguous alleles (https://hml.nmdp.org/MacUI/) -> Decode MAC option.
+# e.g. for this case 
+# DRB4*01:DJJXS -> DRB4*01:03/DRB4*01:124/DRB4*01:134
+# DQB1*02:ECPTR -> DQB1*02:02/DQB1*02:97/DQB1*02:110/DQB1*02:131/DQB1*02:156/DQB1*02:165/DQB1*02:175/DQB1*02:187/DQB1*02:199
+
 #immuno.clinical_mhc_classI_alleles:
-#- HLA-A*01:01
-#- HLA-A*03:01
-#- HLA-B*07:02
-#- HLA-B*08:01
-#- HLA-C*07:01
-#- HLA-C*07:02
+#- HLA-A*XX:XX
+#- HLA-A*YY:YY
+#- HLA-B*40:01
+#- HLA-B*51:01
+#- HLA-C*03:04
+#- HLA-C*15:02
 #immuno.clinical_mhc_classII_alleles:
-#- DRB1*03:01
-#- DRB1*15:01
-#- DRB3*01:01
-#- DRB5*01:01
-#- DQB1*02:01
-#- DQB1*06:02
-#- DQA1*01:02
-#- DQA1*05:01
-#- DPB1*04:01
-#- DPA1*01:03
-#- DPA1*01:03-DPB1*04:01
-#- DQA1*01:02-DQB1*02:01
-#- DQA1*01:02-DQB1*06:02
-#- DQA1*05:01-DQB1*02:01
-#- DQA1*05:01-DQB1*06:02
+#- DRB1*XX:YY
+#- DQA1*XX:YY
 
 # -------------- Intervals to use during GATK germline variant calling -----------------
 immuno.gatk_haplotypecaller_intervals:
@@ -270,4 +267,26 @@ immuno.gatk_haplotypecaller_intervals:
 # ------------- miscellaneous settings ------------------
 immuno.summary_intervals: []
 immuno.gvcf_gq_bands: []
+
+# ------------- fda qc report values --------------------
+immuno.reference_genome_name: "Custom GRCh38 https://zenodo.org/record/4684553"
+immuno.dna_sequencing_platform: "Illumina"
+immuno.dna_sequencing_instrument: "NovaSeq 6000"
+immuno.dna_sequencing_kit: "NovaSeq 6000 S4 Reagent Kit v1.5"
+immuno.dna_sequencing_type: "Whole Exome Sequencing"
+immuno.dna_single_or_paired_end: "Paired End"
+immuno.normal_dna_spike_in_error_rate: "Less than 0.50% for Read 1 and less than 0.75% for Read 2"
+immuno.tumor_dna_spike_in_error_rate: "Less than 0.50% for Read 1 and less than 0.75% for Read 2"
+immuno.normal_dna_total_dna: "Not provided"
+immuno.tumor_dna_total_dna: "Not provided"
+immuno.rna_sequencing_platform: "Illumina"
+immuno.rna_sequencing_instrument: "NovaSeq 6000"
+immuno.rna_sequencing_kit: "RNA Directional Library Prep Kit"
+immuno.rna_sequencing_type: "Riboreduction followed by cDNA capture sequencing"
+immuno.rna_single_or_paired_end: "Paired end"
+immuno.rna_spike_in_error_rate: "Not provided"
+immuno.rna_total_rna: "Not provided"
+immuno.rna_rin_score: "Not provided"
+immuno.rna_freq_normalization_method: "TPM"
+immuno.rna_annotation_file: "http://ftp.ensembl.org/pub/release-105/gtf/homo_sapiens/Homo_sapiens.GRCh38.105.gtf.gz"
 
