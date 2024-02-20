@@ -73,9 +73,9 @@ The following repositories contain: this tutorial (immuno_gcp_wdl), the WDL work
 ```bash
 mkdir git
 cd git
-git clone git@github.com:wustl-oncology/immuno_gcp_wdl_compute1.git # (v1.0.1)
-git clone git@github.com:wustl-oncology/analysis-wdls.git # (v1.0.0)
-git clone git@github.com:wustl-oncology/cloud-workflows.git # (v1.3.0)
+git clone git@github.com:wustl-oncology/immuno_gcp_wdl_compute1.git 
+git clone git@github.com:wustl-oncology/analysis-wdls.git 
+git clone git@github.com:wustl-oncology/cloud-workflows.git
 ```
 
 ### Login to GCP and set the desired project
