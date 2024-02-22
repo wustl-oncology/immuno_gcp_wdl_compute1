@@ -1,6 +1,9 @@
 ---
-#Pull key information from metadata YAML files
-#grep -P "PU|index_sequence|full_name" */*.yaml
+# Data file input information:
+# PU field is taken from the fastq sequence identifier. For example: @LH00180:75:22H2JVLT3:5:1104:2997:1000 1:N:0:AGCTCTACAA+GAATGAAGAG
+# Where PU is flow cell ID.lane. For example: PU:22H2JVLT3.5
+# SM field and the sample_name MUST match. For example: SM:5120_25_Tumor_Lysate AND immuno.tumor_sample_name: "5120_25_Tumor_Lysate"
+# LB field is conventially the SM field with -lib1 appended. For example: LM:5120_25_Tumor_Lysate-lib1
 
 # --------------- Tumor DNA input data files and meta-data --------------
 immuno.tumor_sequence:
@@ -26,10 +29,29 @@ immuno.rna_sequence:
     readgroup: "ID:tumor_rna\tPU:\tSM:\tLB:\tPL:Illumina\tCN:WASHU"
 immuno.sample_name: ""
 immuno.strand: ""
+# Information about strandedness: https://rnabio.org/module-09-appendix/0009/12/01/StrandSettings/
 
 # ------------- CLE validated variants for intersection/filtering --------------------
 immuno.validated_variants: ""
 immuno.validated_variants_tbi: "" 
+
+# ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
+# Source of HLA types for this sample: Histogenetics typing
+# Resolve any ambiguous alleles (https://hml.nmdp.org/MacUI/) -> Decode MAC option.
+# e.g. for this case 
+# DRB4*01:DJJXS -> DRB4*01:03/DRB4*01:124/DRB4*01:134
+# DQB1*02:ECPTR -> DQB1*02:02/DQB1*02:97/DQB1*02:110/DQB1*02:131/DQB1*02:156/DQB1*02:165/DQB1*02:175/DQB1*02:187/DQB1*02:199
+
+immuno.clinical_mhc_classI_alleles:
+#- HLA-A*XX:XX
+#- HLA-A*YY:YY
+#- HLA-B*40:01
+#- HLA-B*51:01
+#- HLA-C*03:04
+#- HLA-C*15:02
+immuno.clinical_mhc_classII_alleles:
+#- DRB1*XX:YY
+#- DQA1*XX:YY
 
 # ------------- Reference genome for DNA-seq alignments ---------------
 immuno.reference: "gs://griffith-lab-workflow-inputs/human_GRCh38_ens105/aligner_indices/bwamem2_2.2.1/all_sequences.fa"
@@ -215,23 +237,7 @@ immuno.allele_specific_anchors: true
 immuno.problematic_amino_acids:
 - C
 
-# ------------------ If you have clinical or otherwise known HLA typing, include here and it will be integrated with Optitype calls ---------------
-# Source of HLA types for this sample: Histogenetics typing
-# Resolve any ambiguous alleles (https://hml.nmdp.org/MacUI/) -> Decode MAC option.
-# e.g. for this case 
-# DRB4*01:DJJXS -> DRB4*01:03/DRB4*01:124/DRB4*01:134
-# DQB1*02:ECPTR -> DQB1*02:02/DQB1*02:97/DQB1*02:110/DQB1*02:131/DQB1*02:156/DQB1*02:165/DQB1*02:175/DQB1*02:187/DQB1*02:199
 
-immuno.clinical_mhc_classI_alleles:
-#- HLA-A*XX:XX
-#- HLA-A*YY:YY
-#- HLA-B*40:01
-#- HLA-B*51:01
-#- HLA-C*03:04
-#- HLA-C*15:02
-immuno.clinical_mhc_classII_alleles:
-#- DRB1*XX:YY
-#- DQA1*XX:YY
 
 # -------------- Intervals to use during GATK germline variant calling -----------------
 immuno.gatk_haplotypecaller_intervals:
