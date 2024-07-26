@@ -73,16 +73,15 @@ The following repositories contain: this tutorial (immuno_gcp_wdl), the WDL work
 ```bash
 mkdir git
 cd git
-git clone git@github.com:wustl-oncology/immuno_gcp_wdl_compute1.git 
-git clone git@github.com:wustl-oncology/analysis-wdls.git 
 git clone git@github.com:wustl-oncology/cloud-workflows.git
 
-#checkout the stable release to be used
-cd $WORKING_BASE/git/analysis-wdls
-git checkout v1.1.4
-
+#Clone a particular version of cloud-workflows. 
 cd $WORKING_BASE/git/cloud-workflows
 git checkout v1.3.1
+
+#NOTE:
+#The `$ANALYSIS_RELEASE` variable in `manual-workflows/start.sh` of cloud-workflows will determine which version of the WDL pipelines are cloned on the Cromwell VM
+#A default release of the analysis-wdls code is defined in this script, but it can also be overridden
 
 ```
 
