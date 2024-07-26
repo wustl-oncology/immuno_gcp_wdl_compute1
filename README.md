@@ -76,6 +76,14 @@ cd git
 git clone git@github.com:wustl-oncology/immuno_gcp_wdl_compute1.git 
 git clone git@github.com:wustl-oncology/analysis-wdls.git 
 git clone git@github.com:wustl-oncology/cloud-workflows.git
+
+#checkout the stable release to be used
+cd $WORKING_BASE/git/analysis-wdls
+git checkout v1.1.4
+
+cd $WORKING_BASE/git/cloud-workflows
+git checkout v1.3.1
+
 ```
 
 ### Login to GCP and set the desired project
