@@ -427,7 +427,7 @@ cd ../generate_protein_fasta
 mkdir candidates
 mkdir all
 
-zcat $WORKING_BASE/final_results/annotated.expression.vcf.gz | less # Get sample ID Found in the #CHROM header of VCF
+zcat $WORKING_BASE/final_results/annotated.expression.vcf.gz | grep -v "^##" | head -n 1 # Get sample ID Found in the #CHROM header of VCF
 export TUMOR_SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
 
 
