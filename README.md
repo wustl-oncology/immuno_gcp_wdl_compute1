@@ -462,12 +462,13 @@ export PATIENT_ID=TWJF-5120-28
 bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts)" /bin/bash
 
 cd $WORKING_BASE
-mkdir manual_review
+mkdir ../manual_review
 
-python3 /opt/scripts/generate_reviews_files.py -a ../itb-review-files/*.xlsx -c ../generate_protein_fasta/candidates/annotated_filtered.vcf-pass-51mer.fa.manufacturability.tsv -classI final_results/pVACseq/mhc_i/*.all_epitopes.aggregated.tsv -classII final_results/pVACseq/mhc_ii/*.all_epitopes.aggregated.tsv -samp $PATIENT_ID -o manual_review/
+python3 /opt/scripts/generate_reviews_files.py -a ../itb-review-files/*.xlsx -c ../generate_protein_fasta/candidates/annotated_filtered.vcf-pass-51mer.fa.manufacturability.tsv -classI final_results/pVACseq/mhc_i/*.all_epitopes.aggregated.tsv -classII final_results/pVACseq/mhc_ii/*.all_epitopes.aggregated.tsv -samp $PATIENT_ID -o ../manual_review/
 
-python3 /opt/scripts/color_peptides51mer.py -p manual_review/*Peptides_51-mer.xlsx -samp $PATIENT_ID -o manual_review/
+python3 /opt/scripts/color_peptides51mer.py -p ../manual_review/*Peptides_51-mer.xlsx -samp $PATIENT_ID -o ../manual_review/
 ```
+
 Open colored_peptides51mer.html and copy the table into an excel spreadsheet. The formatting should remain. Utilizing the Annotated.Neoantigen_Candidates and colored Peptides_51-mer for manual review.
 
 
