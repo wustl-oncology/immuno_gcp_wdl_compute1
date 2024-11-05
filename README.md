@@ -413,6 +413,14 @@ This script will output a file final_results/fda_quality_thresholds_report.tsv a
 
 ```
 python3 /opt/scripts/get_FDA_thresholds.py -WB  $WORKING_BASE -f final_results
+```
+
+### HLA Comparison
+
+This script will output a file manual_review/hla_comparison.tsv and also print the summary to to screen.
+
+```
+python3 /opt/scripts/hla_comparison.py -WB $WORKING_BASE
 exit
 ```
 
