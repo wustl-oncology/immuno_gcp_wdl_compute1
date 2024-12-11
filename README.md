@@ -424,6 +424,16 @@ python3 /opt/scripts/hla_comparison.py -WB $WORKING_BASE
 exit
 ```
 
+### Launching stand-alone pVACview R Shiny app 
+
+If neccessary make a copy of the R shiny application files and pVACseq results on a local computer (or mount the storage1 volume). 
+Then run the following command specifying the path to the directory containing the R shiny application files.
+If you intend to work on multiple cases in parallel using pVACview, use different port numbers for each instance.
+
+```
+R -e "shiny::runApp('$PATH_TO_PVACSEQD_DIR', port=3334)"
+```
+
 ### After Immunogenomics Tumor Board Review
 
 #### Generate Protein Fasta
