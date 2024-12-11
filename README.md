@@ -431,7 +431,7 @@ Then run the following command specifying the path to the directory containing t
 If you intend to work on multiple cases in parallel using pVACview, use different port numbers for each instance.
 
 ```
-R -e "shiny::runApp('$PATH_TO_PVACSEQD_DIR', port=3334)"
+R -e "shiny::runApp('$PATH_TO_PVACSEQ_DIR', port=3334)"
 ```
 
 ### After Immunogenomics Tumor Board Review
