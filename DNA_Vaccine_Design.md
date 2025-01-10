@@ -74,7 +74,7 @@ cd v1
 Create a bash script called `pvacvector_versions.sh` containing the below code
    
 ```
-export HLA_ALLELES="PATIENT-SPECIFIC-HLA-ALLELES"
+export HLA_ALLELES="PATIENT-SPECIFIC-CLASS-I-HLA-ALLELES"
 export BASE_DIR="LOCATION-FOR-RESULTS"
 export INPUT_FASTA="annotated_filtered.vcf-candidates-33mer.fa" # final fasta file of neoantigen candidates, e.g. 33-mer in length
 export SAMPLE_NAME="hcc1395"
