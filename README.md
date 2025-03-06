@@ -310,6 +310,8 @@ mkdir final_results
 cd final_results
 
 python3 /opt/scripts/pull_outputs.py --outputs-file=$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/outputs.json --outputs-dir=$WORKING_BASE/final_results/
+#Sometimes the command above doesn't work, in that case use the command below instead-
+#python3 /opt/scripts/pull_outputs.py --outputs-file=$GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json --outputs-dir=$WORKING_BASE/final_results/
 exit #leave the docker session
 ```
 
