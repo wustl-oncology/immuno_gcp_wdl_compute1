@@ -279,8 +279,8 @@ gsutil cp /shared/analysis-wdls/definitions/$WORKFLOW $GCS_BUCKET_PATH/workflow_
 This command will upload the workflow's artifacts to your google bucket so they can be used after the VM is deleted. They can be found at paths:
 
 ```bash
-gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/timing.html
-gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/outputs.json
+gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/timing.html
+gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/outputs.json
 ```
 
 Confirm that they were successfully transferred and logout of the Cromwell VM on GCP:
