@@ -78,10 +78,10 @@ git clone git@github.com:wustl-oncology/analysis-wdls.git
 
 #Clone a particular version of cloud-workflows and analysis WDLS
 cd $WORKING_BASE/git/cloud-workflows
-git checkout v1.3.1
+git checkout v1.4.4 # will use v1.3.0 of cloud workflows and GCP batch backend
 
 cd $WORKING_BASE/git/analysis-wdls
-git checkout v1.1.4
+git checkout v1.3.0 # will use pvactools v5.3.0
 
 #NOTE1:
 #The `$ANALYSIS_RELEASE` variable in `manual-workflows/start.sh` of cloud-workflows will determine which version of the WDL pipelines are cloned on the Cromwell VM
