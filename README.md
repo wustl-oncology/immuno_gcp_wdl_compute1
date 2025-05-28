@@ -451,13 +451,13 @@ zcat $WORKING_BASE/final_results/annotated.expression.vcf.gz | grep -v "^##" | h
 export TUMOR_SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
 
 
-bsub -Is -q general-interactive -G $GROUP -a "docker(griffithlab/pvactools:4.0.1)" /bin/bash
+bsub -Is -q general-interactive -G $GROUP -a "docker(griffithlab/pvactools:5.3.0)" /bin/bash
 
 pvacseq generate_protein_fasta \
   -p $WORKING_BASE/final_results/pVACseq/phase_vcf/phased.vcf.gz \
   --pass-only --mutant-only -d 150 \
   -s $TUMOR_SAMPLE_ID \
-  --aggregate-report-evaluation {Accept,Review} \
+  --aggregate-report-evaluation "Accept,Review" \
   --input-tsv ../itb-review-files/*.tsv  \
   $WORKING_BASE/final_results/annotated.expression.vcf.gz \
   25 \
