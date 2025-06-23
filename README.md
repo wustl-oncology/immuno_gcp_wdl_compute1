@@ -254,7 +254,7 @@ journalctl -u cromwell | grep "Starting workflow UUID" | perl -ne 'if ($_ =~ /(\
 
 ### Save information about the workflow run itself - Timing Diagram and Outputs List
 
-After a workflow is run, before exiting and deleting your VM, make sure that the timing diagram and the list of outputs are available so you can make use of the data outside of the cloud.
+After a workflow is run, before exiting and deleting your VM, make sure that the timing diagram and the list of outputs are available so you can make use of the data outside of the cloud. Make sure that the $GCS_BUCKET_PATH, $CLOUD_YAML, and $WORKFLOW environment variables are still set (see above).
 
 First determine you WORKFLOW_ID. This can be done several ways. If the run was successful it should be reported at the bottom of the cromwell log as "$WORKFLOW_ID  completed with status Succeeded". Or you find it by the name of the directory where your run was stored in the Google bucket. Both of these approaches are illustrated here:
 
@@ -272,7 +272,7 @@ source /shared/helpers.sh
 save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
 gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$CLOUD_YAML
 gsutil cp /shared/analysis-wdls/workflows.zip $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/workflows.zip
-gsutil cp /shared/analysis-wdls/definitions/$WORKFLOW $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW
+gsutil cp /shared/analysis-wdls/definitions/$WORKFLOW $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$WORKFLOW
 
 ```
 
