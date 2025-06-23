@@ -399,10 +399,10 @@ A written case final report will be created which includes a Genomics Review Rep
 
 ### Basic data QC
 
-Pull the basic data qc from various files. This script will output a file final_results/qc_file.txt and also print the summary to to screen.
+Pull the basic data qc from various files. This script will output a file final_results/qc_file.txt and also print the summary to the screen.
 
 ```
-mkdir $WORKING_BASE/../manual_review
+mkdir -p $WORKING_BASE/../manual_review
 cd $WORKING_BASE/../manual_review
 
 bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts:version7)" /bin/bash
