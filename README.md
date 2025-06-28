@@ -59,6 +59,8 @@ export LOCAL_YAML=hcc1395_immuno_local-WDL.yaml
 export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
 ```
 
+Note: `GCS_INSTANCE_NAME` must start with a lowercase letter, end with a lowercase letter or digit, and only include lowercase letters, digits or hyphens internally, with a maximum of 63 characters total. Otherwise, an error will be generated when creating the gcloud instance.
+
 ## Local setup
 
 ### First create a working directory on your local system
