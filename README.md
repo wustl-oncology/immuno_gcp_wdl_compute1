@@ -59,6 +59,8 @@ export LOCAL_YAML=hcc1395_immuno_local-WDL.yaml
 export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
 ```
 
+Note: `GCS_INSTANCE_NAME` must start with a lowercase letter, end with a lowercase letter or digit, and only include lowercase letters, digits or hyphens internally, with a maximum of 63 characters total. Otherwise, an error will be generated when creating the gcloud instance.
+
 ## Local setup
 
 ### First create a working directory on your local system
@@ -176,7 +178,7 @@ python3 /opt/scripts/cloudize-workflow.py $GCS_BUCKET_NAME $WORKFLOW_PATH $WORKI
 
 Note that this "cloudize" step is primarily about staging input files that you may have locally on your system that need to be copied to a google cloud bucket so that they can be accessed during your workflow run on the cloud. It therefore takes the desired Google Cloud Bucket Name as input. It also takes your Workflow Definition (WDL file) for your pipeline.  It will perform some basic checks of the input expectations of this workflow against the input YAML configuration file you provide. The final input to this script is your input YAML configuration file (the LOCAL YAML). This should contain all the input parameters needed by your workflow, including paths to reference, annotation and data files. If any of the file paths in your input YAML are local paths, this script will attempt to copy them into your bucket. If a file path is already specified as a Google Cloud Bucket path (e.g. gs://PATH ) it will be skipped. The output of the script (the CLOUD YAML), is a version of your YAML that has been updated to point to new paths for any files that were copied into the cloud bucket. This is the YAML you will use to launch your workflow run in the following steps.
 
-If you get an error during this step, a common cause is that there is some disconnect between what inputs you have defined in your YAML file and what the WDL workflow definition expects. Often the error message will hint at where to look in these two files.
+If you get an error during this step, a common cause is that there is some disconnect between what inputs you have defined in your YAML file and what the WDL workflow definition expects. Often the error message will hint at where to look in these two files. If you get an error that `file_inputs is empty []` it may be that relevant storage volume is missing from your `LSF_DOCKER_VOLUMES` environment variable (check your bashrc file).
 
 ### Start a Google VM that will run Cromwell and orchestrate completion of the workflow
 
@@ -265,7 +267,7 @@ journalctl -u cromwell | grep "Starting workflow UUID" | perl -ne 'if ($_ =~ /(\
 
 ### Save information about the workflow run itself - Timing Diagram and Outputs List
 
-After a workflow is run, before exiting and deleting your VM, make sure that the timing diagram and the list of outputs are available so you can make use of the data outside of the cloud.
+After a workflow is run, before exiting and deleting your VM, make sure that the timing diagram and the list of outputs are available so you can make use of the data outside of the cloud. Make sure that the $GCS_BUCKET_PATH, $CLOUD_YAML, and $WORKFLOW environment variables are still set (see above).
 
 First determine you WORKFLOW_ID. This can be done several ways. If the run was successful it should be reported at the bottom of the cromwell log as "$WORKFLOW_ID  completed with status Succeeded". Or you find it by the name of the directory where your run was stored in the Google bucket. Both of these approaches are illustrated here:
 
@@ -280,10 +282,10 @@ Now save the workflow information in your google bucket. Include the YAML and WD
 ```bash
 export WORKFLOW_ID=<id from above>
 source /shared/helpers.sh
-save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
+save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts
 gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$CLOUD_YAML
 gsutil cp /shared/analysis-wdls/workflows.zip $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/workflows.zip
-gsutil cp /shared/analysis-wdls/definitions/$WORKFLOW $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW
+gsutil cp /shared/analysis-wdls/definitions/$WORKFLOW $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$WORKFLOW
 
 ```
 
@@ -410,10 +412,10 @@ A written case final report will be created which includes a Genomics Review Rep
 
 ### Basic data QC
 
-Pull the basic data qc from various files. This script will output a file final_results/qc_file.txt and also print the summary to to screen.
+Pull the basic data qc from various files. This script will output a file final_results/qc_file.txt and also print the summary to the screen.
 
 ```
-mkdir $WORKING_BASE/../manual_review
+mkdir -p $WORKING_BASE/../manual_review
 cd $WORKING_BASE/../manual_review
 
 bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts:version7)" /bin/bash
