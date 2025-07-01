@@ -150,6 +150,17 @@ Note that this YAML file has been set up to work with the HCC1395 raw data files
 
 A template YAML can be found here: [template_immuno_local-WDL.yaml](https://github.com/wustl-oncology/immuno_gcp_wdl_compute1/blob/main/template_yamls/template_immuno_local-WDL.yaml)
 
+### Check the YAML for common errors
+Use `validate_immuno_yaml.py` to check for common errors that come up during creation of the immuno YAML such as syntax errors, mismatched sample names, missing values, etc.
+
+```bash
+cd $WORKING_BASE/yamls
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(mgibio/cloudize-workflow:latest)" /bin/bash
+
+python3 /opt/scripts/validate_immuno_yaml.py $LOCAL_YAML
+
+exit
+```
 
 ### Stage input files to cloud bucket
 
