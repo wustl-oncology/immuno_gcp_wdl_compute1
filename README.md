@@ -80,7 +80,7 @@ git clone git@github.com:wustl-oncology/analysis-wdls.git
 
 #Clone a particular version of cloud-workflows and analysis WDLS
 cd $WORKING_BASE/git/cloud-workflows
-git checkout v1.4.4 # will use v1.3.0 of cloud workflows and GCP batch backend
+git checkout v1.4.5 # will use v1.3.0 of cloud workflows and GCP batch backend
 
 cd $WORKING_BASE/git/analysis-wdls
 git checkout v1.3.0 # will use pvactools v5.3.0
@@ -362,7 +362,7 @@ cd $WORKING_BASE/final_results/workflow_artifacts
 mkdir costs
 cd costs
 
-python3 $WORKING_BASE/git/cloud-workflows/scripts/estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/metadata/ > costs.json
+python3 $WORKING_BASE/git/cloud-workflows/scripts/gb_estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/metadata/ > costs.json
 python3 $WORKING_BASE/git/cloud-workflows/scripts/costs_json_to_csv.py costs.json > costs.csv
 cat costs.csv | sed 's/,/\t/g' > costs.tsv
 
