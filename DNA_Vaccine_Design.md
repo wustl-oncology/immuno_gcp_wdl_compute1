@@ -53,7 +53,7 @@ mkdir pvacvector/v5.3.0
 cd pvacvector/v5.3.0
 ```
 
-We will start with the most stringent, preferred parameters.
+We will start with the least stringent parameters.
 
 ```
 mkdir v1
@@ -135,11 +135,11 @@ The long sequence is our final DNA vector and the contents of this file should b
 
 
 #### Running Different Versions of pVACvector
-Running pVACvector with these parameters might be too strict and so no DNA Vector can be created. 
+pVACvector should also be run with stricter parameters as below to obtain the most optimal design. 
 Here is an example of a bunch of other versions of commands we have tried (you might have to play with the parameters to get results!)
 
 ```
-# v2 parameters (less conservative compared to v1)
+# v2 parameters (more conservative compared to v1)
 export PATIENT_ID="{ patient id }"
 export HLA_ALLELES="{ hla alleles }"
 export PVAC_VERSION="5.3.0"
@@ -157,7 +157,7 @@ $INPUT_FASTA $PATIENT_ID $HLA_ALLELES \
 'all_class_i' \
 $OUTDIR
 
-# v3 parameters (less conservative compared to v1 and v2)
+# v3 parameters (more conservative compared to v1 and v2)
 export PATIENT_ID="{ patient id }"
 export HLA_ALLELES="{ hla alleles }"
 export PVAC_VERSION="5.3.0"
