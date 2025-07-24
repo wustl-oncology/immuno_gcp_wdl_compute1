@@ -4,64 +4,53 @@
 
 **comment out problematic positions in the YAML file**
 
-## Generating Review Files
+## Generating 33-mer after manual review
 
-This is slightly modified to create a 33mer instead of 51mer. 
+Download the post manual review file (with the final list of candidates marked as Accept) from Google Drive and rename the downloaded file to end with `(...)_post_manual_review.tsv`. 
+Rerun the generate protein fasta commands (This is slightly modified to create a 33mer instead of 51mer).
+Note- We will not create the all candidates version of this as the post ITB file does not have all the candidates.
 
 ```
-cd $WORKING_BASE
-mkdir ../generate_protein_fasta
-cd ../generate_protein_fasta
+cd $WORKING_BASE/../generate_protein_fasta
+mkdir 33-mer
+cd 33-mer
 mkdir candidates
-mkdir all
-
 zcat $WORKING_BASE/final_results/annotated.expression.vcf.gz | grep -v "^##" | head -n 1 # Get sample ID Found in the #CHROM header of VCF
 export TUMOR_SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
 
 
-bsub -Is -q general-interactive -G $GROUP -a "docker(griffithlab/pvactools:4.0.1)" /bin/bash
+bsub -Is -q general-interactive -G $GROUP -a "docker(griffithlab/pvactools:5.3.0)" /bin/bash
 
-pvacseq generate_protein_fasta \
+  pvacseq generate_protein_fasta \
   -p $WORKING_BASE/final_results/pVACseq/phase_vcf/phased.vcf.gz \
   --pass-only --mutant-only -d 150 \
   -s $TUMOR_SAMPLE_ID \
-  --aggregate-report-evaluation {Accept,Review} \
-  --input-tsv ../itb-review-files/*.tsv  \
+  --aggregate-report-evaluation "Accept,Review" \
+  --input-tsv $WORKING_BASE/../itb-review-files/*_post_manual_review.tsv  \
   $WORKING_BASE/final_results/annotated.expression.vcf.gz \
   16 \
-  $WORKING_BASE/../generate_protein_fasta/candidates/annotated_filtered.vcf-pass-51mer.fa
-
-pvacseq generate_protein_fasta \
-  -p $WORKING_BASE/final_results/pVACseq/phase_vcf/phased.vcf.gz \
-  --pass-only --mutant-only -d 150 \
-  -s $TUMOR_SAMPLE_ID  \
-  $WORKING_BASE/final_results/annotated.expression.vcf.gz \
-  16  \
-  $WORKING_BASE/../generate_protein_fasta/all/annotated_filtered.vcf-pass-51mer.fa
+  $WORKING_BASE/../generate_protein_fasta/33-mer/candidates/annotated_filtered.vcf-pass-33mer.fa
 
 exit
 ```
 
-## Proceed with Manual review as normal
-
-## Preparing the Final Files After Completed Manual Review
-
 After reviewing all candidates it is time to start preparing the result to be submitted for vaccine design.
 
-1. Remove any candidates that have been rejected from the `annotated_filtered.vcf-candidates-33mer.fa` file.
-2. Edit any sequences in the `annotated_filtered.vcf-candidates-33mer.fa` where proximal variants are not accounted for.
-3. Run pVACvector to produce the vector result
+1. Confirm that only the accepted candidates are in the `annotated_filtered.vcf-candidates-33mer.fa` file.
+2. Note- if the case includes candidates from pVACsplice or pVACfuse, those will need to be manually added to the `annotated_filtered.vcf-candidates-33mer.fa` file. If you rename the file after adding, make sure that the commands below reflect the updated file name.
+3. Edit any sequences in the `annotated_filtered.vcf-candidates-33mer.fa` where proximal variants are not accounted for.
+4. Run pVACvector to produce the vector result
 
 ### Running pVACvector
 
-This step requires a little bit of playing around to get a result sometimes. 
+This step may require a few iterations to get a result. 
 
 ```
-cd ../$WORKING_BASE
+cd $WORKING_BASE/../
 
-mkdir pvacvector
+mkdir pvacvector/v5.3.0
 
-cd pvacvector
+cd pvacvector/v5.3.0
 ```
 
 We will start with the most stringent, preferred parameters.
@@ -71,30 +60,31 @@ mkdir v1
 cd v1
 ```
 
-Create a bash script called `pvacvector_versions.sh` containing the below code
+Create a bash script called `pvacvector.sh` containing the below code
    
 ```
-export HLA_ALLELES="PATIENT-SPECIFIC-CLASS-I-HLA-ALLELES"
-export BASE_DIR="LOCATION-FOR-RESULTS"
-export INPUT_FASTA="annotated_filtered.vcf-candidates-33mer.fa" # final fasta file of neoantigen candidates, e.g. 33-mer in length
-export SAMPLE_NAME="hcc1395"
+export PATIENT_ID="{ patient id }"
+export HLA_ALLELES="{ hla alleles }"
+export PVAC_VERSION="5.3.0"
+export RUN_VERSION="1"
+export BASE_DIR="{ that patient id's base folder }"
+export OUTDIR="$BASE_DIR/pvacvector/v${PVAC_VERSION}/v${RUN_VERSION}/result"
+export INPUT_FASTA="$BASE_DIR/generate_protein_fasta/33-mer/candidates/annotated_filtered.vcf-pass-33mer.fa"
 
-pvacvector run --n-threads 8 \  
- --top-score-metric median --binding-threshold 1000 --percentile-threshold 2 \  
- --class-i-epitope-length 8,9,10,11 \
- --iedb-install-directory /opt/iedb \
- $INPUT_FASTA $SAMPLE_NAME \
- $HLA_ALLELES \
- 'all_class_i' \
- $BASE_DIR/vaccine-vector_median_b1000_p2_33mer
+mkdir -p $OUTDIR
+
+#default parameters
+pvacvector run --top-score-metric median --keep-tmp-files --n-threads 8 --class-i-epitope-length 8,9,10,11 \
+--iedb-install-directory /opt/iedb \
+$INPUT_FASTA $PATIENT_ID $HLA_ALLELES \
+'all_class_i' \
+$OUTDIR
 ```
 
-Execute the bash script using this docker command:
+Create a `run_5.3.0.sh` script to run the `pvacvector.sh` bash script
 ```
-bsub -M 64G -G compute-oncology -n 8 -R 'select[mem>64G] rusage[mem=64G]' -q oncology -a 'docker(griffithlab/pvactools:4.0.6)' \
--oo $WORKING_BASE/pvacvector/v1/pvacvector.stdout \
--eo $WORKING_BASE/pvacvector/v1/pvacvector.stderr \
-/bin/bash $WORKING_BASE/pvacvector/v1/pvacvector_versions.sh
+cd "$(dirname "$0")"
+bsub -M 64000000 -G compute-oncology -n 8 -R 'select[mem>64000] rusage[mem=64000]' -q general -a 'docker(griffithlab/pvactools:5.3.0)' -oo pvacvector.stdout -eo pvacvector.stderr /bin/bash pvacvector.sh
 ```
 
 #### Expected Results
@@ -102,7 +92,7 @@ bsub -M 64G -G compute-oncology -n 8 -R 'select[mem>64G] rusage[mem=64G]' -q onc
 We are looking for pVACvector to make a DNA vector where all peptides are combined into one 
 molecule minimizing the effects of junctional epitopes (that may create novel peptides) between the sequences. 
 pVACvector inserts spacer amino acid sequences to minimize the binding score of junction epitopes.
-We are looking for an overall molecule that has poor binding.
+We are looking for an overall sequence where all the novel junctional epitopes introduced have poor binding.
 
 An example result which would be found in the `SAMPLE_results.dna.fa` folder is:
 ```
@@ -135,11 +125,11 @@ CCCTACGGCAGAATCTACAGCGCCGGCGAGCACACCGCCTACCCCCACGGCTGGGTGGAG
 ACCGCCGTGTACATGATGAGAGACGAGACCCTGGAGCCCCTGCCCAAGAACTGGGAGGTG
 GCCTACACCGACACCGGCATGATCTACTTCATCGACCACAACACCAAG
 ```
-It listed the candidates which it has been vectorized. Then the median and lowest junction score, which in this case we expected to be over 1000,
+It lists the candidates which it has vectorized. Then the median and lowest junction score, which in this case we require be over 500 (default parameters),
 and all the individual junction scores. For further explanation read the pVACvector [documentation](https://pvactools.readthedocs.io/en/latest/pvacvector.html).
 **There is a really useful graphic on the [Output Files Page](https://pvactools.readthedocs.io/en/latest/pvacvector/output_files.html).**
 
-The long sequence is our final DNA vector and the contents of this file should be pasted into the genomics report and the classI peptides colored red to more visually indicate the,
+The long sequence is our final DNA vector and the contents of this file should be pasted into the genomics report and the classI and classII peptides colored red and bolded. Also add the script/parameters that resulted in the final version of the pVACvector results to the genomics report.
 
 <img width="493" alt="Example of DNA Vector in Genomic Report" src="https://github.com/user-attachments/assets/68cba798-d09f-4ea2-ab49-ad658486fdfd" />
 
@@ -149,61 +139,41 @@ Running pVACvector with these parameters might be too strict and so no DNA Vecto
 Here is an example of a bunch of other versions of commands we have tried (you might have to play with the parameters to get results!)
 
 ```
-export HLA_ALLELES="HLA-A*32:01,HLA-A*26:01,HLA-B*35:02,HLA-B*37:01,HLA-C*04:01,HLA-C*06:02"
-export WORK_DIR="/storage1/fs1/gpdunn/Active/Project_0001_Clinical/gc2609/gbm_antigen_dunn/vaccine_G110/pvacvector/v4.0.6"
-export INPUT_FASTA="/storage1/fs1/gpdunn/Active/Project_0001_Clinical/gc2609/gbm_antigen_dunn/vaccine_G110/generate_protein_fasta/33-mer/region1/candidates/annotated_filtered.vcf-candidates-33mer.fa"
+# v2 parameters (less conservative compared to v1)
+export PATIENT_ID="{ patient id }"
+export HLA_ALLELES="{ hla alleles }"
+export PVAC_VERSION="5.3.0"
+export RUN_VERSION="2"
+export BASE_DIR="{ that patient id's base folder }"
+export OUTDIR="$BASE_DIR/pvacvector/v${PVAC_VERSION}/v${RUN_VERSION}/result"
+export INPUT_FASTA="$BASE_DIR/generate_protein_fasta/33-mer/candidates/annotated_filtered.vcf-pass-33mer.fa"
 
-export BASE_DIR="${WORK_DIR}/v1"
-mkdir $BASE_DIR
+mkdir -p $OUTDIR
 
-# PREFERED METHOD: defaults with binding threshold 1000
-pvacvector run --n-threads 8 \  
- --top-score-metric median --binding-threshold 1000 --percentile-threshold 2 \  
- --class-i-epitope-length 8,9,10,11 \
- --iedb-install-directory /opt/iedb \
- $INPUT_FASTA $SAMPLE_NAME \
- $HLA_ALLELES \
- 'all_class_i' \
- $BASE_DIR/vaccine-vector_median_b1000_p2_33mer
+pvacvector run --top-score-metric median --binding-threshold 1000 \
+--keep-tmp-files --n-threads 8 --class-i-epitope-length 8,9,10,11 \
+--iedb-install-directory /opt/iedb \
+$INPUT_FASTA $PATIENT_ID $HLA_ALLELES \
+'all_class_i' \
+$OUTDIR
 
-export BASE_DIR="${WORK_DIR}/v2"
-mkdir $BASE_DIR
+# v3 parameters (less conservative compared to v1 and v2)
+export PATIENT_ID="{ patient id }"
+export HLA_ALLELES="{ hla alleles }"
+export PVAC_VERSION="5.3.0"
+export RUN_VERSION="3"
+export BASE_DIR="{ that patient id's base folder }"
+export OUTDIR="$BASE_DIR/pvacvector/v${PVAC_VERSION}/v${RUN_VERSION}/result"
+export INPUT_FASTA="$BASE_DIR/generate_protein_fasta/33-mer/candidates/annotated_filtered.vcf-pass-33mer.fa"
 
-#default pVACvector parameters (binding threshold 500, no percentile...)
-pvacvector run --n-threads 8 \  
- --top-score-metric median \  
- --class-i-epitope-length 8,9,10,11 \
- --iedb-install-directory /opt/iedb \
- $INPUT_FASTA $SAMPLE_NAME \
- $HLA_ALLELES \
- 'all_class_i' \
- $BASE_DIR/vaccine-vector_defaults_33mer
+mkdir -p $OUTDIR
 
+pvacvector run --top-score-metric median --binding-threshold 1000 --percentile-threshold 2 --percentile-threshold-strategy conservative \
+--keep-tmp-files --n-threads 8 --class-i-epitope-length 8,9,10,11 \
+--iedb-install-directory /opt/iedb \
+$INPUT_FASTA $PATIENT_ID $HLA_ALLELES \
+'all_class_i' \
+$OUTDIR
 
-export BASE_DIR="${WORK_DIR}/v3"
-mkdir $BASE_DIR
-
-# defaults with binding threshold 1500 and max clip 5
-pvacvector run --n-threads 8 \  
- --top-score-metric median -t 16 -b 1500 --max-clip-length 5 \  
- --class-i-epitope-length 8,9,10,11 \
- --iedb-install-directory /opt/iedb \
- $INPUT_FASTA $SAMPLE_NAME \
- $HLA_ALLELES \
- 'all_class_i' \
- $BASE_DIR/vaccine-vector_b1500_clip5_33mer
-
-export BASE_DIR="${WORK_DIR}/v4"
-mkdir $BASE_DIR
-
-#defaults with binding threshold 1000 allele specific
-pvacvector run --n-threads 8 \  
- --top-score-metric median -k -t 16 -b 1000 --allele-specific-binding-thresholds \  
- --class-i-epitope-length 8,9,10,11 \
- --iedb-install-directory /opt/iedb \
- $INPUT_FASTA $SAMPLE_NAME \
- $HLA_ALLELES \
- 'all_class_i' \
- $BASE_DIR/vaccine-vector_b1000_allelespecific_33mer
 ```
 
