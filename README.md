@@ -418,7 +418,7 @@ Pull the basic data qc from various files. This script will output a file final_
 mkdir -p $WORKING_BASE/../manual_review
 cd $WORKING_BASE/../manual_review
 
-bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts:version7)" /bin/bash
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts:version8)" /bin/bash
 python3 /opt/scripts/get_neoantigen_qc.py -WB $WORKING_BASE -f final_results --yaml $WORKING_BASE/yamls/$CLOUD_YAML
 ```
 
