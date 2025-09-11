@@ -492,7 +492,7 @@ To generate files needed for manual review, save the pVAC results from the Immun
 ```
 export PATIENT_ID=TWJF-5120-28
 
-bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts:version7)" /bin/bash
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts:version8)" /bin/bash
 
 cd $WORKING_BASE/..
 mkdir -p manual_review
