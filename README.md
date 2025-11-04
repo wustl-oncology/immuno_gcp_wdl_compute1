@@ -80,7 +80,7 @@ git clone git@github.com:wustl-oncology/analysis-wdls.git
 
 #Clone a particular version of cloud-workflows and analysis WDLS
 cd $WORKING_BASE/git/cloud-workflows
-git checkout v1.4.5 # will use v1.3.0 of cloud workflows and GCP batch backend
+git checkout v1.4.5 # will use v1.3.0 of analysis-wdls pipeline and GCP batch backend
 
 cd $WORKING_BASE/git/analysis-wdls
 git checkout v1.3.0 # will use pvactools v5.3.0
