@@ -491,8 +491,9 @@ To generate files needed for manual review, save the pVAC results from the Immun
 
 ```
 export PATIENT_ID=TWJF-5120-28
-
-bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/neoang_scripts:version8)" /bin/bash
+export TUMOR_SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
+export EXTERNAL_VCF="VCF_PATH" #Path to CLE VCF or other external VCF for comparison
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(griffithlab/pvactools:6.0.2)" /bin/bash
 
 cd $WORKING_BASE/..
 mkdir -p manual_review
@@ -501,8 +502,21 @@ python3 /opt/scripts/generate_reviews_files.py -reviewed_candidates itb-review-f
 
 # Note: You can change the classI and classI IC50/percentile cutoff for coloring
 python3 /opt/scripts/color_peptides51mer.py -peptides manual_review/*Peptides_51-mer.xlsx -probPos C -cIIC50=1000 -cIpercent=2 -cIIIC50=500 -cIIpercent=2 -samp $PATIENT_ID -o manual_review/
+
+pvacseq create_peptide_ordering_form \
+  $WORKING_BASE/gcp_immuno/final_results/annotated.expression.vcf.gz \
+  25 \
+  $WORKING_BASE/itb-review/${PATIENT_ID}.Annotated.Neoantigen_Candidates.tsv \
+  $WORKING_BASE/gcp_immuno_region1/final_results/pVACseq/mhc_ii/${PATIENT_ID}.all_epitopes.aggregated.tsv \
+  ${PATIENT_ID} \
+  ${TUMOR_SAMPLE_ID} \
+  -o $WORKING_BASE/manual_review \
+  -p $WORKING_BASE/gcp_immuno/final_results/pVACseq/phase_vcf/phased.vcf.gz \
+  --external-vcf $EXTERNAL_VCF_VCF \
+  --pass-only \
+  --classI-IC50 1000 --classI-percent 2 --classII-IC50 500 --classII-percent 2 \
+  --prob-pos C \
+  --aggregate-report-evaluation "Accept,Review" \
+
 ```
-
-Open colored_peptides51mer.html and copy the table into an excel spreadsheet. The formatting should remain. Utilizing the Annotated.Neoantigen_Candidates and colored Peptides_51-mer for manual review.
-
 
