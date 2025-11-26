@@ -80,10 +80,10 @@ git clone git@github.com:wustl-oncology/analysis-wdls.git
 
 #Clone a particular version of cloud-workflows and analysis WDLS
 cd $WORKING_BASE/git/cloud-workflows
-git checkout v1.4.5 # will use v1.3.0 of analysis-wdls pipeline and GCP batch backend
+git checkout v1.5.0 # will use v1.5.0 of analysis-wdls pipeline and GCP batch backend
 
 cd $WORKING_BASE/git/analysis-wdls
-git checkout v1.3.0 # will use pvactools v5.3.0
+git checkout v1.5.0 # will use pvactools v6.0.2
 
 #NOTE1:
 #The `$ANALYSIS_RELEASE` variable in `manual-workflows/start.sh` of cloud-workflows will determine which version of the WDL pipelines are cloned on the Cromwell VM
@@ -464,7 +464,7 @@ zcat $WORKING_BASE/final_results/annotated.expression.vcf.gz | grep -v "^##" | h
 export TUMOR_SAMPLE_ID="TWJF-10146-0029-0029_Tumor_Lysate"
 
 
-bsub -Is -q general-interactive -G $GROUP -a "docker(griffithlab/pvactools:5.3.0)" /bin/bash
+bsub -Is -q general-interactive -G $GROUP -a "docker(griffithlab/pvactools:6.0.2)" /bin/bash
 
 pvacseq generate_protein_fasta \
   -p $WORKING_BASE/final_results/pVACseq/phase_vcf/phased.vcf.gz \
