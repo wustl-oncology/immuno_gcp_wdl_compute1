@@ -503,12 +503,12 @@ pvacseq create_peptide_ordering_form \
   $WORKING_BASE/gcp_immuno/final_results/annotated.expression.vcf.gz \
   25 \
   $WORKING_BASE/itb-review/${PATIENT_ID}.Annotated.Neoantigen_Candidates.tsv \
-  $WORKING_BASE/gcp_immuno_region1/final_results/pVACseq/mhc_ii/${PATIENT_ID}.all_epitopes.aggregated.tsv \
+  $WORKING_BASE/gcp_immuno/final_results/pVACseq/mhc_ii/${PATIENT_ID}.all_epitopes.aggregated.tsv \
   ${PATIENT_ID} \
   ${TUMOR_SAMPLE_ID} \
   -o $WORKING_BASE/manual_review \
   -p $WORKING_BASE/gcp_immuno/final_results/pVACseq/phase_vcf/phased.vcf.gz \
-  --external-vcf $EXTERNAL_VCF_VCF \
+  --external-vcf $EXTERNAL_VCF \
   --pass-only \
   --classI-IC50 1000 --classI-percent 2 --classII-IC50 500 --classII-percent 2 \
   --prob-pos C \
