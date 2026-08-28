@@ -115,8 +115,10 @@ Note that the IP ranges or "CIDRs" specified below specify all the IP addresses 
 Note that if any of these things are already initialized already (due to a previous run), the script will report errors, but if the message describes that the resource already exists, this is fine.
 
 ```bash
+bsub -Is -q oncology-interactive -G $GROUP -a "docker(google/cloud-sdk:latest)" /bin/bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
 bash resources.sh init-project --project $GCS_PROJECT --bucket $GCS_BUCKET_NAME --ip-range "128.252.0.0/16,65.254.96.0/19"
+exit
 ```
 
 This step should have created two new configuration files in your current directory: `cromwell.conf` and `workflow_options.json`.
