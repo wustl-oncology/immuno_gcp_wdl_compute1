@@ -37,7 +37,7 @@ Overview of security approach:
 To demonstrate an analysis on the Google cloud we will run the WASHU immunogenomics pipeline on a publicly available set of exome and bulk RNA-seq data generated for a tumor/normal cell line pair (HCC1395 and HCC1395/BL). The HCC1395 cell line is a well known breast cancer cell line that can be purchased and is commonly used for benchmarking cancer genomics analysis and methods development. The datasets we will use here are realistic deeply sequenced exome and RNA-seq data. The immunogenomics pipeline is a very elaborate end-to-end pipeline that starts with raw data and performs data QC, germline variant calling, somatic variant calling (multiple variant callers and variant types), HLA typing, RNA expression analysis and neoantigen identification.  
 
 ### Interacting with Google buckets from your local system
-Note that you can use this docker image to access `gsutil` for exploration of your google storage: `docker(google/cloud-sdk)`
+Note that you can use this docker image to access `gcloud` for exploration of your google storage: `docker(google/cloud-sdk)`
 
 ## Step-by-step instructions
 
@@ -228,7 +228,7 @@ First **on your local system**, copy your cloudized YAML file to a google bucket
 
 ```bash
 cd $WORKING_BASE/yamls/
-gsutil cp $CLOUD_YAML $GCS_BUCKET_PATH/yamls/$CLOUD_YAML
+gcloud storage cp $CLOUD_YAML $GCS_BUCKET_PATH/yamls/$CLOUD_YAML
 ```
 
 Now log into Google Cromwell VM instance again and copy the YAML file to its local file system
@@ -239,7 +239,7 @@ export GCS_BUCKET_PATH=gs://griffith-lab-test-malachi
 export CLOUD_YAML=hcc1395_immuno_cloud-WDL.yaml
 export WORKFLOW=immuno.wdl
 
-gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
+gcloud storage cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML .
 
 ``` 
 
@@ -267,7 +267,7 @@ Example commands that query the Cromwell server and get the current status, curr
 export WORKFLOW_ID=<id from above>
 curl http://localhost:8000/api/workflows/v1/$WORKFLOW_ID/status
 curl http://localhost:8000/api/workflows/v1/$WORKFLOW_ID/timing > $WORKFLOW_ID.timing.html
-gsutil cp $WORKFLOW_ID.timing.html $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$WORKFLOW_ID.timing.html
+gcloud storage cp $WORKFLOW_ID.timing.html $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$WORKFLOW_ID.timing.html
 
 ```
 
@@ -284,7 +284,7 @@ First determine you WORKFLOW_ID. This can be done several ways. If the run was s
 
 ```bash
 export GCS_BUCKET_PATH=gs://griffith-lab-test-malachi
-gsutil ls $GCS_BUCKET_PATH/cromwell-executions/immuno/
+gcloud storage ls $GCS_BUCKET_PATH/cromwell-executions/immuno/
 
 journalctl -u cromwell | tail | grep "Workflow actor"
 ```
@@ -294,22 +294,22 @@ Now save the workflow information in your google bucket. Include the YAML and WD
 export WORKFLOW_ID=<id from above>
 source /shared/helpers.sh
 save_artifacts $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts
-gsutil cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$CLOUD_YAML
-gsutil cp /shared/analysis-wdls/workflows.zip $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/workflows.zip
-gsutil cp /shared/analysis-wdls/definitions/$WORKFLOW $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$WORKFLOW
+gcloud storage cp $GCS_BUCKET_PATH/yamls/$CLOUD_YAML $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$CLOUD_YAML
+gcloud storage cp /shared/analysis-wdls/workflows.zip $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/workflows.zip
+gcloud storage cp /shared/analysis-wdls/definitions/$WORKFLOW $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/$WORKFLOW
 
 ```
 
 This command will upload the workflow's artifacts to your google bucket so they can be used after the VM is deleted. They can be found at paths:
 
 ```bash
-gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/timing.html
-gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/outputs.json
+gcloud storage ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/timing.html
+gcloud storage ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/outputs.json
 ```
 
 Confirm that they were successfully transferred and logout of the Cromwell VM on GCP:
 ```bash
-gsutil ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
+gcloud storage ls $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID
 exit #leave the google VM
 ```
 
@@ -356,7 +356,7 @@ cd $WORKING_BASE/final_results/
 mkdir workflow_artifacts
 cd workflow_artifacts
 
-gsutil -m cp -r $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/* .
+gcloud storage cp -r $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/* .
 
 exit
 ```
