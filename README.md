@@ -374,21 +374,10 @@ mkdir costs
 cd costs
 
 python3 $WORKING_BASE/git/cloud-workflows/scripts/gb_estimate_billing.py $WORKFLOW_ID $GCS_BUCKET_PATH/workflow_artifacts/$WORKFLOW_ID/artifacts/metadata/ > costs.json
-python3 $WORKING_BASE/git/cloud-workflows/scripts/costs_json_to_csv.py costs.json > costs.csv
-cat costs.csv | sed 's/,/\t/g' > costs.tsv
+python3 $WORKING_BASE/git/cloud-workflows/scripts/costs_json_to_csv.py --tsv costs.json > costs.tsv
+python3 $WORKING_BASE/git/cloud-workflows/scripts/condense_costs.py costs.tsv > costs_report_final.tsv
 
 exit #leave the docker session
-
-cd $WORKING_BASE/final_results/workflow_artifacts/costs/
-cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 13 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_total_condensed.tsv
-cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 9 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_memory_condensed.tsv
-cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 10 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_cpu_condensed.tsv
-cut -f 1 costs.tsv | perl -pe 's/_shard-\d+//g' | sort | uniq | while read i;do echo "$i     $(grep $i costs.tsv | cut -f 11 | awk '{ SUM += $1} END { print SUM}')";done | sed 's/ \+ /\t/g' > costs_disk_condensed.tsv
-
-paste costs_total_condensed.tsv costs_cpu_condensed.tsv costs_memory_condensed.tsv costs_disk_condensed.tsv | cut -f 1,2,4,6,8 > costs_report.tsv
-echo -e "task\ttotal\tcpu\tmemory\tdisk" > header.tsv
-sort -n -k 2 -r costs_report.tsv | cat header.tsv - > costs_report_final.tsv
-rm -f costs_report.tsv header.tsv costs.csv
 
 ```
 
