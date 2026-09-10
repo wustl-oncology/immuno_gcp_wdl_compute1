@@ -203,7 +203,7 @@ For more options on configuration of the VM refer to: `gcloud compute instances 
 
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
-bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=50GB --boot-disk-type=pd-standard --machine-type=e2-standard-2 --analysis-release 1.5.1 --cromwell-version 92
+bash start.sh $GCS_INSTANCE_NAME --analysis-release=1.5.1 --cromwell-version=92 --server-account=$GCS_SERVICE_ACCOUNT --project=$GCS_PROJECT --boot-disk-size=50GB --boot-disk-type=pd-standard --machine-type=e2-standard-2
 exit #leave the docker session
 ```
 
