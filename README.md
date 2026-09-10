@@ -80,10 +80,10 @@ git clone git@github.com:wustl-oncology/analysis-wdls.git
 
 #Clone a particular version of cloud-workflows and analysis WDLS
 cd $WORKING_BASE/git/cloud-workflows
-git checkout v1.5.0 # will use v1.5.0 of analysis-wdls pipeline and GCP batch backend
+git checkout v1.7.2 # will use GCP batch backend and version of analysis-wdls specified by start.sh below
 
 cd $WORKING_BASE/git/analysis-wdls
-git checkout v1.5.0 # will use pvactools v6.0.2
+git checkout v1.5.1 # will use pvactools v6.0.5
 
 #NOTE1:
 #The `$ANALYSIS_RELEASE` variable in `manual-workflows/start.sh` of cloud-workflows will determine which version of the WDL pipelines are cloned on the Cromwell VM
@@ -203,7 +203,7 @@ For more options on configuration of the VM refer to: `gcloud compute instances 
 
 ```bash
 cd $WORKING_BASE/git/cloud-workflows/manual-workflows/
-bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=50GB --boot-disk-type=pd-standard --machine-type=e2-standard-2
+bash start.sh $GCS_INSTANCE_NAME --server-account $GCS_SERVICE_ACCOUNT --project $GCS_PROJECT --boot-disk-size=50GB --boot-disk-type=pd-standard --machine-type=e2-standard-2 --analysis-release 1.5.1 --cromwell-version 92
 exit #leave the docker session
 ```
 
